@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="Hamed Maleki — NetDevOps and Infrastructure Automation Engineer. Building reliable infrastructure through automation, observability, and practical engineering.">
+  <meta property="og:title" content="Hamed Maleki — NetDevOps & Infrastructure Automation">
+  <meta property="og:description" content="Infrastructure, automation, and observability at scale.">
+  <meta property="og:type" content="website">
+  <title>Hamed Maleki — NetDevOps & Infrastructure Automation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d18;
+      --surface: rgba(17, 27, 45, .72);
+      --surface-strong: #111b2d;
+      --text: #edf4ff;
+      --muted: #9aa9bf;
+      --line: rgba(158, 184, 218, .16);
+      --cyan: #63e6e2;
+      --blue: #7da7ff;
+      --lime: #c5f36b;
+      --shadow: 0 24px 80px rgba(0,0,0,.28);
+      --radius: 22px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0; background:
+        radial-gradient(ellipse at 82% 8%, rgba(68, 110, 190, .17), transparent 32rem),
+        radial-gradient(ellipse at 8% 34%, rgba(48, 195, 184, .10), transparent 28rem),
+        var(--bg);
+      color: var(--text); font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: -.012em;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--cyan); }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+    .nav-shell { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(8,13,24,.76); border-bottom: 1px solid var(--line); }
+    nav { min-height: 72px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:750; letter-spacing:-.04em; }
+    .brand-mark { width:34px; height:34px; display:grid; place-items:center; border-radius:11px; color:#07131c; background:linear-gradient(135deg,var(--cyan),var(--lime)); font-size:15px; font-weight:900; }
+    .nav-links { display:flex; align-items:center; gap:26px; color:var(--muted); font-size:13px; font-weight:600; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-cta, .button { display:inline-flex; align-items:center; justify-content:center; gap:9px; border:1px solid rgba(99,230,226,.35); border-radius:999px; padding:10px 16px; color:var(--cyan); font-size:13px; font-weight:700; transition:.2s ease; }
+    .nav-cta:hover, .button:hover { background:rgba(99,230,226,.1); transform:translateY(-2px); }
+    .hero { min-height:650px; display:grid; grid-template-columns:1.15fr .85fr; align-items:center; gap:56px; padding:92px 0 82px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:10px; color:var(--cyan); text-transform:uppercase; letter-spacing:.16em; font-size:11px; font-weight:800; }
+    .dot { width:7px; height:7px; border-radius:50%; background:var(--lime); box-shadow:0 0 16px var(--lime); }
+    h1 { margin:22px 0 18px; font-size:clamp(48px,7vw,82px); line-height:.99; letter-spacing:-.075em; font-weight:800; }
+    h1 span { display:block; background:linear-gradient(100deg,var(--cyan),#9eb9ff 62%,var(--lime)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero-copy { max-width:640px; color:#b5c3d7; font-size:18px; line-height:1.8; }
+    .hero-copy strong { color:var(--text); font-weight:650; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+    .button.primary { color:#06151a; border:0; background:linear-gradient(110deg,var(--cyan),var(--lime)); box-shadow:0 10px 35px rgba(99,230,226,.15); }
+    .button.primary:hover { color:#06151a; filter:brightness(1.06); }
+    .button.secondary { color:var(--text); border-color:var(--line); }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:22px; margin-top:38px; color:var(--muted); font-size:12px; }
+    .hero-meta span { display:flex; align-items:center; gap:8px; }
+    .hero-meta b { color:var(--text); font-weight:650; }
+    .hero-visual { position:relative; min-height:420px; display:grid; place-items:center; }
+    .orb { position:absolute; width:min(390px, 90%); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 30%, rgba(99,230,226,.22), rgba(125,167,255,.10) 45%, transparent 70%); filter:blur(2px); }
+    .orbit { position:absolute; width:340px; max-width:88%; aspect-ratio:1; border:1px solid rgba(125,167,255,.2); border-radius:50%; transform:rotate(-24deg) scaleY(.68); }
+    .orbit.two { width:420px; border-color:rgba(99,230,226,.15); transform:rotate(48deg) scaleY(.68); }
+    .core-card { position:relative; z-index:1; width:min(330px,90%); padding:26px; border:1px solid rgba(165,194,231,.2); border-radius:26px; background:linear-gradient(145deg,rgba(24,39,62,.92),rgba(10,17,30,.9)); box-shadow:var(--shadow); transform:rotate(2deg); }
+    .terminal-top { display:flex; gap:6px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+    .terminal-top i { width:7px; height:7px; border-radius:50%; background:#58708e; }
+    .terminal-top i:first-child { background:#ff8d83; } .terminal-top i:nth-child(2) { background:#f4d16e; } .terminal-top i:nth-child(3) { background:#8ee0a2; }
+    .terminal-label { margin:20px 0 9px; color:var(--muted); font:11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .terminal-code { color:#d9e8ff; font:13px/2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .terminal-code .c { color:var(--cyan); } .terminal-code .g { color:var(--lime); } .terminal-code .m { color:#8da7cb; }
+    .status { display:flex; align-items:center; gap:8px; margin-top:22px; padding-top:16px; border-top:1px solid var(--line); color:#b9c9dc; font-size:11px; }
+    .status .dot { width:6px; height:6px; }
+    section { padding:82px 0; border-top:1px solid var(--line); }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:34px; }
+    .kicker { color:var(--cyan); text-transform:uppercase; letter-spacing:.16em; font-size:10px; font-weight:800; }
+    h2 { margin:9px 0 0; font-size:clamp(30px,4vw,43px); line-height:1.1; letter-spacing:-.055em; }
+    .section-intro { max-width:480px; color:var(--muted); font-size:14px; }
+    .about-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:22px; }
+    .panel { border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); box-shadow:0 12px 45px rgba(0,0,0,.12); }
+    .about-text { padding:30px; color:#b5c3d7; }
+    .about-text p { margin:0 0 16px; } .about-text p:last-child { margin:0; }
+    .stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .stat { padding:24px; min-height:136px; display:flex; flex-direction:column; justify-content:space-between; }
+    .stat strong { color:var(--cyan); font-size:35px; letter-spacing:-.06em; line-height:1; }
+    .stat span { color:var(--muted); font-size:12px; }
+    .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .skill-card { padding:23px; }
+    .skill-icon { width:37px; height:37px; display:grid; place-items:center; border-radius:12px; color:var(--cyan); background:rgba(99,230,226,.1); font-size:17px; }
+    .skill-card h3 { margin:17px 0 10px; font-size:15px; }
+    .skill-card p { margin:0; color:var(--muted); font-size:13px; line-height:1.8; }
+    .tag-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+    .tag { padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:#c4d2e5; background:rgba(255,255,255,.025); font-size:11px; }
+    .timeline { position:relative; margin-left:7px; }
+    .timeline:before { content:""; position:absolute; left:7px; top:10px; bottom:10px; width:1px; background:linear-gradient(var(--cyan),rgba(125,167,255,.12)); }
+    .role { position:relative; display:grid; grid-template-columns:190px 1fr; gap:30px; padding:0 0 34px 36px; }
+    .role:last-child { padding-bottom:0; }
+    .role:before { content:""; position:absolute; left:2px; top:7px; width:11px; height:11px; border:2px solid var(--cyan); border-radius:50%; background:var(--bg); box-shadow:0 0 15px rgba(99,230,226,.4); }
+    .role-date { color:var(--muted); font-size:12px; padding-top:3px; }
+    .role h3 { margin:0; font-size:18px; letter-spacing:-.025em; }
+    .role-company { color:var(--cyan); font-size:13px; margin:3px 0 11px; }
+    .role ul { margin:0; padding-left:18px; color:#aebdd1; font-size:13px; }
+    .role li { margin:5px 0; padding-left:3px; }
+    .projects { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .project { padding:25px; position:relative; overflow:hidden; transition:.2s ease; }
+    .project:hover { transform:translateY(-4px); border-color:rgba(99,230,226,.35); }
+    .project-top { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .project-type { color:var(--cyan); text-transform:uppercase; letter-spacing:.12em; font-size:10px; font-weight:800; }
+    .project h3 { margin:18px 0 9px; font-size:19px; }
+    .project p { color:var(--muted); font-size:13px; margin:0; }
+    .project-link { display:inline-flex; align-items:center; gap:8px; margin-top:20px; color:var(--cyan); font-size:12px; font-weight:700; }
+    .project-mark { color:#8ba3c4; font-size:18px; }
+    .edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .edu-card { padding:25px; }
+    .edu-card h3 { margin:0 0 7px; font-size:16px; }
+    .edu-card p { margin:0; color:var(--muted); font-size:13px; }
+    .language-row { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid var(--line); color:#c3d0e2; font-size:13px; }
+    .language-row:last-child { border:0; }
+    .language-row span:last-child { color:var(--muted); }
+    .contact { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:space-between; gap:28px; padding:38px; border:1px solid rgba(99,230,226,.23); border-radius:28px; background:linear-gradient(115deg,rgba(25,54,67,.68),rgba(18,29,49,.75)); }
+    .contact:after { content:""; position:absolute; width:270px; height:270px; right:-80px; top:-160px; border-radius:50%; background:rgba(99,230,226,.12); filter:blur(25px); }
+    .contact h2 { font-size:clamp(27px,4vw,38px); }
+    .contact p { margin:12px 0 0; color:var(--muted); font-size:14px; }
+    .contact-actions { display:flex; flex-wrap:wrap; gap:10px; z-index:1; }
+    footer { padding:30px 0 42px; color:#75869f; font-size:11px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+    .footer-links { display:flex; gap:18px; }
+    @media (max-width:850px) {
+      .hero { grid-template-columns:1fr; gap:20px; padding-top:72px; }
+      .hero-visual { min-height:350px; }
+      .about-grid { grid-template-columns:1fr; }
+      .skills-grid { grid-template-columns:repeat(2,1fr); }
+      .section-head { display:block; } .section-intro { margin-top:14px; }
+    }
+    @media (max-width:600px) {
+      .wrap { width:min(100% - 32px,var(--max)); }
+      .nav-links { gap:13px; font-size:11px; } .nav-links a:nth-child(2), .nav-links a:nth-child(3) { display:none; }
+      .nav-cta { padding:8px 12px; font-size:11px; }
+      .hero { min-height:unset; padding:65px 0 55px; }
+      .hero-copy { font-size:16px; }
+      .hero-visual { min-height:310px; }
+      section { padding:62px 0; }
+      .skills-grid, .projects, .edu-grid { grid-template-columns:1fr; }
+      .role { grid-template-columns:1fr; gap:5px; padding-bottom:28px; }
+      .role-date { font-size:11px; }
+      .stats { gap:9px; } .stat { min-height:115px; padding:18px; }
+      .contact { display:block; padding:27px; } .contact-actions { margin-top:22px; }
+      .footer-inner { flex-direction:column; align-items:flex-start; }
+    }
+    @media print {
+      :root { color-scheme:light; --bg:#fff; --text:#111827; --muted:#475569; --line:#dbe2ea; }
+      body { background:#fff; color:#111827; }
+      .nav-shell, .hero-actions, .contact-actions, footer { display:none; }
+      .hero { min-height:0; padding:30px 0; grid-template-columns:1fr; }
+      .hero-visual { display:none; }
+      section { padding:28px 0; break-inside:avoid; }
+      .panel { background:#fff; box-shadow:none; }
+      .role ul, .about-text, .skill-card p, .project p { color:#334155; }
+      .tag { color:#334155; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+  <div class="nav-shell">
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#home"><span class="brand-mark">HM</span><span>Hamed Maleki</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a><a href="#expertise">Expertise</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
+      </div>
+      <a class="nav-cta" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+
+  <main>
+    <header class="wrap hero" id="home">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> NetDevOps · Infrastructure Automation</div>
+        <h1>Hamed<br><span>Maleki.</span></h1>
+        <p class="hero-copy">
+          I build and automate <strong>reliable infrastructure</strong> — connecting systems,
+          networks, and observability with pragmatic engineering. From large-scale Linux
+          platforms to network automation and custom monitoring tools, I turn operational
+          complexity into systems teams can trust.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#experience">Explore my experience <span aria-hidden="true">↓</span></a>
+          <a class="button secondary" href="mailto:hamed.maaleki@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-meta">
+          <span><b>16+ years</b> in IT & infrastructure</span>
+          <span><b>Hands-on</b> team leadership</span>
+          <span><b>Open</b> to international opportunities</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Abstract infrastructure terminal illustration">
+        <div class="orb"></div><div class="orbit"></div><div class="orbit two"></div>
+        <div class="core-card">
+          <div class="terminal-top"><i></i><i></i><i></i></div>
+          <div class="terminal-label">hamed@infra:~$ ./build-reliability</div>
+          <div class="terminal-code">
+            <div><span class="m">focus</span> = <span class="c">"automation"</span></div>
+            <div><span class="m">systems</span> = [</div>
+            <div>&nbsp; <span class="g">"linux"</span>, "network",</div>
+            <div>&nbsp; "virtualization", "observability"</div>
+            <div>]</div>
+            <div><span class="m">outcome</span> = <span class="c">"less toil"</span></div>
+          </div>
+          <div class="status"><span class="dot"></span> Engineering with ownership</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">01 / About</div><h2>Infrastructure is my craft.<br>Automation is my approach.</h2></div>
+          <p class="section-intro">A practical engineer and team lead who enjoys solving the hard problems behind dependable platforms.</p>
+        </div>
+        <div class="about-grid">
+          <div class="panel about-text">
+            <p>I'm a NetDevOps and infrastructure automation engineer with more than 16 years of experience across digital banking, technology, telecommunications, and large-scale service operations.</p>
+            <p>My work spans Linux systems, virtualized environments, infrastructure as code, network programmability, and observability. I enjoy moving repetitive operational work into version-controlled automation and building the exporters and integrations that make complex systems easier to understand.</p>
+            <p>Today, I lead a hands-on NetDevOps team, helping evolve monitoring-focused operations toward automation with Ansible, Python, Go, and modern network tooling.</p>
+          </div>
+          <div class="stats">
+            <div class="panel stat"><strong>16+</strong><span>Years in infrastructure & operations</span></div>
+            <div class="panel stat"><strong>700+</strong><span>Virtual machines supported at scale</span></div>
+            <div class="panel stat"><strong>70+</strong><span>Bare-metal servers managed</span></div>
+            <div class="panel stat"><strong>4,000+</strong><span>Fuel stations monitored in NOC operations</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="expertise">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">02 / Expertise</div><h2>Tools are only useful<br>when they solve real problems.</h2></div>
+          <p class="section-intro">A toolkit built around automation, operational reliability, visibility, and maintainable systems.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="panel skill-card"><div class="skill-icon">⌘</div><h3>Automation & IaC</h3><p>Repeatable infrastructure workflows, configuration management, and Git-based delivery.</p><div class="tag-list"><span class="tag">Ansible</span><span class="tag">Terraform</span><span class="tag">GitLab CI/CD</span><span class="tag">Python</span></div></article>
+          <article class="panel skill-card"><div class="skill-icon">▦</div><h3>Virtualization & Compute</h3><p>Operating and automating large on-premise virtualized environments.</p><div class="tag-list"><span class="tag">KVM</span><span class="tag">OpenNebula</span><span class="tag">VMware vSphere</span></div></article>
+          <article class="panel skill-card"><div class="skill-icon">⌁</div><h3>Network Automation</h3><p>Network programmability, API integrations, configuration workflows, and device automation.</p><div class="tag-list"><span class="tag">Ansible</span><span class="tag">Nornir</span><span class="tag">REST APIs</span><span class="tag">F5</span></div></article>
+          <article class="panel skill-card"><div class="skill-icon">◉</div><h3>Observability</h3><p>Custom metrics, monitoring pipelines, alerting, and operational dashboards.</p><div class="tag-list"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">SNMP</span><span class="tag">Nagios</span></div></article>
+          <article class="panel skill-card"><div class="skill-icon">{ }</div><h3>Software & Scripting</h3><p>Building practical tools and integrations that reduce toil and improve operations.</p><div class="tag-list"><span class="tag">Go</span><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">REST</span></div></article>
+          <article class="panel skill-card"><div class="skill-icon">▤</div><h3>Systems & Platforms</h3><p>Linux administration, container platforms, databases, and service foundations.</p><div class="tag-list"><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">MariaDB</span><span class="tag">MySQL</span><span class="tag">Kubernetes exposure</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">03 / Experience</div><h2>A career built close<br>to production.</h2></div>
+          <p class="section-intro">Progressively broader ownership across infrastructure operations, automation, observability, and network engineering.</p>
+        </div>
+        <div class="timeline">
+          <article class="role">
+            <div class="role-date">Feb 2026 — Present</div>
+            <div><h3>NetDevOps Team Lead</h3><div class="role-company">Blu Bank · Digital Banking</div><ul><li>Lead a hands-on team evolving network monitoring into network automation and engineering.</li><li>Drive automation initiatives using Ansible, Python, Nornir, and Git-based workflows.</li><li>Develop Go-based Prometheus exporters and monitoring capabilities for network platforms, including F5 BIG-IP and F5OS.</li><li>Work with network APIs and infrastructure integrations to improve operational visibility and consistency.</li></ul></div>
+          </article>
+          <article class="role">
+            <div class="role-date">Aug 2025 — Feb 2026</div>
+            <div><h3>Senior NetDevOps Engineer</h3><div class="role-company">Blu Bank · Digital Banking</div><ul><li>Worked on network automation, custom observability tooling, and infrastructure integrations.</li><li>Built and improved exporter-based monitoring for network devices and services.</li></ul></div>
+          </article>
+          <article class="role">
+            <div class="role-date">Sep 2021 — Nov 2025</div>
+            <div><h3>SysOps / DevOps Engineer</h3><div class="role-company">Snapp · Technology & Ride-Hailing</div><ul><li>Managed infrastructure comprising 70+ bare-metal servers and 700+ virtual machines across KVM and OpenNebula.</li><li>Built Go exporters and Prometheus monitoring rules to improve internal observability.</li><li>Automated infrastructure tasks using Bash, Python, Ansible, and GitLab CI/CD.</li><li>Developed and contributed to a custom Terraform provider used in production.</li></ul></div>
+          </article>
+          <article class="role">
+            <div class="role-date">Jul 2020 — Oct 2021</div>
+            <div><h3>SysOps Engineer</h3><div class="role-company">Blu Bank · Digital Banking</div><ul><li>Operated a VMware vSphere environment with 40+ bare-metal servers and 500+ virtual machines.</li><li>Automated firewall changes and Linux administration tasks with Ansible.</li><li>Created monitoring scripts and automated infrastructure inventory reporting.</li></ul></div>
+          </article>
+          <article class="role">
+            <div class="role-date">Nov 2018 — Jul 2020</div>
+            <div><h3>Linux System Administrator</h3><div class="role-company">Mobinnet · Telecommunications</div><ul><li>Built and maintained a three-node MariaDB Galera cluster for high availability.</li><li>Developed Bash and Python SNMP automation pipelines for radio-device monitoring.</li><li>Integrated monitoring data into Nagios using custom socket-based ingestion.</li></ul></div>
+          </article>
+          <article class="role">
+            <div class="role-date">Feb 2016 — Nov 2018</div>
+            <div><h3>Linux System Administrator</h3><div class="role-company">Asiatech · Telecommunications</div><ul><li>Managed 40+ bare-metal servers and 300+ VMware virtual machines.</li><li>Administered FreeRADIUS, MySQL, and Syslog; supported HA, DRS, and SDRS configurations.</li><li>Used Logstash to parse logs and forward data into internal databases.</li></ul></div>
+          </article>
+          <article class="role">
+            <div class="role-date">Jun 2010 — Feb 2016</div>
+            <div><h3>NOC Engineer · IFCP Project</h3><div class="role-company">National Iranian Oil Company (NIOC)</div><ul><li>Monitored systems and services supporting more than 4,000 fuel stations using SolarWinds and ManageEngine.</li><li>Wrote Bash scripts for log cleanup, network health checks, and alert automation.</li><li>Handled incident escalation and tiered troubleshooting across multiple service layers.</li></ul></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">04 / Selected work</div><h2>Engineering beyond<br>the job description.</h2></div>
+          <p class="section-intro">Open-source tools and practical engineering projects focused on making infrastructure easier to operate.</p>
+        </div>
+        <div class="projects">
+          <article class="panel project">
+            <div class="project-top"><span class="project-type">Open source · Go</span><span class="project-mark">↗</span></div>
+            <h3>F5 BIG-IP Exporter</h3>
+            <p>A Prometheus exporter for F5 BIG-IP, designed to expose operational metrics through the iControl REST API, with multi-target probing and concurrent collection.</p>
+            <div class="tag-list"><span class="tag">Go</span><span class="tag">Prometheus</span><span class="tag">iControl REST</span><span class="tag">Docker</span></div>
+            <a class="project-link" href="https://github.com/Haameed/f5_bigip_exporter" target="_blank" rel="noopener noreferrer">View repository <span>↗</span></a>
+          </article>
+          <article class="panel project">
+            <div class="project-top"><span class="project-type">Open source · Go</span><span class="project-mark">↗</span></div>
+            <h3>F5OS Exporter</h3>
+            <p>Prometheus metrics collection for F5OS platforms, extending infrastructure visibility into the hardware and platform layer.</p>
+            <div class="tag-list"><span class="tag">Go</span><span class="tag">Prometheus</span><span class="tag">F5OS</span></div>
+            <a class="project-link" href="https://github.com/Haameed/f5_f5os_exporter" target="_blank" rel="noopener noreferrer">View repository <span>↗</span></a>
+          </article>
+          <article class="panel project">
+            <div class="project-top"><span class="project-type">Automation · NetDevOps</span><span class="project-mark">⌘</span></div>
+            <h3>Network Automation Workflows</h3>
+            <p>Practical automation for Cisco environments, including configuration compliance checks, VLAN comparison, and repeatable operational tasks.</p>
+            <div class="tag-list"><span class="tag">Nornir</span><span class="tag">Python</span><span class="tag">Cisco IOS</span><span class="tag">Git</span></div>
+            <a class="project-link" href="https://github.com/Haameed" target="_blank" rel="noopener noreferrer">Explore GitHub <span>↗</span></a>
+          </article>
+          <article class="panel project">
+            <div class="project-top"><span class="project-type">Platform integration</span><span class="project-mark">⌘</span></div>
+            <h3>Go SMS Gateway</h3>
+            <p>A provider-integrated messaging service with a consistent API layer, designed to simplify OTP and notification delivery across multiple SMS providers.</p>
+            <div class="tag-list"><span class="tag">Go</span><span class="tag">REST API</span><span class="tag">Keycloak</span><span class="tag">Integrations</span></div>
+            <a class="project-link" href="https://github.com/Haameed" target="_blank" rel="noopener noreferrer">Explore GitHub <span>↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <div class="section-head"><div><div class="kicker">05 / Education & languages</div><h2>Always learning.<br>Always improving.</h2></div></div>
+        <div class="edu-grid">
+          <div class="panel edu-card"><div class="kicker">Education</div><h3>Bachelor of Science · Information Technology</h3><p>University of Applied Science and Technology · 2015</p></div>
+          <div class="panel edu-card"><div class="kicker">Languages</div><div class="language-row"><span>Persian</span><span>Native</span></div><div class="language-row"><span>English</span><span>Advanced · C1</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <div><div class="kicker">06 / Contact</div><h2>Have an interesting<br>infrastructure challenge?</h2><p>I'm open to conversations about NetDevOps, SRE, and infrastructure automation opportunities — including relocation.</p></div>
+          <div class="contact-actions">
+            <a class="button primary" href="mailto:hamed.maaleki@gmail.com">Email me ↗</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/hamed-maleki-40649184/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a class="button secondary" href="https://github.com/Haameed" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year">2026</span> Hamed Maleki. Built with care and a little automation.</span>
+      <div class="footer-links"><a href="mailto:hamed.maaleki@gmail.com">Email</a><a href="https://github.com/Haameed" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/hamed-maaleki/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
