@@ -1,863 +1,1315 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hamed Maaleki · Senior DevOps Engineer</title>
-<meta name="description" content="Hamed Maaleki, Senior DevOps engineer in Tehran. Linux platforms, infrastructure automation with Ansible and Terraform, and Prometheus monitoring tools written in Go. Open to relocation to Germany and Europe." />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>README.md · hamed-maaleki</title>
+<meta name="description" content="Hamed Maaleki, Senior DevOps engineer in Tehran. Linux platforms, infrastructure automation with Ansible and Terraform, and Prometheus exporters written in Go and Python. Open to relocation to Germany and Europe." />
 <meta name="author" content="Hamed Maaleki" />
 <meta property="og:title" content="Hamed Maaleki · Senior DevOps Engineer" />
-<meta property="og:description" content="Linux, infrastructure automation and observability. 16 years in operations. Open to roles in Germany and Europe." />
-<meta property="og:type" content="profile" />
-<meta name="theme-color" content="#f5f3ee" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2315171c'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='30' fill='%23f5f3ee'>HM</text></svg>" />
-
+<meta property="og:description" content="Linux, infrastructure automation and observability. In operations since 2010. Open to roles in Germany and Europe." />
+<meta name="theme-color" content="#3c3c3c" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23007acc'/><text x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Menlo,monospace' font-weight='700' font-size='26' fill='white'>HM</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Hamed Maaleki",
-  "jobTitle": "Senior DevOps Engineer",
-  "email": "mailto:hamed.maaleki@gmail.com",
-  "address": { "@type": "PostalAddress", "addressLocality": "Tehran", "addressCountry": "IR" },
-  "sameAs": ["https://github.com/Haameed", "https://www.linkedin.com/in/hamed-maaleki/"],
-  "knowsAbout": ["Linux", "Ansible", "Terraform", "Go", "Python", "Prometheus", "Grafana", "KVM", "OpenNebula", "VMware vSphere", "F5 BIG-IP", "Network automation"]
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
 <style>
-  :root {
-    --bg: #f5f3ee;
-    --surface: #fffdf9;
-    --surface-2: #efece5;
-    --ink: #15171c;
-    --ink-2: #353944;
-    --muted: #666b78;
-    --line: #e1ddd3;
-    --accent: #0d6b58;
-    --accent-soft: #e2eee8;
-    --metric: #c2410c;
-    --term-bg: #13161b;
-    --term-ink: #d9d6cf;
-    --term-dim: #6f7684;
-    --shadow: 0 1px 2px rgba(20,20,20,.04), 0 8px 30px rgba(20,20,20,.06);
-    --radius: 14px;
-    --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
-    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
-  [data-theme="dark"] {
-    --bg: #0e1014;
-    --surface: #151820;
-    --surface-2: #1b1f28;
-    --ink: #ebe8e1;
-    --ink-2: #c9c6bf;
-    --muted: #9198a5;
-    --line: #262b35;
-    --accent: #5cc6a7;
-    --accent-soft: #15302a;
-    --metric: #fb923c;
-    --term-bg: #0a0c10;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
-  }
+:root {
+  --title:#3c3c3c; --title-fg:#cccccc;
+  --act:#333333; --act-fg:#858585; --act-on:#ffffff;
+  --side:#252526; --side-fg:#cccccc; --hover:#2a2d2e; --sel:#37373d; --focus:#007fd4;
+  --tabs:#252526; --tab:#2d2d2d; --tab-fg:#969696; --tab-on:#1e1e1e; --tab-on-fg:#ffffff;
+  --ed:#1e1e1e; --fg:#d4d4d4; --gut:#858585; --gut-on:#c6c6c6; --line-hl:#282828;
+  --border:#3c3c3c; --status:#007acc; --status-fg:#ffffff; --remote:#16825d;
+  --widget:#252526; --widget-border:#454545; --input:#3c3c3c; --qo-sel:#04395e;
+  --k:#569cd6; --k2:#c586c0; --s:#ce9178; --c:#6a9955; --t:#4ec9b0; --f:#dcdcaa; --v:#9cdcfe; --n:#b5cea8; --p:#d4d4d4;
+  --md-fg:#cccccc; --md-code:#2b2b2b; --link:#3794ff;
+  --tfg:#cccccc; --ag:#0dbc79; --ab:#3b8eea; --ay:#e5e510; --ac:#29b8db; --ad:#8b8b8b; --ar:#f14c4c;
+  --mono:"JetBrains Mono", Consolas, "SF Mono", Menlo, monospace;
+  --ui:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Ubuntu, sans-serif;
+}
+[data-theme="light"] {
+  --title:#dddddd; --title-fg:#333333;
+  --act:#2c2c2c; --act-fg:#ffffff80; --act-on:#ffffff;
+  --side:#f3f3f3; --side-fg:#616161; --hover:#e8e8e8; --sel:#e4e6f1; --focus:#0090f1;
+  --tabs:#f3f3f3; --tab:#ececec; --tab-fg:#6f6f6f; --tab-on:#ffffff; --tab-on-fg:#333333;
+  --ed:#ffffff; --fg:#000000; --gut:#237893; --gut-on:#0b216f; --line-hl:#eeeeee;
+  --border:#e5e5e5; --widget:#f3f3f3; --widget-border:#c8c8c8; --input:#ffffff; --qo-sel:#0060c0;
+  --k:#0000ff; --k2:#af00db; --s:#a31515; --c:#008000; --t:#267f99; --f:#795e26; --v:#001080; --n:#098658; --p:#000000;
+  --md-fg:#333333; --md-code:#f3f3f3; --link:#006ab1;
+  --tfg:#333333; --ag:#008000; --ab:#0451a5; --ay:#949800; --ac:#0598bc; --ad:#6e6e6e; --ar:#cd3131;
+}
 
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16.5px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    transition: background .3s ease, color .3s ease;
-  }
-  a { color: inherit; }
-  img { max-width: 100%; display: block; }
-  ::selection { background: var(--accent); color: var(--bg); }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden;
+  background: var(--ed); color: var(--fg); font: 13px/1.4 var(--ui); -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }
+::selection { background: #264f78; color: inherit; }
+[data-theme="light"] ::selection { background: #add6ff; }
+::-webkit-scrollbar { width: 14px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(121,121,121,.4); }
+::-webkit-scrollbar-thumb:hover { background: rgba(100,100,100,.7); }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
 
-  .wrap { width: min(1120px, 100% - 48px); margin-inline: auto; }
+/* ---------- title bar ---------- */
+.titlebar {
+  height: 32px; flex: none; display: flex; align-items: center; gap: 14px;
+  padding: 0 12px; background: var(--title); color: var(--title-fg); font-size: 12.5px; position: relative;
+  user-select: none;
+}
+.lights { display: flex; gap: 8px; }
+.lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+.lights i:nth-child(2) { background: #febc2e; }
+.lights i:nth-child(3) { background: #28c840; }
+.menus { display: flex; gap: 2px; }
+.menus span { padding: 3px 7px; border-radius: 4px; opacity: .85; }
+.menus span:hover { background: rgba(127,127,127,.2); }
+.cc {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: min(440px, 46vw); height: 22px; border-radius: 6px;
+  border: 1px solid var(--widget-border); background: rgba(127,127,127,.1);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  color: var(--title-fg); cursor: pointer; font-size: 12px; opacity: .9;
+}
+.cc:hover { background: rgba(127,127,127,.2); }
+.cc svg { width: 14px; height: 14px; }
 
-  /* ---------- Nav ---------- */
-  .nav {
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: saturate(1.4) blur(12px);
-    -webkit-backdrop-filter: saturate(1.4) blur(12px);
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    border-bottom: 1px solid transparent;
-    transition: border-color .3s ease;
-  }
-  .nav.scrolled { border-bottom-color: var(--line); }
-  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .brand { font-family: var(--serif); font-size: 1.45rem; text-decoration: none; letter-spacing: .2px; }
-  .brand span { color: var(--accent); }
-  .nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
-  .nav ul a {
-    text-decoration: none; font-size: .9rem; color: var(--muted);
-    transition: color .2s ease; position: relative;
-  }
-  .nav ul a:hover, .nav ul a.active { color: var(--ink); }
-  .nav ul a.active::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1.5px; background: var(--accent);
-  }
-  .nav-right { display: flex; align-items: center; gap: 14px; }
-  .theme-btn {
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid var(--line); background: var(--surface);
-    color: var(--ink); cursor: pointer; display: grid; place-items: center;
-    transition: transform .2s ease, border-color .2s ease;
-  }
-  .theme-btn:hover { transform: rotate(-12deg); border-color: var(--muted); }
-  .theme-btn svg { width: 16px; height: 16px; }
-  .theme-btn .sun { display: none; }
-  [data-theme="dark"] .theme-btn .sun { display: block; }
-  [data-theme="dark"] .theme-btn .moon { display: none; }
+/* ---------- main ---------- */
+.main { flex: 1; display: flex; min-height: 0; position: relative; }
+.activity {
+  width: 48px; flex: none; background: var(--act);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.act-btn {
+  width: 48px; height: 48px; display: grid; place-items: center;
+  border: 0; background: none; color: var(--act-fg); cursor: pointer; position: relative;
+}
+.act-btn:hover, .act-btn.on { color: var(--act-on); }
+.act-btn.on::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--act-on); }
+.act-btn svg { width: 24px; height: 24px; }
 
-  /* ---------- Hero ---------- */
-  .hero { padding: 88px 0 72px; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: center; }
-  .status {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: .82rem; color: var(--ink-2);
-    padding: 6px 14px 6px 10px; border: 1px solid var(--line); border-radius: 999px;
-    background: var(--surface);
-  }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22a06b; position: relative; }
-  .dot::after {
-    content: ""; position: absolute; inset: -4px; border-radius: 50%;
-    border: 2px solid #22a06b; opacity: .5; animation: ping 2.4s ease-out infinite;
-  }
-  @keyframes ping { 0% { transform: scale(.6); opacity: .6; } 100% { transform: scale(1.8); opacity: 0; } }
+.sidebar {
+  width: 250px; flex: none; background: var(--side); color: var(--side-fg);
+  display: flex; flex-direction: column; overflow: hidden; user-select: none;
+}
+.sidebar.hidden { display: none; }
+.side-title {
+  height: 35px; flex: none; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px 0 20px; font-size: 11px; letter-spacing: .3px; text-transform: uppercase;
+}
+.sec {
+  height: 22px; flex: none; display: flex; align-items: center; gap: 2px; padding-left: 2px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer;
+}
+.sec.bordered { border-top: 1px solid var(--border); }
+.tree { flex: 1; overflow: auto; padding-bottom: 8px; }
+.row {
+  height: 22px; display: flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap;
+  padding-left: calc(var(--d) * 10px + 8px); font-size: 13px; color: var(--side-fg);
+}
+.row.file { padding-left: calc(var(--d) * 10px + 26px); }
+.row:hover { background: var(--hover); }
+.row.on { background: var(--sel); }
+.chev { width: 16px; height: 16px; display: inline-grid; place-items: center; flex: none; margin-right: -4px; }
+.chev::before {
+  content: ""; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg); transition: transform .1s;
+}
+.open > .chev::before { transform: rotate(45deg) translate(-1px, -1px); }
+.kids.closed { display: none; }
+.fi { font: 700 9px/1 var(--ui); width: 16px; text-align: center; flex: none; letter-spacing: -.2px; }
+.fi-go { color: #519aba; } .fi-md { color: #519aba; } .fi-mod { color: #a074c4; } .fi-pdf { color: #cc3e44; }
 
-  h1 {
-    font-family: var(--serif); font-weight: 400;
-    font-size: clamp(3.2rem, 7.5vw, 5.6rem);
-    line-height: .98; letter-spacing: -1.5px;
-    margin: 26px 0 22px;
-  }
-  h1 em { font-style: italic; color: var(--accent); }
-  .lede { font-size: 1.15rem; color: var(--ink-2); max-width: 34em; margin: 0 0 32px; }
-  .lede strong { color: var(--ink); font-weight: 600; }
+/* ---------- workbench ---------- */
+.workbench { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--ed); }
+.tabs { height: 35px; flex: none; display: flex; background: var(--tabs); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  display: flex; align-items: center; gap: 6px; padding: 0 6px 0 12px; flex: none;
+  background: var(--tab); color: var(--tab-fg); border-right: 1px solid var(--tabs);
+  cursor: pointer; white-space: nowrap; font-size: 13px; user-select: none;
+}
+.tab.on { background: var(--tab-on); color: var(--tab-on-fg); }
+.tab .x { width: 20px; height: 20px; border-radius: 4px; display: grid; place-items: center; opacity: 0; font-size: 15px; line-height: 1; }
+.tab.on .x, .tab:hover .x { opacity: 1; }
+.tab .x:hover { background: rgba(127,127,127,.3); }
+.tab.preview .name { font-style: normal; }
+.crumbs {
+  height: 22px; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 16px;
+  font-size: 12.5px; color: var(--tab-fg); background: var(--ed); white-space: nowrap; overflow: hidden;
+}
+.crumbs .sep { opacity: .6; font-size: 11px; }
+.editor { flex: 1; min-height: 0; position: relative; }
+.scroller { position: absolute; inset: 0; overflow: auto; }
+.code {
+  display: inline-block; min-width: 100%; padding: 2px 100px 45vh 0;
+  font: 13.5px/20px var(--mono); tab-size: 4; -moz-tab-size: 4; white-space: pre;
+}
+.ln { display: flex; min-width: 100%; cursor: text; }
+.gn {
+  position: sticky; left: 0; flex: none; width: 66px; padding-right: 24px; text-align: right;
+  color: var(--gut); background: var(--ed); user-select: none; z-index: 1;
+}
+.tx { flex: 1; padding-left: 2px; color: var(--fg); }
+.ln.on .gn { color: var(--gut-on); }
+.ln.on .tx { box-shadow: inset 0 2px 0 var(--line-hl), inset 0 -2px 0 var(--line-hl); }
+.k { color: var(--k); } .k2 { color: var(--k2); } .s { color: var(--s); } .c { color: var(--c); }
+.t { color: var(--t); } .f { color: var(--f); } .v { color: var(--v); } .n { color: var(--n); } .p { color: var(--p); }
+.code a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
+.code a:hover { text-decoration-color: currentColor; cursor: pointer; }
 
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 9px;
-    padding: 12px 20px; border-radius: 10px; font-size: .93rem; font-weight: 500;
-    text-decoration: none; border: 1px solid var(--line);
-    transition: transform .2s ease, background .2s ease, border-color .2s ease;
-  }
-  .btn svg { width: 17px; height: 17px; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .btn-ghost { background: var(--surface); }
-  .btn-ghost:hover { border-color: var(--muted); }
+.minimap { position: absolute; top: 0; right: 14px; width: 72px; bottom: 0; overflow: hidden; cursor: pointer; }
+.mm-code {
+  font: 13.5px/20px var(--mono); white-space: pre; tab-size: 4; pointer-events: none;
+  transform: scale(.14); transform-origin: 0 0; width: 720%; padding-top: 2px; opacity: .75;
+}
+.mm-code a { color: inherit; text-decoration: none; }
+.mm-slider { position: absolute; left: 0; right: 0; background: rgba(121,121,121,.13); pointer-events: none; }
+.minimap:hover .mm-slider { background: rgba(121,121,121,.25); }
+.is-preview .minimap { display: none; }
 
-  .meta-row {
-    display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px;
-    font-size: .86rem; color: var(--muted);
-  }
-  .meta-row span { display: inline-flex; align-items: center; gap: 7px; }
-  .meta-row svg { width: 15px; height: 15px; }
+.empty { height: 100%; display: grid; place-content: center; text-align: center; color: var(--tab-fg); gap: 10px; }
+.empty .logo { font: 700 72px var(--mono); opacity: .12; margin-bottom: 14px; }
+kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rgba(127,127,127,.17); border: 1px solid rgba(127,127,127,.3); border-bottom-width: 2px; }
 
-  /* terminal card */
-  .term {
-    background: var(--term-bg); color: var(--term-ink);
-    border-radius: var(--radius); box-shadow: var(--shadow);
-    font-family: var(--mono); font-size: .8rem; line-height: 1.85;
-    overflow: hidden; border: 1px solid rgba(255,255,255,.06);
-    transform: rotate(.6deg);
-  }
-  .term-bar {
-    display: flex; align-items: center; gap: 7px; padding: 12px 16px;
-    border-bottom: 1px solid rgba(255,255,255,.07);
-  }
-  .term-bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3f4a; }
-  .term-bar i:nth-child(1) { background: #ec6a5e; }
-  .term-bar i:nth-child(2) { background: #f4bf4f; }
-  .term-bar i:nth-child(3) { background: #61c554; }
-  .term-bar b { margin-left: 10px; font-weight: 400; color: var(--term-dim); font-size: .75rem; }
-  .term pre { margin: 0; padding: 18px 20px 22px; white-space: pre; overflow-x: auto; }
-  .t-dim { color: var(--term-dim); }
-  .t-prompt { color: #5cc6a7; }
-  .t-name { color: #e7e3da; }
-  .t-label { color: #8fb8ff; }
-  .t-str { color: #c3e88d; }
-  .t-val { color: #fb923c; font-weight: 500; }
-  .cursor { display: inline-block; width: 8px; height: 15px; background: #5cc6a7; vertical-align: -2px; animation: blink 1.1s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
+/* ---------- markdown preview ---------- */
+.md { max-width: 880px; padding: 26px 40px 80px; color: var(--md-fg); font: 14px/1.65 var(--ui); }
+.md h1 { font-size: 2.1em; font-weight: 600; margin: 0 0 .5em; padding-bottom: .3em; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 18px; }
+.md h1 img { width: 64px; height: 64px; border-radius: 50%; }
+.md h1 small { display: block; font-size: .45em; font-weight: 400; opacity: .7; margin-top: 2px; }
+.md h2 { font-size: 1.45em; font-weight: 600; margin: 1.7em 0 .6em; padding-bottom: .3em; border-bottom: 1px solid var(--border); }
+.md a { color: var(--link); text-decoration: none; }
+.md a:hover { text-decoration: underline; }
+.md code { font: 12.5px var(--mono); background: var(--md-code); padding: 2px 6px; border-radius: 4px; }
+.md pre { background: var(--md-code); padding: 14px 16px; border-radius: 6px; overflow-x: auto; font: 12.5px/1.65 var(--mono); }
+.md pre code { background: none; padding: 0; }
+.md pre .c { color: var(--c); }
+.md table { border-collapse: collapse; width: 100%; margin: 6px 0; }
+.md th, .md td { border: 1px solid var(--border); padding: 7px 12px; text-align: left; vertical-align: top; }
+.md th { font-weight: 600; white-space: nowrap; }
+.md blockquote { margin: 0; padding: 4px 16px; border-left: 4px solid rgba(127,127,127,.4); opacity: .9; }
+.md blockquote footer { font-size: .9em; opacity: .75; margin-top: 4px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 18px; }
+.badge { display: inline-flex; font: 11px/20px Verdana, Geneva, sans-serif; border-radius: 3px; overflow: hidden; }
+.badge b { background: #555; color: #fff; padding: 0 7px; font-weight: 400; }
+.badge i { background: #007ec6; color: #fff; padding: 0 7px; font-style: normal; }
+.badge.ok i { background: #3fb950; } .badge.go i { background: #00add8; } .badge.warn i { background: #dfb317; color: #222; }
 
-  /* ---------- Sections ---------- */
-  section { padding: 84px 0; }
-  .sec-head { display: grid; grid-template-columns: 220px 1fr; gap: 40px; margin-bottom: 44px; align-items: baseline; }
-  .eyebrow {
-    font-family: var(--mono); font-size: .76rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted);
-  }
-  .eyebrow b { color: var(--accent); font-weight: 500; }
-  h2 {
-    font-family: var(--serif); font-weight: 400; font-size: clamp(2.1rem, 4vw, 2.9rem);
-    line-height: 1.08; letter-spacing: -.5px; margin: 0;
-  }
-  h2 em { font-style: italic; color: var(--accent); }
-  .divider { border: 0; border-top: 1px solid var(--line); margin: 0; }
+/* ---------- panel ---------- */
+.panel { height: 32%; min-height: 130px; flex: none; border-top: 1px solid var(--border); display: flex; flex-direction: column; background: var(--ed); }
+.panel.hidden { display: none; }
+.panel-head { height: 35px; flex: none; display: flex; align-items: center; gap: 20px; padding: 0 8px 0 18px; font-size: 11px; letter-spacing: .3px; text-transform: uppercase; user-select: none; }
+.ptab { color: var(--tab-fg); cursor: pointer; padding: 6px 0 4px; border-bottom: 1px solid transparent; }
+.ptab:hover { color: var(--tab-on-fg); }
+.ptab.on { color: var(--tab-on-fg); border-bottom-color: var(--tab-on-fg); }
+.panel-head .spacer { flex: 1; }
+.icon-btn { border: 0; background: none; cursor: pointer; width: 24px; height: 24px; border-radius: 4px; display: grid; place-items: center; color: var(--tab-fg); }
+.icon-btn:hover { background: rgba(127,127,127,.2); color: var(--tab-on-fg); }
+.icon-btn svg { width: 16px; height: 16px; }
+.pbody { flex: 1; overflow: auto; padding: 2px 20px 12px; font: 13px/1.5 var(--mono); color: var(--tfg); white-space: pre-wrap; word-break: break-word; }
+.pbody[hidden] { display: none; }
+.prompt-line { display: flex; white-space: pre; }
+.prompt-line input { flex: 1; min-width: 40px; background: none; border: 0; outline: 0; padding: 0; color: inherit; font: inherit; caret-color: var(--tfg); }
+.a-g { color: var(--ag); } .a-b { color: var(--ab); } .a-y { color: var(--ay); } .a-c { color: var(--ac); } .a-d { color: var(--ad); } .a-r { color: var(--ar); }
+.pbody a { color: var(--ac); }
 
-  /* About */
-  .about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
-  .about-body { display: grid; grid-template-columns: 1.3fr .7fr; gap: 56px; }
-  .about-body p { margin: 0 0 1.1em; color: var(--ink-2); font-size: 1.06rem; }
-  .about-body p:first-child::first-letter {
-    font-family: var(--serif); float: left; font-size: 4.1rem; line-height: .82; padding: 6px 10px 0 0; color: var(--ink);
-  }
-  .facts { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
-  .facts li { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
-  .facts li span:first-child { color: var(--muted); }
-  .facts li span:last-child { text-align: right; font-weight: 500; }
+/* ---------- status bar ---------- */
+.statusbar { height: 22px; flex: none; display: flex; align-items: center; background: var(--status); color: var(--status-fg); font-size: 12px; user-select: none; }
+.sb { height: 100%; padding: 0 8px; display: flex; align-items: center; gap: 4px; cursor: pointer; white-space: nowrap; }
+.sb:hover { background: rgba(255,255,255,.12); }
+.sb svg { width: 14px; height: 14px; }
+.sb.remote { background: var(--remote); padding: 0 10px; }
+.sb-right { margin-left: auto; display: flex; height: 100%; }
 
-  /* Numbers strip */
-  .numbers { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; margin-top: 56px; }
-  .num { padding: 26px 26px 24px; border-right: 1px solid var(--line); }
-  .num:last-child { border-right: 0; }
-  .num strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 2.8rem; line-height: 1; letter-spacing: -1px; }
-  .num strong sup { font-size: 1.3rem; color: var(--accent); vertical-align: top; position: relative; top: 4px; margin-left: 2px; }
-  .num span { display: block; margin-top: 10px; font-size: .86rem; color: var(--muted); line-height: 1.45; }
+/* ---------- quick open ---------- */
+.qo { position: fixed; inset: 0; z-index: 100; display: none; }
+.qo.show { display: block; }
+.qo-box {
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: min(600px, 94vw);
+  background: var(--widget); border: 1px solid var(--widget-border); border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.45); padding: 6px;
+}
+.qo-box input {
+  width: 100%; height: 28px; padding: 0 8px; background: var(--input); color: var(--fg);
+  border: 1px solid var(--focus); border-radius: 2px; outline: 0; font: 13px var(--ui);
+}
+.qo-list { margin-top: 6px; max-height: 50vh; overflow: auto; }
+.qo-item { display: flex; align-items: center; gap: 8px; height: 24px; padding: 0 8px; border-radius: 3px; cursor: pointer; color: var(--side-fg); white-space: nowrap; }
+.qo-item small { opacity: .65; overflow: hidden; text-overflow: ellipsis; }
+.qo-item.on { background: var(--qo-sel); color: #fff; }
 
-  /* Experience */
-  .jobs { border-top: 1px solid var(--line); }
-  .job { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 38px 0; border-bottom: 1px solid var(--line); }
-  .job-when { font-family: var(--mono); font-size: .8rem; color: var(--muted); padding-top: 6px; line-height: 1.7; }
-  .job-when .place { display: block; font-family: var(--sans); margin-top: 6px; font-size: .82rem; }
-  .job h3 { margin: 0; font-size: 1.25rem; font-weight: 600; letter-spacing: -.2px; }
-  .job h3 .co { color: var(--muted); font-weight: 400; }
-  .roles { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
-  .role-pill { font-size: .8rem; padding: 4px 11px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); }
-  .role-pill.now { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
-  .job .note { font-size: .88rem; color: var(--muted); margin: 10px 0 0; font-style: italic; }
-  .job ul { margin: 16px 0 0; padding: 0; list-style: none; }
-  .job li { position: relative; padding-left: 22px; margin-bottom: 9px; color: var(--ink-2); }
-  .job li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 9px; height: 1.5px; background: var(--accent); }
-  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
-  .stack span { font-family: var(--mono); font-size: .72rem; color: var(--muted); padding: 3px 8px; border: 1px dashed var(--line); border-radius: 6px; }
-
-  /* Projects */
-  .projects { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 28px; text-decoration: none; display: flex; flex-direction: column;
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
-  .card.feature { grid-column: span 4; grid-row: span 2; }
-  .card.side { grid-column: span 2; }
-  .card.third { grid-column: span 2; }
-  .card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
-  .repo { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
-  .repo b { color: var(--ink); font-weight: 500; }
-  .arrow { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); transition: background .2s, color .2s, transform .25s; flex-shrink: 0; }
-  .arrow svg { width: 14px; height: 14px; }
-  .card:hover .arrow { background: var(--ink); color: var(--bg); transform: rotate(-45deg); }
-  .card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1.1; margin: 0 0 12px; letter-spacing: -.3px; }
-  .card.feature h3 { font-size: 2.3rem; }
-  .card p { margin: 0 0 16px; color: var(--ink-2); font-size: .96rem; }
-  .card .points { list-style: none; padding: 0; margin: 4px 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
-  .card .points li { font-size: .9rem; color: var(--ink-2); padding-left: 18px; position: relative; }
-  .card .points li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-size: .85rem; }
-  .card-foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px; padding-top: 6px; }
-  .tag { font-family: var(--mono); font-size: .7rem; padding: 3px 9px; border-radius: 6px; background: var(--surface-2); color: var(--ink-2); }
-  .tag.go { background: #e0f2f7; color: #0b6e86; }
-  [data-theme="dark"] .tag.go { background: #0f2a33; color: #6ed0e8; }
-  .snippet {
-    font-family: var(--mono); font-size: .76rem; background: var(--term-bg); color: var(--term-ink);
-    border-radius: 10px; padding: 14px 16px; margin: 4px 0 22px; overflow-x: auto; white-space: pre; line-height: 1.75;
-  }
-
-  /* Skills */
-  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-  .skill { padding: 26px 26px 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .skill h4 { margin: 0 0 14px; font-size: .78rem; font-family: var(--mono); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
-  .chip { font-size: .86rem; padding: 5px 11px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); }
-  .chip.main { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--accent); background: var(--accent-soft); }
-  .skill-note { margin-top: 14px; font-size: .84rem; color: var(--muted); }
-
-  /* Quote */
-  .quote-wrap { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  blockquote { margin: 0 auto; max-width: 860px; text-align: center; }
-  blockquote p { font-family: var(--serif); font-size: clamp(1.6rem, 3.2vw, 2.3rem); line-height: 1.3; margin: 0 0 26px; letter-spacing: -.2px; }
-  blockquote p::before { content: "“"; color: var(--accent); }
-  blockquote p::after { content: "”"; color: var(--accent); }
-  blockquote footer { font-size: .9rem; color: var(--muted); }
-  blockquote footer strong { color: var(--ink); font-weight: 600; }
-
-  /* Edu + languages */
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
-  .panel h4 { margin: 0 0 6px; font-size: 1.08rem; font-weight: 600; }
-  .panel p { margin: 0; color: var(--muted); font-size: .94rem; }
-  .lang { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
-  .lang:last-child { border-bottom: 0; padding-bottom: 0; }
-  .lang:first-of-type { padding-top: 4px; }
-  .lang span:last-child { color: var(--muted); }
-
-  /* Contact */
-  .contact { padding: 110px 0 90px; text-align: center; }
-  .contact h2 { font-size: clamp(2.6rem, 6vw, 4.4rem); margin-bottom: 18px; }
-  .contact p { color: var(--ink-2); max-width: 36em; margin: 0 auto 34px; font-size: 1.06rem; }
-  .mail {
-    display: inline-block; font-family: var(--serif); font-size: clamp(1.5rem, 3.6vw, 2.4rem);
-    text-decoration: none; border-bottom: 1.5px solid var(--accent); padding-bottom: 4px; margin-bottom: 36px;
-    transition: color .2s ease;
-  }
-  .mail:hover { color: var(--accent); }
-  .contact .actions { justify-content: center; }
-
-  footer.site { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: .84rem; color: var(--muted); }
-  footer.site .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  footer.site a { text-decoration: none; }
-  footer.site a:hover { color: var(--ink); }
-
-  /* Reveal */
-  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
-  .js .reveal.in { opacity: 1; transform: none; }
-
-  /* Responsive */
-  @media (max-width: 960px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .term { transform: none; }
-    .sec-head, .about-grid, .job { grid-template-columns: 1fr; gap: 14px; }
-    .about-body { grid-template-columns: 1fr; gap: 32px; }
-    .numbers { grid-template-columns: repeat(2, 1fr); }
-    .num:nth-child(2) { border-right: 0; }
-    .num:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-    .projects { grid-template-columns: 1fr 1fr; }
-    .card.feature { grid-column: span 2; grid-row: auto; }
-    .card.side, .card.third { grid-column: span 1; }
-    .skills { grid-template-columns: 1fr 1fr; }
-    .nav ul { display: none; }
-  }
-  @media (max-width: 620px) {
-    body { font-size: 16px; }
-    .wrap { width: min(1120px, 100% - 36px); }
-    .hero { padding: 56px 0 48px; }
-    section { padding: 64px 0; }
-    .projects { grid-template-columns: 1fr; }
-    .card.feature, .card.side, .card.third { grid-column: auto; }
-    .card .points { grid-template-columns: 1fr; }
-    .skills { grid-template-columns: 1fr; }
-    .two { grid-template-columns: 1fr; }
-    .term pre { font-size: .7rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-    html { scroll-behavior: auto; }
-  }
-  @media print {
-    .nav, .theme-btn, .actions, .term, .contact .actions { display: none !important; }
-    body { background: #fff; color: #000; font-size: 11pt; }
-    section { padding: 24px 0; }
-    .card, .panel { box-shadow: none; break-inside: avoid; }
-    .job { break-inside: avoid; }
-    .js .reveal { opacity: 1; transform: none; }
-  }
+/* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  .menus, .hide-m { display: none !important; }
+  .cc { width: 56vw; }
+  .sidebar { position: absolute; left: 48px; top: 0; bottom: 0; z-index: 30; box-shadow: 4px 0 18px rgba(0,0,0,.4); }
+  .minimap { display: none; }
+  .code { font-size: 12.5px; line-height: 19px; padding-right: 24px; }
+  .gn { width: 44px; padding-right: 12px; }
+  .md { padding: 20px 18px 60px; }
+  .md h1 { font-size: 1.7em; }
+  .panel { height: 36%; }
+  .pbody { font-size: 12px; padding: 2px 12px 10px; }
+}
+@media (max-width: 460px) {
+  .activity { width: 42px; } .act-btn { width: 42px; }
+  .sidebar { left: 42px; }
+  .lights { display: none; }
+}
 </style>
 </head>
-
 <body>
-<script>
-  document.documentElement.classList.add('js');
-  (function () {
-    var saved = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
-  })();
-</script>
 
-<!-- ============ NAV ============ -->
-<header class="nav" id="nav">
-  <div class="wrap">
-    <a href="#top" class="brand">Hamed Maaleki<span>.</span></a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Open source</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="nav-right">
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      </button>
-    </div>
+<noscript>
+  <div style="padding:24px;font:15px/1.6 system-ui;max-width:720px">
+    <h1>Hamed Maaleki</h1>
+    <p>Senior DevOps Engineer in Tehran, Iran. Open to relocation to Germany and Europe.
+    Linux, infrastructure automation (Ansible, Terraform) and observability (Prometheus, Go exporters).</p>
+    <p><a href="mailto:hamed.maaleki@gmail.com">hamed.maaleki@gmail.com</a> ·
+    <a href="https://github.com/Haameed">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/hamed-maaleki/">LinkedIn</a> ·
+    <a href="hamed_maaleki-PDF.pdf">CV (PDF)</a></p>
+  </div>
+</noscript>
+
+<!-- ================= TITLE BAR ================= -->
+<header class="titlebar">
+  <div class="lights"><i></i><i></i><i></i></div>
+  <nav class="menus"><span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span><span>Help</span></nav>
+  <div class="cc" id="cc" title="Search files (Ctrl+P)">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3.5 3.5"/></svg>
+    hamed-maaleki
   </div>
 </header>
 
-<main id="top">
-
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap hero-grid">
+<div class="main">
+  <!-- ================= ACTIVITY BAR ================= -->
+  <aside class="activity">
     <div>
-      <span class="status"><span class="dot"></span>Open to roles in Germany &amp; Europe</span>
-      <h1>Hamed<br><em>Maaleki</em></h1>
-      <p class="lede">
-        Senior DevOps engineer. I work on <strong>Linux platforms, infrastructure automation and monitoring</strong>.
-        I've worked in operations since 2010, and right now I lead the NetDevOps team at Blu Bank in Tehran.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:hamed.maaleki@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          Get in touch
-        </a>
-   
-        <a class="btn btn-ghost" href="https://github.com/Haameed" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
-          GitHub
-        </a>
+      <button class="act-btn on" id="actExplorer" title="Explorer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v12A1.5 1.5 0 0 0 7.5 18h9a1.5 1.5 0 0 0 1.5-1.5V7z"/><path d="M14 3v4h4"/><path d="M6 7H4.5A1.5 1.5 0 0 0 3 8.5v11A1.5 1.5 0 0 0 4.5 21H13a1.5 1.5 0 0 0 1.5-1.5V18"/></svg>
+      </button>
+      <button class="act-btn" id="actSearch" title="Search files (Ctrl+P)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="10" r="6"/><path d="m9.7 14.3-6 6"/></svg>
+      </button>
+      <button class="act-btn" id="actGit" title="Source Control: git log">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6.5" cy="5.5" r="2.2"/><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="7.5" r="2.2"/><path d="M6.5 7.7v8.6M17.5 9.7c0 4-4 4.3-9.4 7.3"/></svg>
+      </button>
+      <button class="act-btn" id="actGithub" title="github.com/Haameed">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.2z"/></svg>
+      </button>
+    </div>
+    <div>
+      <button class="act-btn" id="actLinkedin" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20.5c1-3.8 4-5.6 7.5-5.6s6.5 1.8 7.5 5.6"/></svg>
+      </button>
+      <button class="act-btn" id="actTheme" title="Toggle Dark+ / Light+">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7M18.5 18.5l-1.7-1.7M7.2 7.2 5.5 5.5"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-title"><span>Explorer</span><span style="letter-spacing:2px">···</span></div>
+    <div class="sec open" id="secProject"><span class="chev"></span>hamed-maaleki</div>
+    <div class="tree" id="tree"></div>
+    <div class="sec bordered"><span class="chev"></span>Outline</div>
+    <div class="sec bordered"><span class="chev"></span>Timeline</div>
+  </aside>
+
+  <!-- ================= EDITOR ================= -->
+  <section class="workbench">
+    <div class="tabs" id="tabs"></div>
+    <div class="crumbs" id="crumbs"></div>
+    <div class="editor" id="editor">
+      <div class="scroller" id="scroller"></div>
+      <div class="minimap" id="minimap"><div id="mmCode"></div><div class="mm-slider" id="mmSlider"></div></div>
+    </div>
+
+    <div class="panel" id="panel">
+      <div class="panel-head">
+        <span class="ptab" data-p="problems">Problems</span>
+        <span class="ptab" data-p="output">Output</span>
+        <span class="ptab hide-m">Debug Console</span>
+        <span class="ptab on" data-p="terminal">Terminal</span>
+        <span class="spacer"></span>
+        <button class="icon-btn" id="clearTerm" title="Clear terminal"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.7 9.5h5.6l.7-9.5"/></svg></button>
+        <button class="icon-btn" id="closePanel" title="Close panel (Ctrl+`)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
       </div>
-      <div class="meta-row">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Tehran, Iran</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/><circle cx="12" cy="12" r="10"/></svg>Willing to relocate</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Visa sponsorship needed</span>
-      </div>
+      <div class="pbody" id="pTerminal"><div id="termOut"></div><div class="prompt-line"><span id="promptLabel"></span><input id="termIn" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input" /></div></div>
+      <div class="pbody" id="pProblems" hidden>No problems have been detected in the workspace.</div>
+      <div class="pbody" id="pOutput" hidden><span class="a-d">[info]</span> gopls: workspace loaded (6 packages)
+<span class="a-d">[info]</span> go vet ./...: no issues found
+<span class="a-d">[info]</span> staticcheck: no issues found</div>
     </div>
+  </section>
+</div>
 
-    <div class="term" aria-label="Career summary shown as Prometheus metrics">
-      <div class="term-bar"><i></i><i></i><i></i><b>~/metrics</b></div>
-<pre><span class="t-prompt">$</span> curl -s localhost:9100/metrics | grep hamed_
-
-<span class="t-dim"># HELP hamed_ops_experience_years Years in IT operations.</span>
-<span class="t-dim"># TYPE hamed_ops_experience_years gauge</span>
-<span class="t-name">hamed_ops_experience_years</span> <span class="t-val">16</span>
-
-<span class="t-name">hamed_bare_metal_servers</span>{<span class="t-label">env</span>=<span class="t-str">"snapp"</span>} <span class="t-val">70</span>
-<span class="t-name">hamed_virtual_machines</span>{<span class="t-label">hv</span>=<span class="t-str">"kvm"</span>} <span class="t-val">700</span>
-<span class="t-name">hamed_sites_monitored</span>{<span class="t-label">type</span>=<span class="t-str">"fuel_station"</span>} <span class="t-val">4000</span>
-<span class="t-name">hamed_exporters_published</span>{<span class="t-label">lang</span>=<span class="t-str">"go"</span>} <span class="t-val">4</span>
-<span class="t-name">hamed_team_size</span>{<span class="t-label">role</span>=<span class="t-str">"lead"</span>} <span class="t-val">3</span>
-<span class="t-name">hamed_open_to_relocation</span>{<span class="t-label">region</span>=<span class="t-str">"eu"</span>} <span class="t-val">1</span>
-
-<span class="t-prompt">$</span> <span class="cursor"></span></pre>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ============ ABOUT ============ -->
-<section id="about">
-  <div class="wrap">
-    <div class="about-grid reveal">
-      <div class="eyebrow"><b>01</b> / About</div>
-      <div>
-        <h2 style="margin-bottom:34px">I like infrastructure that runs<br>itself and <em>tells you</em> when it can't.</h2>
-        <div class="about-body">
-          <div>
-            <p>
-              My first job was in a network operations center for the National Iranian Oil Company, watching dashboards
-              for more than 4,000 fuel stations across the country. That's where I picked up two habits I still have:
-              I want to know a service is in trouble before someone calls, and I don't like fixing the same thing by hand twice.
-            </p>
-            <p>
-              After that I ran Linux and virtualization platforms at an ISP, a telecom operator, a ride-hailing
-              company and a digital bank. At Snapp I looked after about 70 bare-metal hosts and over 700 VMs on KVM and
-              OpenNebula, mostly through Ansible, Terraform and GitLab CI. I was also on the team that built a Terraform
-              provider for our internal cloud.
-            </p>
-            <p>
-              These days I lead a three-person NetDevOps team at Blu Bank and still write a lot of the code myself, mostly in Go.
-              Over the last year I published Prometheus exporters for F5 BIG-IP and F5OS, which people outside
-              the company now run too.
-            </p>
-            <p>
-              I'm looking for a senior hands-on engineering role in Germany or elsewhere in Europe,
-              working on automation, observability or Linux platforms.
-            </p>
-          </div>
-          <ul class="facts">
-            <li><span>Based in</span><span>Tehran, Iran</span></li>
-            <li><span>Current role</span><span>NetDevOps Team Lead, Blu Bank</span></li>
-            <li><span>In operations since</span><span>2010</span></li>
-            <li><span>Main languages</span><span>Go, Python, Bash</span></li>
-            <li><span>Looking for</span><span>Senior IC roles</span></li>
-            <li><span>Relocation</span><span>Germany / EU</span></li>
-            <li><span>Work permit</span><span>Sponsorship needed</span></li>
-          </ul>
-        </div>
-
-        <div class="numbers">
-          <div class="num"><strong>16<sup>+</sup></strong><span>years across IT operations, Linux and automation</span></div>
-          <div class="num"><strong>700<sup>+</sup></strong><span>virtual machines operated on KVM / OpenNebula</span></div>
-          <div class="num"><strong>70<sup>+</sup></strong><span>bare-metal servers in a single environment</span></div>
-          <div class="num"><strong>5</strong><span>organizations: banking, telecom, ISP, tech, energy</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ============ EXPERIENCE ============ -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow"><b>02</b> / Experience</div>
-      <h2>Where I've worked</h2>
-    </div>
-
-    <div class="jobs">
-
-      <article class="job reveal">
-        <div class="job-when">Aug 2025 – Present<span class="place">Tehran, Iran</span></div>
-        <div>
-          <h3>Blu Bank <span class="co">· Digital banking</span></h3>
-          <div class="roles">
-            <span class="role-pill now">NetDevOps Team Lead · Feb 2026 – now</span>
-            <span class="role-pill">Senior NetDevOps Engineer · Aug 2025 – Feb 2026</span>
-          </div>
-          <p class="note">Started part-time while I was still at Snapp; full-time since November 2025.</p>
-          <ul>
-            <li>I lead a team of three. I still do a lot of the hands-on work, and most of my coordination is with the infrastructure, network and security teams.</li>
-            <li>We build network and infrastructure automation with Ansible, Terraform, Go and Python, usually talking to device REST APIs. Changes go through Git.</li>
-            <li>I wrote two Prometheus exporters in Go, for F5 BIG-IP (TMOS) and F5OS, so our load balancers report into the same monitoring as everything else. Both are open source.</li>
-            <li>I work on an internal network security panel. For supported operations, engineers run changes from one place instead of logging into each device separately.</li>
-            <li>I built a Go SMS gateway that our infrastructure and operations tools send messages through.</li>
-            <li>We build, test and ship these services with Docker and GitLab CI/CD.</li>
-            <li>I've also been testing on-prem LLMs for infrastructure analysis, troubleshooting and security operations work.</li>
-          </ul>
-          <div class="stack"><span>Go</span><span>Python</span><span>Ansible</span><span>Terraform</span><span>F5 BIG-IP</span><span>F5OS</span><span>Prometheus</span><span>GitLab CI</span><span>Docker</span></div>
-        </div>
-      </article>
-
-      <article class="job reveal">
-        <div class="job-when">Sep 2021 – Nov 2025<span class="place">Tehran, Iran</span></div>
-        <div>
-          <h3>Snapp <span class="co">· Ride-hailing &amp; tech</span></h3>
-          <div class="roles"><span class="role-pill">SysOps / DevOps Engineer</span></div>
-          <ul>
-            <li>Ran more than 70 bare-metal servers and 700 virtual machines on KVM and OpenNebula.</li>
-            <li>Automated provisioning, configuration and the routine recurring work with Ansible, Python, Bash and GitLab CI/CD.</li>
-            <li>Was part of the team that built a custom Terraform provider for the company's cloud platform, so its resources could be managed as code in production.</li>
-            <li>Wrote Go exporters and alerting rules for internal infrastructure and services.</li>
-            <li>Kept secrets in Git with Mozilla SOPS as part of a GitOps workflow.</li>
-            <li>Worked through production incidents across Linux, virtualization, monitoring and automation with the infrastructure and development teams.</li>
-          </ul>
-          <div class="stack"><span>KVM</span><span>OpenNebula</span><span>Terraform</span><span>Ansible</span><span>Go</span><span>Prometheus</span><span>SOPS</span><span>GitOps</span></div>
-        </div>
-      </article>
-
-      <article class="job reveal">
-        <div class="job-when">Oct 2020 – Sep 2021<span class="place">Tehran, Iran</span></div>
-        <div>
-          <h3>Blu Bank <span class="co">· Digital banking</span></h3>
-          <div class="roles"><span class="role-pill">SysOps Engineer</span></div>
-          <ul>
-            <li>Managed 40+ physical hosts and 500+ VMs on VMware vSphere.</li>
-            <li>Wrote and maintained Ansible playbooks for Linux administration and firewall configuration changes.</li>
-            <li>Filled the gaps in our monitoring tools with Bash and Python checks.</li>
-            <li>Automated the infrastructure inventory and sent it out as email reports, so nobody had to keep spreadsheets up to date by hand.</li>
-          </ul>
-          <div class="stack"><span>vSphere</span><span>Linux</span><span>Ansible</span><span>Python</span><span>Bash</span></div>
-        </div>
-      </article>
-
-      <article class="job reveal">
-        <div class="job-when">Nov 2018 – Jul 2020<span class="place">Tehran, Iran</span></div>
-        <div>
-          <h3>Mobinnet <span class="co">· Telecom</span></h3>
-          <div class="roles"><span class="role-pill">Linux System Administrator</span></div>
-          <ul>
-            <li>Built and ran a three-node MariaDB Galera cluster for high-availability database services.</li>
-            <li>Wrote SNMP monitoring for telecom radio devices in Bash and Python and fed the results into Nagios through a custom socket-based ingestion.</li>
-            <li>Administered the Linux systems behind telecom infrastructure and operational services, and wrote health-check scripts for them.</li>
-          </ul>
-          <div class="stack"><span>MariaDB Galera</span><span>SNMP</span><span>Nagios</span><span>Linux</span></div>
-        </div>
-      </article>
-
-      <article class="job reveal">
-        <div class="job-when">Feb 2016 – Nov 2018<span class="place">Tehran, Iran</span></div>
-        <div>
-          <h3>Asiatech <span class="co">· Internet service provider</span></h3>
-          <div class="roles"><span class="role-pill">Linux System Administrator</span></div>
-          <ul>
-            <li>Managed 40+ hosts and 300+ VMs on VMware vSphere, including the HA, DRS and Storage DRS setup.</li>
-            <li>Ran production services including FreeRADIUS, MySQL and central Syslog.</li>
-            <li>Started automating configuration and day-to-day tasks with Ansible.</li>
-            <li>Built Logstash pipelines that parsed infrastructure logs and wrote them to internal databases.</li>
-          </ul>
-          <div class="stack"><span>vSphere HA/DRS</span><span>FreeRADIUS</span><span>MySQL</span><span>Logstash</span><span>Ansible</span></div>
-        </div>
-      </article>
-
-      <article class="job reveal">
-        <div class="job-when">Jun 2010 – Feb 2016<span class="place">Tehran, Iran</span></div>
-        <div>
-          <h3>National Iranian Oil Company <span class="co">· IFCP project</span></h3>
-          <div class="roles"><span class="role-pill">NOC Engineer</span></div>
-          <ul>
-            <li>Monitored the systems and services behind 4,000+ fuel stations using SolarWinds and ManageEngine.</li>
-            <li>Wrote Bash scripts for log cleanup, network health checks and alerting.</li>
-            <li>Handled incidents and escalations and coordinated troubleshooting across a widely distributed network.</li>
-          </ul>
-          <div class="stack"><span>SolarWinds</span><span>ManageEngine</span><span>Bash</span><span>NOC</span></div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ============ PROJECTS ============ -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow"><b>03</b> / Open source</div>
-      <h2>Things I've built and <em>published</em></h2>
-    </div>
-
-    <div class="projects">
-
-      <a class="card feature reveal" href="https://github.com/Haameed/f5_bigip_exporter" target="_blank" rel="noopener">
-        <div class="card-top">
-          <span class="repo">Haameed / <b>f5_bigip_exporter</b></span>
-          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-        <h3>F5 BIG-IP Prometheus Exporter</h3>
-        <p>
-          I couldn't find an exporter that covered what we needed from our F5 load balancers, so I wrote one.
-          It uses the iControl REST API and follows the multi-target <code>/probe</code> pattern, so a single instance
-          can scrape any number of BIG-IP devices with no agent on the box.
-        </p>
-        <ul class="points">
-          <li>Virtual servers, pools, nodes, TMM, HA state</li>
-          <li>SSL certificate expiry and TLS version usage</li>
-          <li>Collectors run concurrently in goroutines</li>
-          <li>Token caching: one login under concurrent scrapes</li>
-          <li>Hardware sensors, skipped cleanly on VE</li>
-          <li>Grafana dashboard and alert rules included</li>
-        </ul>
-<div class="snippet"><span class="t-dim"># alert on legacy TLS still being negotiated</span>
-rate(bigip_clientssl_protocol_uses_total{protocol=~<span class="t-str">"SSLv.*|TLSv1.0|TLSv1.1"</span>}[5m]) <span class="t-val">&gt; 0</span></div>
-        <div class="card-foot">
-          <span class="tag go">Go</span><span class="tag">Prometheus</span><span class="tag">iControl REST</span><span class="tag">Docker · GHCR</span><span class="tag">MIT</span>
-        </div>
-      </a>
-
-      <a class="card side reveal" href="https://github.com/Haameed/f5_f5os_exporter" target="_blank" rel="noopener">
-        <div class="card-top">
-          <span class="repo">Haameed / <b>f5_f5os_exporter</b></span>
-          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-        <h3>F5OS Exporter</h3>
-        <p>After the BIG-IP exporter came out, the question I got most was "what about F5OS?" This is the answer. It covers rSeries and VELOS through the OpenConfig-based REST API, including CPU, disks, PSUs, interfaces, LACP and licensing.</p>
-        <div class="card-foot"><span class="tag go">Go</span><span class="tag">OpenConfig</span><span class="tag">GoReleaser</span></div>
-      </a>
-
-      <a class="card side reveal" href="https://github.com/Haameed/opennebula-dynamic-inventory" target="_blank" rel="noopener">
-        <div class="card-top">
-          <span class="repo">Haameed / <b>opennebula-dynamic-inventory</b></span>
-          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-        <h3>OpenNebula Inventory for Ansible</h3>
-        <p>An Ansible inventory plugin that reads running VMs from one or more OpenNebula clusters and groups them by name, label or attribute (SSH port, for example). It works with the CLI, AWX and GitLab CI.</p>
-        <div class="card-foot"><span class="tag">Python</span><span class="tag">Ansible</span><span class="tag">OpenNebula</span></div>
-      </a>
-
-      <a class="card third reveal" href="https://github.com/Haameed/opennebula_exporter" target="_blank" rel="noopener">
-        <div class="card-top">
-          <span class="repo">Haameed / <b>opennebula_exporter</b></span>
-          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-        <h3>OpenNebula Exporter</h3>
-        <p>Prometheus metrics for OpenNebula clouds.</p>
-        <div class="card-foot"><span class="tag">Prometheus</span><span class="tag">OpenNebula</span></div>
-      </a>
-
-      <a class="card third reveal" href="https://github.com/Haameed/fortigate_exporter" target="_blank" rel="noopener">
-        <div class="card-top">
-          <span class="repo">Haameed / <b>fortigate_exporter</b></span>
-          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-        <h3>FortiGate Exporter</h3>
-        <p>Prometheus exporter for Fortinet FortiGate firewalls.</p>
-        <div class="card-foot"><span class="tag">Prometheus</span><span class="tag">FortiGate</span></div>
-      </a>
-
-      <a class="card third reveal" href="https://github.com/Haameed?tab=repositories" target="_blank" rel="noopener">
-        <div class="card-top">
-          <span class="repo">github.com / <b>Haameed</b></span>
-          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-        <h3>Everything else</h3>
-        <p>Bash scripts from various projects, plus smaller tools and experiments.</p>
-        <div class="card-foot"><span class="tag">Bash</span><span class="tag">Misc</span></div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ============ SKILLS ============ -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow"><b>04</b> / Skills</div>
-      <h2>Tools I use day to day</h2>
-    </div>
-
-    <div class="skills reveal">
-      <div class="skill">
-        <h4>Automation &amp; IaC</h4>
-        <div class="chips">
-          <span class="chip main">Ansible</span><span class="chip main">Terraform</span><span class="chip">Provider development</span><span class="chip">GitOps</span><span class="chip">Git workflows</span>
-        </div>
-      </div>
-      <div class="skill">
-        <h4>Programming &amp; delivery</h4>
-        <div class="chips">
-          <span class="chip main">Go</span><span class="chip main">Python</span><span class="chip">Bash</span><span class="chip">REST APIs</span><span class="chip">GitLab CI/CD</span><span class="chip">Docker</span>
-        </div>
-      </div>
-      <div class="skill">
-        <h4>Observability</h4>
-        <div class="chips">
-          <span class="chip main">Prometheus</span><span class="chip main">Grafana</span><span class="chip">Custom exporters</span><span class="chip">Nagios</span><span class="chip">Checkmk</span><span class="chip">SolarWinds</span><span class="chip">SNMP</span><span class="chip">Logstash</span><span class="chip">Syslog</span>
-        </div>
-      </div>
-      <div class="skill">
-        <h4>Linux &amp; virtualization</h4>
-        <div class="chips">
-          <span class="chip main">Linux</span><span class="chip">Ubuntu</span><span class="chip main">KVM</span><span class="chip">OpenNebula</span><span class="chip">VMware vSphere</span><span class="chip">HA / DRS / SDRS</span>
-        </div>
-      </div>
-      <div class="skill">
-        <h4>Network &amp; security</h4>
-        <div class="chips">
-          <span class="chip main">F5 BIG-IP / TMOS</span><span class="chip">F5OS</span><span class="chip">Network automation</span><span class="chip">HashiCorp Vault</span><span class="chip">Mozilla SOPS</span><span class="chip">Keycloak</span><span class="chip">LDAP</span><span class="chip">FreeIPA</span>
-        </div>
-      </div>
-      <div class="skill">
-        <h4>Databases</h4>
-        <div class="chips">
-          <span class="chip">MariaDB</span><span class="chip">Galera Cluster</span><span class="chip">MySQL</span>
-        </div>
-        <p class="skill-note">I've also used Kubernetes and Helm, but only in small setups and labs, and not recently.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ QUOTE ============ -->
-<section class="quote-wrap">
-  <div class="wrap reveal">
-    <blockquote>
-      <p>Hamed is one of the best Linux system administrators I've ever seen. He has strong experience in Linux and infrastructure as code, and he handles several projects at once and delivers them before the deadline.</p>
-      <footer><strong>Keivan Nobakht</strong> · recommendation on LinkedIn</footer>
-    </blockquote>
-  </div>
-</section>
-
-<!-- ============ EDUCATION ============ -->
-<section id="education">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow"><b>05</b> / Background</div>
-      <h2>Education &amp; languages</h2>
-    </div>
-    <div class="two reveal">
-      <div class="panel">
-        <div class="eyebrow" style="margin-bottom:14px">Education</div>
-        <h4>B.Sc. Information Technology</h4>
-        <p>University of Applied Science and Technology, Iran · 2015</p>
-      </div>
-      <div class="panel">
-        <div class="eyebrow" style="margin-bottom:8px">Languages</div>
-        <div class="lang"><span>Persian</span><span>Native</span></div>
-        <div class="lang"><span>English</span><span>Professional working proficiency</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ============ CONTACT ============ -->
-<section class="contact" id="contact">
-  <div class="wrap reveal">
-    <div class="eyebrow" style="margin-bottom:18px"><b>06</b> / Contact</div>
-    <h2>Let's <em>talk</em>.</h2>
-    <p>If you're hiring for infrastructure, platform or observability work in Europe, I'd like to hear about it. Email is the fastest way to reach me.</p>
-    <a class="mail" href="mailto:hamed.maaleki@gmail.com">hamed.maaleki@gmail.com</a>
-    <div class="actions">
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/hamed-maaleki/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.6-2.64-1.62 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg>
-        LinkedIn
-      </a>
-      <a class="btn btn-ghost" href="https://github.com/Haameed" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
-        GitHub
-      </a>
-
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="site">
-  <div class="wrap">
-    <span>© <span id="year">2026</span> Hamed Maaleki · Tehran</span>
-    <span><a href="#top">Back to top ↑</a></span>
+<!-- ================= STATUS BAR ================= -->
+<footer class="statusbar">
+  <div class="sb remote" title="Location"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m5 4-3 4 3 4M11 4l3 4-3 4"/></svg>Tehran → EU</div>
+  <div class="sb" id="sbBranch" title="git log"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="4.5" cy="3.5" r="1.5"/><circle cx="4.5" cy="12.5" r="1.5"/><circle cx="11.5" cy="5" r="1.5"/><path d="M4.5 5v6M11.5 6.5c0 3-3 3-7 4.8"/></svg>main</div>
+  <div class="sb" id="sbProblems" title="Problems"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="5.5"/><path d="m6 6 4 4M10 6l-4 4"/></svg>0 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 2.5 14 13H2z"/><path d="M8 6.5v3M8 11v.5"/></svg>0</div>
+  <div class="sb-right">
+    <div class="sb" id="sbPos">Ln 1, Col 1</div>
+    <div class="sb hide-m">Tab Size: 4</div>
+    <div class="sb hide-m">UTF-8</div>
+    <div class="sb hide-m">LF</div>
+    <div class="sb" id="sbLang">Markdown</div>
+    <div class="sb hide-m">Go 1.23</div>
+    <div class="sb" id="sbHire" title="Email me"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m3 8.5 3 3 7-7"/></svg>Open to work</div>
   </div>
 </footer>
 
+<!-- ================= QUICK OPEN ================= -->
+<div class="qo" id="qo">
+  <div class="qo-box">
+    <input id="qoIn" placeholder="Search files by name, or try: cv, email, github" autocomplete="off" spellcheck="false" />
+    <div class="qo-list" id="qoList"></div>
+  </div>
+</div>
+
+<!-- ================= README PREVIEW ================= -->
+<template id="readme">
+  <h1><img src="https://github.com/Haameed.png?size=128" alt="Hamed Maaleki" onerror="this.remove()" /><span>Hamed Maaleki<small>Senior DevOps Engineer · Infrastructure automation &amp; observability</small></span></h1>
+  <div class="badges">
+    <span class="badge"><b>based in</b><i>Tehran, Iran</i></span>
+    <span class="badge"><b>relocating</b><i>Germany / EU</i></span>
+    <span class="badge go"><b>writes</b><i>Go · Python · Bash</i></span>
+    <span class="badge ok"><b>status</b><i>open to work</i></span>
+    <span class="badge warn"><b>visa</b><i>sponsorship needed</i></span>
+  </div>
+
+  <p>I work on Linux platforms, infrastructure automation and monitoring. I've been in operations since 2010.
+  I started in a NOC, then ran virtualization platforms for an ISP, a telecom operator, a ride-hailing company and a bank.
+  Over the last few years I've written most of my tooling in Go and Python.</p>
+
+  <p>This site is laid out like one of my repos, because that's what my screen looks like most days.
+  Open a file on the left, press <kbd>Ctrl</kbd>+<kbd>P</kbd>, or type <code>help</code> in the terminal below.
+  If you'd rather read a normal CV, <a href="hamed_maaleki-PDF.pdf" download>here's the PDF</a>.</p>
+
+  <h2>At a glance</h2>
+  <table>
+    <tr><th>Now</th><td>NetDevOps Team Lead at Blu Bank. I lead a team of three and still write a lot of the code.</td></tr>
+    <tr><th>Before</th><td>SysOps / DevOps at Snapp: 70+ bare-metal servers and 700+ VMs on KVM and OpenNebula, plus a team-built Terraform provider used in production.</td></tr>
+    <tr><th>Open source</th><td>Prometheus exporters for F5 BIG-IP, F5OS, FortiGate and OpenNebula, and an Ansible inventory plugin for OpenNebula.</td></tr>
+    <tr><th>Looking for</th><td>A senior hands-on role in infrastructure automation, observability or Linux platforms, in Germany or elsewhere in Europe.</td></tr>
+    <tr><th>Paperwork</th><td>I'll need the employer's support with the work visa and residence permit.</td></tr>
+  </table>
+
+  <h2>Layout</h2>
+<pre><code>.
+├── <a href="#" data-open="main.go">main.go</a>                          <span class="c"># start here</span>
+├── <a href="#" data-open="go.mod">go.mod</a>                           <span class="c"># the tools I depend on</span>
+├── internal/
+│   ├── about/<a href="#" data-open="internal/about/about.go">about.go</a>               <span class="c"># the longer intro</span>
+│   ├── experience/<a href="#" data-open="internal/experience/experience.go">experience.go</a>     <span class="c"># 2010 → today</span>
+│   ├── projects/<a href="#" data-open="internal/projects/projects.go">projects.go</a>         <span class="c"># open-source work</span>
+│   ├── skills/<a href="#" data-open="internal/skills/skills.go">skills.go</a>             <span class="c"># the toolbox</span>
+│   └── contact/<a href="#" data-open="internal/contact/contact.go">contact.go</a>           <span class="c"># how to reach me</span>
+└── <a href="hamed_maaleki-PDF.pdf" download>Hamed-Maaleki-CV.pdf</a></code></pre>
+
+  <h2>From a colleague</h2>
+  <blockquote>
+    <p>Hamed is one of the best Linux system administrators I've ever seen. He has strong experience in Linux and infrastructure as code, and he handles several projects at once and delivers them before the deadline.</p>
+    <footer>Keivan Nobakht, on LinkedIn</footer>
+  </blockquote>
+
+  <h2>Contact</h2>
+  <p>
+    Email: <a href="mailto:hamed.maaleki@gmail.com">hamed.maaleki@gmail.com</a><br>
+    LinkedIn: <a href="https://www.linkedin.com/in/hamed-maaleki/" target="_blank" rel="noopener">linkedin.com/in/hamed-maaleki</a><br>
+    GitHub: <a href="https://github.com/Haameed" target="_blank" rel="noopener">github.com/Haameed</a>
+  </p>
+</template>
+
+<!-- ================= SOURCE FILES ================= -->
+<script type="text/plain" data-path="main.go" data-lang="go">
+// Hamed Maaleki, Senior DevOps Engineer.
+//
+// I've worked in IT operations since 2010: first in a NOC, then running
+// Linux and virtualization platforms, and for the last few years writing
+// most of my tooling in Go and Python.
+//
+// Try it in the terminal below:  go run .
+package main
+
+import (
+	"fmt"
+
+	"github.com/Haameed/hamed-maaleki/internal/about"
+	"github.com/Haameed/hamed-maaleki/internal/contact"
+	"github.com/Haameed/hamed-maaleki/internal/experience"
+)
+
+func main() {
+	me := about.Me()
+
+	fmt.Printf("%s · %s\n", me.Name, me.Title)
+	fmt.Printf("%s → open to relocation to %s\n\n", me.Location, me.RelocateTo)
+
+	for _, job := range experience.History() {
+		fmt.Printf("%-29s %-28s %s\n", job.Company, job.Role, job.Period())
+	}
+
+	fmt.Println("\nreach me:", contact.Email)
+}
+</script>
+
+<script type="text/plain" data-path="go.mod" data-lang="mod">
+module github.com/Haameed/hamed-maaleki
+
+go 1.23
+
+// The tools I use most. The "version" is the year and month
+// I started using each one in production.
+require (
+	git.savannah.gnu.org/bash              v2010.6.0
+	vmware.com/vsphere                     v2016.2.0  // HA, DRS, SDRS
+	github.com/ansible/ansible             v2016.2.0
+	github.com/elastic/logstash            v2016.2.0
+	github.com/MariaDB/galera              v2018.11.0 // three-node cluster
+	github.com/python/cpython              v2018.11.0
+	github.com/NagiosEnterprises/nagioscore v2018.11.0
+	github.com/OpenNebula/one              v2021.9.0  // 700+ VMs on KVM
+	github.com/hashicorp/terraform         v2021.9.0  // incl. a custom provider
+	github.com/prometheus/prometheus       v2021.9.0
+	github.com/golang/go                   v2021.9.0
+	github.com/getsops/sops                v2021.9.0
+	gitlab.com/gitlab-org/gitlab           v2021.9.0  // CI/CD
+	github.com/F5Networks/f5-bigip         v2025.8.0
+)
+
+// Used in small setups and labs only, and not recently.
+require (
+	k8s.io/kubernetes v0.0.0 // indirect
+	helm.sh/helm      v0.0.0 // indirect
+)
+</script>
+
+<script type="text/plain" data-path="internal/about/about.go" data-lang="go">
+// Package about is the short version of who I am.
+package about
+
+// Engineer is the answer to "so, tell me about yourself".
+type Engineer struct {
+	Name       string
+	Title      string
+	Location   string
+	RelocateTo string
+	InOpsSince int
+	Focus      []string
+	Education  string
+	Languages  map[string]string
+}
+
+// Me returns my details.
+//
+// The longer version: my first job was in a network operations center for
+// the National Iranian Oil Company, monitoring the systems behind more than
+// 4,000 fuel stations. That's where I picked up two habits I still have: I
+// want to know a service is in trouble before someone calls, and I don't
+// like fixing the same thing by hand twice.
+//
+// After that I ran Linux and virtualization at an ISP, a telecom operator,
+// a ride-hailing company and a digital bank. At Snapp that meant about 70
+// bare-metal hosts and 700+ VMs on KVM and OpenNebula, managed mostly
+// through Ansible, Terraform and GitLab CI.
+//
+// Today I lead the NetDevOps team at Blu Bank and still write a lot of the
+// code. I'd like my next role to be a senior hands-on one, in Germany or
+// somewhere else in Europe.
+func Me() Engineer {
+	return Engineer{
+		Name:       "Hamed Maaleki",
+		Title:      "Senior DevOps Engineer",
+		Location:   "Tehran, Iran",
+		RelocateTo: "Germany / EU",
+		InOpsSince: 2010,
+		Focus: []string{
+			"infrastructure automation",
+			"observability",
+			"Linux platforms",
+		},
+		Education: "B.Sc. IT, University of Applied Science and Technology (2015)",
+		Languages: map[string]string{
+			"Persian": "native",
+			"English": "professional working proficiency",
+		},
+	}
+}
+</script>
+
+<script type="text/plain" data-path="internal/experience/experience.go" data-lang="go">
+// Package experience is my work history, newest first.
+package experience
+
+// Job is one position. Notes are what I actually did there.
+type Job struct {
+	Company string
+	Role    string
+	From    string // yyyy-mm
+	To      string // empty if I'm still there
+	Notes   []string
+	Stack   []string
+}
+
+// Period formats the dates for humans.
+func (j Job) Period() string {
+	if j.To == "" {
+		return j.From + " → now"
+	}
+	return j.From + " → " + j.To
+}
+
+// History returns every job since 2010.
+func History() []Job {
+	return []Job{
+		{
+			Company: "Blu Bank",
+			Role:    "NetDevOps Team Lead",
+			From:    "2026-02",
+			Notes: []string{
+				"Lead a team of three and still do a good share of the hands-on work.",
+				"Coordinate mostly with the infrastructure, network and security teams.",
+			},
+		},
+		{
+			Company: "Blu Bank",
+			Role:    "Senior NetDevOps Engineer",
+			From:    "2025-08",
+			To:      "2026-02",
+			// Part-time next to Snapp at first, full-time from 2025-11.
+			Notes: []string{
+				"Network and infra automation in Ansible, Terraform, Go and Python, mostly over REST APIs.",
+				"Wrote Prometheus exporters for F5 BIG-IP and F5OS. Both are open source.",
+				"Work on an internal network security panel: one place to run supported",
+				"changes instead of logging into each device separately.",
+				"Built a Go SMS gateway that our infra and ops tooling sends messages through.",
+				"Build, test and ship all of it with Docker and GitLab CI/CD.",
+				"Testing on-prem LLMs for troubleshooting and security operations work.",
+			},
+			Stack: []string{"Go", "Python", "Ansible", "Terraform", "F5", "Prometheus", "GitLab CI"},
+		},
+		{
+			Company: "Snapp",
+			Role:    "SysOps / DevOps Engineer",
+			From:    "2021-09",
+			To:      "2025-11",
+			Notes: []string{
+				"Ran 70+ bare-metal servers and 700+ VMs on KVM and OpenNebula.",
+				"Automated provisioning, configuration and the routine recurring work",
+				"with Ansible, Python, Bash and GitLab CI/CD.",
+				"Part of the team that built a Terraform provider for our internal cloud,",
+				"so its resources could be managed as code in production.",
+				"Wrote Go exporters and alerting rules for internal infra and services.",
+				"Kept secrets in Git with Mozilla SOPS as part of a GitOps workflow.",
+				"Worked production incidents with the infra and dev teams across Linux,",
+				"virtualization, monitoring and automation.",
+			},
+			Stack: []string{"KVM", "OpenNebula", "Terraform", "Ansible", "Go", "Prometheus", "SOPS"},
+		},
+		{
+			Company: "Blu Bank",
+			Role:    "SysOps Engineer",
+			From:    "2020-10",
+			To:      "2021-09",
+			Notes: []string{
+				"Managed 40+ hosts and 500+ VMs on VMware vSphere.",
+				"Ansible playbooks for Linux administration and firewall changes.",
+				"Bash and Python checks for the things our monitoring didn't cover.",
+				"Automated the infrastructure inventory and sent it out as email reports.",
+			},
+		},
+		{
+			Company: "Mobinnet",
+			Role:    "Linux System Administrator",
+			From:    "2018-11",
+			To:      "2020-07",
+			Notes: []string{
+				"Built and ran a three-node MariaDB Galera cluster.",
+				"SNMP monitoring for telecom radio devices in Bash and Python, fed into",
+				"Nagios through a custom socket-based ingestion.",
+				"Health-check scripts and troubleshooting across Linux, databases and services.",
+			},
+		},
+		{
+			Company: "Asiatech",
+			Role:    "Linux System Administrator",
+			From:    "2016-02",
+			To:      "2018-11",
+			Notes: []string{
+				"Managed 40+ hosts and 300+ VMs on vSphere, including HA, DRS and Storage DRS.",
+				"Ran FreeRADIUS, MySQL and central Syslog in production.",
+				"Started automating day-to-day work with Ansible.",
+				"Logstash pipelines that parsed infrastructure logs into internal databases.",
+			},
+		},
+		{
+			// Where it started. IFCP project.
+			Company: "National Iranian Oil Company",
+			Role:    "NOC Engineer",
+			From:    "2010-06",
+			To:      "2016-02",
+			Notes: []string{
+				"Monitored the systems behind 4,000+ fuel stations with SolarWinds and ManageEngine.",
+				"Bash scripts for log cleanup, network health checks and alerting.",
+				"Handled incidents and escalations across a widely distributed network.",
+			},
+		},
+	}
+}
+</script>
+
+<script type="text/plain" data-path="internal/projects/projects.go" data-lang="go">
+// Package projects is the open-source work on my GitHub: Prometheus
+// exporters and Ansible tooling, mostly for gear I work with every day.
+package projects
+
+// Project is one repository.
+type Project struct {
+	Name       string
+	Repo       string
+	Lang       string
+	Summary    string
+	Highlights []string
+}
+
+// All lists them roughly by how much time I've put in.
+var All = []Project{
+	{
+		Name:    "f5_bigip_exporter",
+		Repo:    "https://github.com/Haameed/f5_bigip_exporter",
+		Lang:    "Go",
+		Summary: "Prometheus exporter for F5 BIG-IP over iControl REST.",
+		Highlights: []string{
+			"multi-target /probe pattern: one exporter, many devices, no agent on the box",
+			"virtual servers, pools, nodes, TMM and HA state",
+			"SSL certificate expiry and TLS protocol usage",
+			"collectors run concurrently; one login token shared across scrapes",
+			"hardware sensors, skipped cleanly on Virtual Edition",
+			"Grafana dashboard and alert rules included",
+		},
+	},
+	{
+		Name:    "f5_f5os_exporter",
+		Repo:    "https://github.com/Haameed/f5_f5os_exporter",
+		Lang:    "Go",
+		Summary: "Same idea for F5OS (rSeries and VELOS), via the OpenConfig REST API.",
+		Highlights: []string{
+			"CPU, disks, PSUs, interfaces, LACP and licensing",
+			"released with GoReleaser",
+		},
+	},
+	{
+		Name:    "opennebula-dynamic-inventory",
+		Repo:    "https://github.com/Haameed/opennebula-dynamic-inventory",
+		Lang:    "Python",
+		Summary: "Ansible inventory plugin that reads running VMs from OpenNebula.",
+		Highlights: []string{
+			"works with one or more clusters",
+			"groups hosts by name, label or attribute (SSH port, for example)",
+			"runs from the CLI, AWX and GitLab CI",
+		},
+	},
+	{
+		Name:    "opennebula_exporter",
+		Repo:    "https://github.com/Haameed/opennebula_exporter",
+		Summary: "Prometheus metrics for OpenNebula clouds.",
+	},
+	{
+		Name:    "fortigate_exporter",
+		Repo:    "https://github.com/Haameed/fortigate_exporter",
+		Summary: "Prometheus exporter for Fortinet FortiGate firewalls.",
+	},
+}
+
+// An alert from the BIG-IP exporter repo that I like. It catches clients
+// that still negotiate old TLS versions:
+//
+//	rate(bigip_clientssl_protocol_uses_total{protocol=~"SSLv.*|TLSv1.0|TLSv1.1"}[5m]) > 0
+</script>
+
+<script type="text/plain" data-path="internal/skills/skills.go" data-lang="go">
+// Package skills is the toolbox, grouped the way I think about it.
+package skills
+
+// Toolbox is what I use in production.
+var Toolbox = map[string][]string{
+	"automation": {"Ansible", "Terraform", "Terraform provider development", "GitOps"},
+	"code":       {"Go", "Python", "Bash", "REST APIs"},
+	"delivery":   {"GitLab CI/CD", "Docker", "Git-based workflows"},
+	"observability": {
+		"Prometheus", "Grafana", "custom exporters",
+		"Nagios", "Checkmk", "SolarWinds", "SNMP", "Logstash", "Syslog",
+	},
+	"linux":    {"Linux", "Ubuntu", "KVM", "OpenNebula", "VMware vSphere (HA, DRS, SDRS)"},
+	"network":  {"F5 BIG-IP / TMOS", "F5OS", "network automation"},
+	"security": {"HashiCorp Vault", "Mozilla SOPS", "Keycloak", "LDAP", "FreeIPA"},
+	"data":     {"MariaDB", "MariaDB Galera Cluster", "MySQL"},
+}
+
+// Lab lists things I've used only in small setups and labs, and not
+// recently. I'd rather say that here than have it come up as a surprise.
+var Lab = []string{"Kubernetes", "Helm"}
+</script>
+
+<script type="text/plain" data-path="internal/contact/contact.go" data-lang="go">
+// Package contact is how to reach me. Email is the fastest.
+package contact
+
+const (
+	Email    = "hamed.maaleki@gmail.com"
+	GitHub   = "https://github.com/Haameed"
+	LinkedIn = "https://www.linkedin.com/in/hamed-maaleki/"
+)
+
+// LookingFor is the kind of role I want next.
+const LookingFor = "senior hands-on: infrastructure automation, observability, Linux platforms"
+
+// Where: Germany first, but anywhere in Europe works.
+//
+// Visa: I'll need the employer's support with the work visa and residence
+// permit. I know that's extra paperwork, so I'd rather say it up front.
+var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
+</script>
+
 <script>
-  // theme toggle
-  document.getElementById('themeBtn').addEventListener('click', function () {
-    var html = document.documentElement;
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+(function () {
+  "use strict";
+  var $ = function (s) { return document.querySelector(s); };
+  var EMAIL = "hamed.maaleki@gmail.com";
+  var GH = "https://github.com/Haameed";
+  var LI = "https://www.linkedin.com/in/hamed-maaleki/";
+  var CV = "hamed_maaleki-PDF.pdf";
+  var MOBILE = function () { return window.innerWidth <= 760; };
+
+  /* ---------------- theme ---------------- */
+  var savedTheme = localStorage.getItem("vsc-theme");
+  if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+
+  /* ---------------- files ---------------- */
+  var FILES = {};
+  document.querySelectorAll('script[type="text/plain"][data-path]').forEach(function (s) {
+    FILES[s.dataset.path] = { lang: s.dataset.lang, src: s.textContent.replace(/^\r?\n/, "").replace(/\s+$/, "") };
   });
+  FILES["README.md"] = { lang: "markdown", preview: true };
 
-  // nav border on scroll
-  var nav = document.getElementById('nav');
-  window.addEventListener('scroll', function () {
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, { passive: true });
+  var TREE = [
+    { name: "internal", children: [
+      { name: "about", children: [{ file: "internal/about/about.go" }] },
+      { name: "contact", children: [{ file: "internal/contact/contact.go" }] },
+      { name: "experience", children: [{ file: "internal/experience/experience.go" }] },
+      { name: "projects", children: [{ file: "internal/projects/projects.go" }] },
+      { name: "skills", children: [{ file: "internal/skills/skills.go" }] }
+    ]},
+    { file: "go.mod" },
+    { file: CV },
+    { file: "main.go" },
+    { file: "README.md" }
+  ];
 
-  // reveal on scroll
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  function base(p) { return p.split("/").pop(); }
+  function dirOf(p) { var a = p.split("/"); a.pop(); return a.join("/"); }
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function icon(p) {
+    if (p.endsWith(".go")) return '<span class="fi fi-go">go</span>';
+    if (p.endsWith(".mod")) return '<span class="fi fi-mod">≡</span>';
+    if (p.endsWith(".md")) return '<span class="fi fi-md">M↓</span>';
+    if (p.endsWith(".pdf")) return '<span class="fi fi-pdf">PDF</span>';
+    return '<span class="fi">•</span>';
+  }
 
-  // active nav link
-  var links = document.querySelectorAll('.nav ul a');
-  var sections = Array.prototype.map.call(links, function (a) { return document.querySelector(a.getAttribute('href')); });
-  var spy = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id); });
+  /* ---------------- highlighter ---------------- */
+  var KW = new Set("chan const func interface map package import struct type var".split(" "));
+  var CTL = new Set("break case continue default defer else fallthrough for go goto if range return select switch".split(" "));
+  var CONSTS = new Set(["true", "false", "nil", "iota"]);
+  var BT = new Set("any bool byte error float32 float64 int int8 int16 int32 int64 rune string uint uint8 uint16 uint32 uint64".split(" "));
+  var MODKW = new Set(["module", "go", "require", "replace", "exclude", "toolchain"]);
+
+  function linkify(h) {
+    return h
+      .replace(/https?:\/\/[^\s"'`<)\]]+/g, function (u) { return '<a href="' + u + '" target="_blank" rel="noopener">' + u + "</a>"; })
+      .replace(/\b[\w.+-]+@[\w-]+\.[\w.]+\b/g, function (m) { return '<a href="mailto:' + m + '">' + m + "</a>"; });
+  }
+  function tok(cls, text, link) {
+    return text.split("\n").map(function (part) {
+      if (!part) return "";
+      var h = esc(part);
+      if (link) h = linkify(h);
+      return cls ? '<span class="' + cls + '">' + h + "</span>" : h;
+    }).join("\n");
+  }
+  function highlight(src, mode) {
+    var re = /(\/\/[^\n]*)|(\/\*[\s\S]*?\*\/)|("(?:\\.|[^"\\\n])*"|`[^`]*`)|(\bv\d+(?:\.[0-9x]+)*\b|\b\d+(?:\.\d+)?\b)|([A-Za-z_]\w*)|(\s+)|([\s\S])/g;
+    var out = "", m, prev = "", prevKind = "";
+    while ((m = re.exec(src))) {
+      var t = m[0];
+      if (m[1] || m[2]) { out += tok("c", t, true); continue; }
+      if (m[3]) { out += tok("s", t, true); prev = t; prevKind = "str"; continue; }
+      if (m[4]) { out += tok("n", t); prev = t; prevKind = "num"; continue; }
+      if (m[6]) { out += tok("", t); continue; }
+      if (m[7]) { out += tok("p", t); prev = t; prevKind = "p"; continue; }
+      var id = m[5], cls;
+      var next = (src.slice(re.lastIndex, re.lastIndex + 40).match(/^[ \t]*(\S)/) || [])[1] || "";
+      var cap = /^[A-Z]/.test(id);
+      if (mode === "mod") cls = MODKW.has(id) ? "k" : "";
+      else if (KW.has(id) || CONSTS.has(id)) cls = "k";
+      else if (CTL.has(id)) cls = "k2";
+      else if (BT.has(id)) cls = "t";
+      else if (next === "(") cls = "f";
+      else if (prev === "type") cls = "t";
+      else if (cap && (next === "{" || prev === "]" || prev === "*" || (next === ")" && prevKind === "id"))) cls = "t";
+      else if (cap && prev === ")" ) cls = "t";
+      else cls = "v";
+      out += tok(cls, id);
+      prev = id; prevKind = "id";
+    }
+    return out;
+  }
+
+  /* ---------------- explorer ---------------- */
+  var treeEl = $("#tree");
+  function buildTree(nodes, depth, path) {
+    var h = "";
+    nodes.forEach(function (n) {
+      if (n.children) {
+        var id = path + n.name + "/";
+        h += '<div class="row dir open" data-dir="' + id + '" style="--d:' + depth + '"><span class="chev"></span><span>' + n.name + "</span></div>";
+        h += '<div class="kids" data-kids="' + id + '">' + buildTree(n.children, depth + 1, id) + "</div>";
+      } else {
+        h += '<div class="row file" data-file="' + n.file + '" style="--d:' + depth + '" title="' + n.file + '">' + icon(n.file) + "<span>" + base(n.file) + "</span></div>";
       }
     });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  sections.forEach(function (s) { if (s) spy.observe(s); });
+    return h;
+  }
+  treeEl.innerHTML = buildTree(TREE, 0, "");
+  treeEl.addEventListener("click", function (e) {
+    var row = e.target.closest(".row");
+    if (!row) return;
+    if (row.dataset.dir) {
+      row.classList.toggle("open");
+      treeEl.querySelector('[data-kids="' + row.dataset.dir + '"]').classList.toggle("closed");
+    } else open(row.dataset.file);
+  });
+  $("#secProject").addEventListener("click", function () {
+    this.classList.toggle("open");
+    treeEl.style.display = this.classList.contains("open") ? "" : "none";
+  });
+  function markTree() {
+    treeEl.querySelectorAll(".row.file").forEach(function (r) { r.classList.toggle("on", r.dataset.file === active); });
+  }
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+  /* ---------------- tabs + editor ---------------- */
+  var tabs = [], active = null;
+  var tabsEl = $("#tabs"), scroller = $("#scroller"), editor = $("#editor"), crumbs = $("#crumbs");
+  var mmCode = $("#mmCode"), mmSlider = $("#mmSlider"), minimap = $("#minimap");
+
+  function downloadCV() {
+    var a = document.createElement("a");
+    a.href = CV; a.download = CV; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  function open(p) {
+    if (p === CV) { downloadCV(); return; }
+    if (!FILES[p]) return;
+    if (tabs.indexOf(p) === -1) tabs.push(p);
+    active = p;
+    renderTabs(); renderEditor(); markTree();
+    try { history.replaceState(null, "", "#" + p); } catch (e) {}
+    if (MOBILE()) setSidebar(false);
+  }
+  function closeTab(p) {
+    var i = tabs.indexOf(p);
+    if (i === -1) return;
+    tabs.splice(i, 1);
+    if (active === p) active = tabs[i] || tabs[i - 1] || null;
+    renderTabs(); renderEditor(); markTree();
+  }
+  function renderTabs() {
+    tabsEl.innerHTML = tabs.map(function (p) {
+      var f = FILES[p];
+      var label = f.preview ? "Preview " + base(p) : base(p);
+      return '<div class="tab' + (p === active ? " on" : "") + (f.preview ? " preview" : "") + '" data-tab="' + p + '" title="' + p + '">' +
+        icon(p) + '<span class="name">' + label + '</span><span class="x" data-close="' + p + '">×</span></div>';
+    }).join("");
+    var on = tabsEl.querySelector(".tab.on");
+    if (on) on.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+  tabsEl.addEventListener("click", function (e) {
+    var x = e.target.closest("[data-close]");
+    if (x) { e.stopPropagation(); closeTab(x.dataset.close); return; }
+    var t = e.target.closest(".tab");
+    if (t) open(t.dataset.tab);
+  });
+  tabsEl.addEventListener("auxclick", function (e) {
+    var t = e.target.closest(".tab");
+    if (t && e.button === 1) closeTab(t.dataset.tab);
+  });
+
+  function renderEditor() {
+    if (!active) {
+      editor.classList.add("is-preview");
+      crumbs.innerHTML = "";
+      scroller.innerHTML = '<div class="empty"><div class="logo">{ }</div>' +
+        "<div>Go to file &nbsp;<kbd>Ctrl</kbd> + <kbd>P</kbd></div>" +
+        "<div>Toggle terminal &nbsp;<kbd>Ctrl</kbd> + <kbd>`</kbd></div></div>";
+      document.title = "hamed-maaleki";
+      setLang("");
+      return;
+    }
+    var f = FILES[active];
+    var parts = ["hamed-maaleki"].concat(active.split("/"));
+    crumbs.innerHTML = parts.map(function (s, i) {
+      return (i === parts.length - 1 ? icon(active) + " " : "") + "<span>" + s + "</span>";
+    }).join('<span class="sep">›</span>');
+    document.title = base(active) + " · hamed-maaleki";
+
+    if (f.preview) {
+      editor.classList.add("is-preview");
+      scroller.innerHTML = '<div class="md">' + $("#readme").innerHTML + "</div>";
+      setLang("Markdown");
+    } else {
+      editor.classList.remove("is-preview");
+      if (!f.html) f.html = highlight(f.src, f.lang === "mod" ? "mod" : "go");
+      var lines = f.html.split("\n");
+      scroller.innerHTML = '<div class="code">' + lines.map(function (l, i) {
+        return '<div class="ln" data-n="' + (i + 1) + '"><span class="gn">' + (i + 1) + '</span><span class="tx">' + (l || " ") + "</span></div>";
+      }).join("") + "</div>";
+      mmCode.className = "mm-code";
+      mmCode.innerHTML = lines.map(function (l) { return "<div>" + (l || " ") + "</div>"; }).join("");
+      setLang(f.lang === "mod" ? "Go Module File" : "Go");
+      setCursor(1, 1);
+    }
+    scroller.scrollTop = 0; scroller.scrollLeft = 0;
+    updateSlider();
+  }
+
+  function setLang(l) { $("#sbLang").textContent = l || "Plain Text"; }
+  function setCursor(ln, col) {
+    $("#sbPos").textContent = "Ln " + ln + ", Col " + col;
+    scroller.querySelectorAll(".ln.on").forEach(function (x) { x.classList.remove("on"); });
+    var row = scroller.querySelector('.ln[data-n="' + ln + '"]');
+    if (row) row.classList.add("on");
+  }
+
+  // measure char width for column calc
+  var charW = (function () {
+    var s = document.createElement("span");
+    s.style.cssText = "position:absolute;visibility:hidden;font:13.5px var(--mono);white-space:pre";
+    s.textContent = "MMMMMMMMMM";
+    document.body.appendChild(s);
+    var w = s.getBoundingClientRect().width / 10;
+    s.remove();
+    return w || 8;
+  })();
+
+  scroller.addEventListener("click", function (e) {
+    var a = e.target.closest("a[data-open]");
+    if (a) { e.preventDefault(); open(a.dataset.open); return; }
+    var ln = e.target.closest(".ln");
+    if (!ln) return;
+    var tx = ln.querySelector(".tx");
+    var len = tx.textContent.replace(/\t/g, "    ").length;
+    var col = Math.max(1, Math.min(len + 1, Math.round((e.clientX - tx.getBoundingClientRect().left) / charW) + 1));
+    setCursor(+ln.dataset.n, col);
+  });
+
+  /* minimap */
+  var MM_SCALE = 0.14;
+  function updateSlider() {
+    if (editor.classList.contains("is-preview")) return;
+    var codeH = scroller.scrollHeight * MM_SCALE;
+    var mmH = minimap.clientHeight;
+    var offset = codeH > mmH ? (scroller.scrollTop / Math.max(1, scroller.scrollHeight - scroller.clientHeight)) * (codeH - mmH) : 0;
+    mmCode.style.marginTop = -offset + "px";
+    mmSlider.style.top = (scroller.scrollTop * MM_SCALE - offset) + "px";
+    mmSlider.style.height = Math.max(12, scroller.clientHeight * MM_SCALE) + "px";
+  }
+  scroller.addEventListener("scroll", updateSlider, { passive: true });
+  window.addEventListener("resize", updateSlider);
+  minimap.addEventListener("click", function (e) {
+    var r = minimap.getBoundingClientRect();
+    var ratio = (e.clientY - r.top) / r.height;
+    scroller.scrollTo({ top: ratio * (scroller.scrollHeight - scroller.clientHeight), behavior: "smooth" });
+  });
+
+  /* ---------------- sidebar + activity ---------------- */
+  var sidebar = $("#sidebar");
+  function setSidebar(show) {
+    sidebar.classList.toggle("hidden", !show);
+    $("#actExplorer").classList.toggle("on", show);
+  }
+  $("#actExplorer").addEventListener("click", function () { setSidebar(sidebar.classList.contains("hidden")); });
+  $("#actSearch").addEventListener("click", function () { showQO(); });
+  $("#cc").addEventListener("click", function () { showQO(); });
+  $("#actGit").addEventListener("click", function () { showPanel("terminal"); run("git log --oneline"); });
+  $("#sbBranch").addEventListener("click", function () { showPanel("terminal"); run("git log --oneline"); });
+  $("#actGithub").addEventListener("click", function () { window.open(GH, "_blank", "noopener"); });
+  $("#actLinkedin").addEventListener("click", function () { window.open(LI, "_blank", "noopener"); });
+  $("#sbHire").addEventListener("click", function () { location.href = "mailto:" + EMAIL; });
+  $("#sbProblems").addEventListener("click", function () { showPanel("problems"); });
+  $("#actTheme").addEventListener("click", function () {
+    var html = document.documentElement;
+    var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    localStorage.setItem("vsc-theme", next);
+  });
+
+  /* ---------------- panel ---------------- */
+  var panel = $("#panel");
+  function showPanel(which) {
+    panel.classList.remove("hidden");
+    document.querySelectorAll(".ptab[data-p]").forEach(function (t) { t.classList.toggle("on", t.dataset.p === which); });
+    $("#pTerminal").hidden = which !== "terminal";
+    $("#pProblems").hidden = which !== "problems";
+    $("#pOutput").hidden = which !== "output";
+    setTimeout(updateSlider, 0);
+  }
+  document.querySelectorAll(".ptab[data-p]").forEach(function (t) {
+    t.addEventListener("click", function () { showPanel(t.dataset.p); });
+  });
+  $("#closePanel").addEventListener("click", function () { panel.classList.add("hidden"); setTimeout(updateSlider, 0); });
+  $("#clearTerm").addEventListener("click", function () { termOut.innerHTML = ""; });
+
+  /* ---------------- terminal ---------------- */
+  var termOut = $("#termOut"), termIn = $("#termIn"), termBody = $("#pTerminal");
+  var PROMPT = '<span class="a-g">hamed@maaleki</span>:<span class="a-b">~/hamed-maaleki</span>$ ';
+  $("#promptLabel").innerHTML = PROMPT;
+
+  var JOBS = [
+    ["Blu Bank", "NetDevOps Team Lead", "2026-02", ""],
+    ["Blu Bank", "Senior NetDevOps Engineer", "2025-08", "2026-02"],
+    ["Snapp", "SysOps / DevOps Engineer", "2021-09", "2025-11"],
+    ["Blu Bank", "SysOps Engineer", "2020-10", "2021-09"],
+    ["Mobinnet", "Linux System Administrator", "2018-11", "2020-07"],
+    ["Asiatech", "Linux System Administrator", "2016-02", "2018-11"],
+    ["National Iranian Oil Company", "NOC Engineer", "2010-06", "2016-02"]
+  ];
+
+  function print(html) {
+    var d = document.createElement("div");
+    d.innerHTML = html;
+    termOut.appendChild(d);
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+  function findFile(arg) {
+    if (!arg) return null;
+    arg = arg.replace(/^\.\//, "");
+    if (FILES[arg]) return arg;
+    var k = Object.keys(FILES).filter(function (p) { return base(p) === arg || p.endsWith("/" + arg); });
+    return k[0] || null;
+  }
+
+  var CMDS = {
+    help: function () {
+      return [
+        '<span class="a-y">go run .</span>          run main.go',
+        '<span class="a-y">go test ./...</span>     run the tests',
+        '<span class="a-y">git log</span>           career history, as commits',
+        '<span class="a-y">ls</span>, <span class="a-y">tree</span>          list files',
+        '<span class="a-y">open</span> &lt;file&gt;       open a file in the editor (e.g. open projects.go)',
+        '<span class="a-y">cat</span> &lt;file&gt;        print a file here',
+        '<span class="a-y">whoami</span>            the one-line version',
+        '<span class="a-y">contact</span>           email and links',
+        '<span class="a-y">cv</span>                download my CV (PDF)',
+        '<span class="a-y">clear</span>             clear the terminal',
+        "",
+        '<span class="a-d">Shortcuts: Ctrl+P to find a file, Ctrl+` to toggle this panel.</span>'
+      ].join("\n");
+    },
+    ls: function () {
+      return '<span class="a-b">internal/</span>  go.mod  ' + CV + '  main.go  README.md';
+    },
+    tree: function () {
+      return [".", "├── go.mod", "├── " + CV, '├── <span class="a-b">internal</span>',
+        '│   ├── <span class="a-b">about</span>/about.go', '│   ├── <span class="a-b">contact</span>/contact.go',
+        '│   ├── <span class="a-b">experience</span>/experience.go', '│   ├── <span class="a-b">projects</span>/projects.go',
+        '│   └── <span class="a-b">skills</span>/skills.go', "├── main.go", "└── README.md", "",
+        '<span class="a-d">6 directories, 9 files</span>'].join("\n");
+    },
+    whoami: function () { return "hamed: senior devops engineer, tehran. linux, automation, observability. relocating to the EU."; },
+    contact: function () {
+      return "email     <a href=\"mailto:" + EMAIL + "\">" + EMAIL + "</a>\n" +
+        "linkedin  <a href=\"" + LI + "\" target=\"_blank\" rel=\"noopener\">linkedin.com/in/hamed-maaleki</a>\n" +
+        "github    <a href=\"" + GH + "\" target=\"_blank\" rel=\"noopener\">github.com/Haameed</a>";
+    },
+    cv: function () { downloadCV(); return '<span class="a-g">↓</span> downloading ' + CV; },
+    clear: function () { termOut.innerHTML = ""; return null; },
+    echo: function (a) { return esc(a.join(" ")); },
+    pwd: function () { return "/home/hamed/hamed-maaleki"; },
+    date: function () { return new Date().toString(); },
+    open: function (a) {
+      var p = findFile(a[0]);
+      if (!p) return '<span class="a-r">open: ' + esc(a[0] || "") + ": no such file</span>";
+      open(p); return '<span class="a-d">opened ' + p + "</span>";
+    },
+    cat: function (a) {
+      var p = findFile(a[0]);
+      if (!p) return '<span class="a-r">cat: ' + esc(a[0] || "") + ": No such file or directory</span>";
+      if (FILES[p].preview) { open(p); return '<span class="a-d">README.md opened in preview</span>'; }
+      return highlight(FILES[p].src, FILES[p].lang === "mod" ? "mod" : "go");
+    },
+    go: function (a) {
+      if (a[0] === "run") {
+        var out = ["Hamed Maaleki · Senior DevOps Engineer", "Tehran, Iran → open to relocation to Germany / EU", ""];
+        JOBS.forEach(function (j) {
+          out.push(j[0].padEnd(29) + " " + j[1].padEnd(28) + " " + j[2] + " → " + (j[3] || "now"));
+        });
+        out.push("", 'reach me: <a href="mailto:' + EMAIL + '">' + EMAIL + "</a>");
+        return out.join("\n");
+      }
+      if (a[0] === "test") {
+        var mod = "github.com/Haameed/hamed-maaleki/internal/";
+        return [
+          '<span class="a-g">ok</span>  \t' + mod + "about\t0.004s",
+          '<span class="a-g">ok</span>  \t' + mod + "experience\t0.006s",
+          '<span class="a-g">ok</span>  \t' + mod + "projects\t0.005s",
+          '<span class="a-g">ok</span>  \t' + mod + "skills\t0.003s",
+          "?   \t" + mod + "contact\t[no test files]"
+        ].join("\n");
+      }
+      if (a[0] === "version") return "go version go1.23.4 linux/amd64";
+      return "usage: go run . | go test ./... | go version";
+    },
+    git: function (a) {
+      if (a[0] === "log") {
+        var c = [
+          ["e41c9a2", "Lead the NetDevOps team at Blu Bank", "2026-02", true],
+          ["b7d03f5", "Join Blu Bank as Senior NetDevOps Engineer", "2025-08"],
+          ["9a2e611", "Move to Snapp: KVM, OpenNebula, Terraform, Go", "2021-09"],
+          ["4c8f0d3", "Join Blu Bank as SysOps Engineer", "2020-10"],
+          ["1f6b2ae", "Move to Mobinnet: telecom Linux, Galera, SNMP", "2018-11"],
+          ["88d1c47", "Move to Asiatech: vSphere, first Ansible playbooks", "2016-02"],
+          ["0a3e9b1", "Initial commit: NOC engineer at NIOC", "2010-06"]
+        ];
+        return c.map(function (x) {
+          return '<span class="a-y">' + x[0] + "</span> " +
+            (x[3] ? '(<span class="a-c">HEAD -&gt; </span><span class="a-g">main</span>) ' : "") +
+            x[1] + ' <span class="a-d">' + x[2] + "</span>";
+        }).join("\n");
+      }
+      if (a[0] === "status") return "On branch main\nnothing to commit, working tree clean";
+      return "usage: git log | git status";
+    },
+    hire: function () { location.href = "mailto:" + EMAIL + "?subject=Let's%20talk"; return '<span class="a-g">opening your mail client…</span>'; },
+    sudo: function (a) { return a.join(" ").indexOf("hire") > -1 ? CMDS.hire() : "hamed is not in the sudoers file. This incident will be reported."; },
+    code: function (a) { return CMDS.open(a); },
+    vim: function () { return "nice try. you're in VS Code now :)"; }
+  };
+  CMDS.ll = CMDS.ls;
+
+  var hist = [], hi = 0;
+  function run(line) {
+    print(PROMPT + esc(line));
+    var parts = line.trim().split(/\s+/);
+    var cmd = parts.shift();
+    if (!cmd) return;
+    hist.push(line); hi = hist.length;
+    var fn = CMDS[cmd.toLowerCase()];
+    if (!fn) { print('<span class="a-r">bash: ' + esc(cmd) + ': command not found</span>. Try <span class="a-y">help</span>.'); return; }
+    var r = fn(parts);
+    if (r != null) print(r);
+  }
+  termIn.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { var v = termIn.value; termIn.value = ""; run(v); }
+    else if (e.key === "ArrowUp") { if (hi > 0) { hi--; termIn.value = hist[hi]; } e.preventDefault(); }
+    else if (e.key === "ArrowDown") { if (hi < hist.length) { hi++; termIn.value = hist[hi] || ""; } e.preventDefault(); }
+    else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); termOut.innerHTML = ""; }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      var words = termIn.value.split(" "), last = words.pop();
+      var pool = words.length ? Object.keys(FILES).map(base) : Object.keys(CMDS);
+      var hit = pool.filter(function (x) { return x.indexOf(last) === 0; });
+      if (hit.length === 1) { words.push(hit[0]); termIn.value = words.join(" ") + " "; }
+    }
+  });
+  termBody.addEventListener("click", function (e) {
+    if (e.target.closest("a")) return;
+    if (window.getSelection().toString()) return;
+    termIn.focus();
+  });
+
+  /* ---------------- quick open ---------------- */
+  var qo = $("#qo"), qoIn = $("#qoIn"), qoList = $("#qoList"), qoItems = [], qoSel = 0;
+  var EXTRA = [
+    { label: "Download CV (PDF)", desc: "cv", icon: icon(CV), act: downloadCV },
+    { label: "Email Hamed", desc: EMAIL, icon: '<span class="fi">@</span>', act: function () { location.href = "mailto:" + EMAIL; } },
+    { label: "Open GitHub profile", desc: "github.com/Haameed", icon: '<span class="fi">gh</span>', act: function () { window.open(GH, "_blank", "noopener"); } },
+    { label: "Open LinkedIn profile", desc: "linkedin.com/in/hamed-maaleki", icon: '<span class="fi">in</span>', act: function () { window.open(LI, "_blank", "noopener"); } },
+    { label: "Toggle terminal", desc: "Ctrl+`", icon: '<span class="fi">&gt;_</span>', act: togglePanel },
+    { label: "Toggle dark / light theme", desc: "Dark+ · Light+", icon: '<span class="fi">◐</span>', act: function () { $("#actTheme").click(); } }
+  ];
+  function allItems() {
+    return Object.keys(FILES).map(function (p) {
+      return { label: base(p), desc: dirOf(p), icon: icon(p), act: function () { open(p); } };
+    }).concat(EXTRA);
+  }
+  function renderQO() {
+    var q = qoIn.value.trim().toLowerCase();
+    qoItems = allItems().filter(function (i) { return !q || (i.label + " " + i.desc).toLowerCase().indexOf(q) > -1; });
+    qoSel = Math.min(qoSel, Math.max(0, qoItems.length - 1));
+    qoList.innerHTML = qoItems.length ? qoItems.map(function (i, n) {
+      return '<div class="qo-item' + (n === qoSel ? " on" : "") + '" data-i="' + n + '">' + i.icon + "<span>" + i.label + "</span><small>" + esc(i.desc) + "</small></div>";
+    }).join("") : '<div class="qo-item"><small>No matching results</small></div>';
+  }
+  function showQO() { qo.classList.add("show"); qoIn.value = ""; qoSel = 0; renderQO(); setTimeout(function () { qoIn.focus(); }, 0); }
+  function hideQO() { qo.classList.remove("show"); }
+  function pickQO(n) { var it = qoItems[n]; hideQO(); if (it) it.act(); }
+  qoIn.addEventListener("input", function () { qoSel = 0; renderQO(); });
+  qoIn.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { qoSel = Math.min(qoItems.length - 1, qoSel + 1); renderQO(); e.preventDefault(); }
+    else if (e.key === "ArrowUp") { qoSel = Math.max(0, qoSel - 1); renderQO(); e.preventDefault(); }
+    else if (e.key === "Enter") pickQO(qoSel);
+    else if (e.key === "Escape") hideQO();
+  });
+  qoList.addEventListener("click", function (e) { var it = e.target.closest("[data-i]"); if (it) pickQO(+it.dataset.i); });
+  qo.addEventListener("mousedown", function (e) { if (e.target === qo) hideQO(); });
+
+  function togglePanel() {
+    if (panel.classList.contains("hidden")) { showPanel("terminal"); termIn.focus(); }
+    else panel.classList.add("hidden");
+    setTimeout(updateSlider, 0);
+  }
+
+  /* ---------------- shortcuts ---------------- */
+  document.addEventListener("keydown", function (e) {
+    var mod = e.ctrlKey || e.metaKey;
+    if (mod && (e.key === "p" || e.key === "P")) { e.preventDefault(); showQO(); }
+    else if (e.ctrlKey && (e.key === "`" || e.code === "Backquote")) { e.preventDefault(); togglePanel(); }
+    else if (mod && (e.key === "b" || e.key === "B")) { e.preventDefault(); setSidebar(sidebar.classList.contains("hidden")); }
+    else if (e.key === "Escape") hideQO();
+  });
+
+  /* ---------------- boot ---------------- */
+  if (MOBILE()) setSidebar(false);
+  var start = decodeURIComponent(location.hash.slice(1));
+  tabs = ["README.md", "main.go"];
+  open(FILES[start] ? start : "README.md");
+
+  print('<span class="a-d">Welcome. Type </span><span class="a-y">help</span><span class="a-d"> to see what this terminal can do.</span>');
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var demo = "go run .";
+  if (reduce) { run(demo); }
+  else {
+    setTimeout(function () {
+      var i = 0;
+      var t = setInterval(function () {
+        if (document.activeElement === termIn && termIn.value && termIn.value !== demo.slice(0, i)) { clearInterval(t); return; }
+        termIn.value = demo.slice(0, ++i);
+        if (i >= demo.length) {
+          clearInterval(t);
+          setTimeout(function () { termIn.value = ""; run(demo); }, 380);
+        }
+      }, 85);
+    }, 700);
+  }
+})();
 </script>
 </body>
 </html>
