@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>README.md · hamed-maaleki</title>
-<meta name="description" content="Hamed Maaleki, Senior DevOps engineer in Tehran. Linux platforms, infrastructure automation with Ansible and Terraform, and Prometheus exporters written in Go and Python. Open to relocation to Germany and Europe." />
+<meta name="description" content="Hamed Maaleki, Senior DevOps engineer in Tehran. Linux platforms, infrastructure automation with Ansible and Terraform, and Prometheus exporters written in Go. Open to relocation to Germany and Europe." />
 <meta name="author" content="Hamed Maaleki" />
 <meta property="og:title" content="Hamed Maaleki · Senior DevOps Engineer" />
 <meta property="og:description" content="Linux, infrastructure automation and observability. In operations since 2010. Open to roles in Germany and Europe." />
@@ -26,6 +26,8 @@
   --k:#569cd6; --k2:#c586c0; --s:#ce9178; --c:#6a9955; --t:#4ec9b0; --f:#dcdcaa; --v:#9cdcfe; --n:#b5cea8; --p:#d4d4d4;
   --md-fg:#cccccc; --md-code:#2b2b2b; --link:#3794ff;
   --tfg:#cccccc; --ag:#0dbc79; --ab:#3b8eea; --ay:#e5e510; --ac:#29b8db; --ad:#8b8b8b; --ar:#f14c4c;
+  --find-all:rgba(234,92,0,.33); --find-cur:#515c6a;
+  --fs:13.5px; --lh:20px;
   --mono:"JetBrains Mono", Consolas, "SF Mono", Menlo, monospace;
   --ui:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Ubuntu, sans-serif;
 }
@@ -39,6 +41,7 @@
   --k:#0000ff; --k2:#af00db; --s:#a31515; --c:#008000; --t:#267f99; --f:#795e26; --v:#001080; --n:#098658; --p:#000000;
   --md-fg:#333333; --md-code:#f3f3f3; --link:#006ab1;
   --tfg:#333333; --ag:#008000; --ab:#0451a5; --ay:#949800; --ac:#0598bc; --ad:#6e6e6e; --ar:#cd3131;
+  --find-all:rgba(234,92,0,.33); --find-cur:#a8ac94;
 }
 
 * { box-sizing: border-box; }
@@ -50,24 +53,32 @@ body {
 button { font: inherit; color: inherit; }
 ::selection { background: #264f78; color: inherit; }
 [data-theme="light"] ::selection { background: #add6ff; }
+::highlight(find-all) { background-color: var(--find-all); }
+::highlight(find-cur) { background-color: var(--find-cur); }
 ::-webkit-scrollbar { width: 14px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: rgba(121,121,121,.4); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(100,100,100,.7); }
 ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+[hidden] { display: none !important; }
 
 /* ---------- title bar ---------- */
 .titlebar {
-  height: 32px; flex: none; display: flex; align-items: center; gap: 14px;
+  height: 32px; flex: none; display: flex; align-items: center; gap: 12px;
   padding: 0 12px; background: var(--title); color: var(--title-fg); font-size: 12.5px; position: relative;
-  user-select: none;
+  user-select: none; z-index: 60;
 }
 .lights { display: flex; gap: 8px; }
 .lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
 .lights i:nth-child(2) { background: #febc2e; }
 .lights i:nth-child(3) { background: #28c840; }
-.menus { display: flex; gap: 2px; }
-.menus span { padding: 3px 7px; border-radius: 4px; opacity: .85; }
-.menus span:hover { background: rgba(127,127,127,.2); }
+.menus { display: flex; gap: 1px; }
+.mlabel {
+  border: 0; background: none; padding: 3px 8px; border-radius: 4px; font-size: 12.5px;
+  color: var(--title-fg); opacity: .9; cursor: default; outline: none;
+}
+.mlabel:hover, .mlabel:focus-visible, .mlabel.on { background: rgba(127,127,127,.25); opacity: 1; }
+.mbtn { display: none; border: 0; background: none; color: var(--title-fg); width: 28px; height: 24px; border-radius: 4px; cursor: pointer; }
+.mbtn:hover { background: rgba(127,127,127,.25); }
 .cc {
   position: absolute; left: 50%; transform: translateX(-50%);
   width: min(440px, 46vw); height: 22px; border-radius: 6px;
@@ -77,6 +88,23 @@ button { font: inherit; color: inherit; }
 }
 .cc:hover { background: rgba(127,127,127,.2); }
 .cc svg { width: 14px; height: 14px; }
+
+/* ---------- dropdown / context menu ---------- */
+.dd {
+  position: fixed; z-index: 200; min-width: 250px; padding: 4px;
+  background: var(--widget); color: var(--side-fg);
+  border: 1px solid var(--widget-border); border-radius: 6px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.4); font-size: 13px; user-select: none;
+}
+.dd-item {
+  display: grid; grid-template-columns: 22px 1fr auto; align-items: center;
+  height: 24px; padding: 0 12px 0 4px; border-radius: 4px; cursor: pointer; white-space: nowrap;
+}
+.dd-ck { text-align: center; font-size: 12px; }
+.dd-k { padding-left: 30px; font-size: 12px; opacity: .75; }
+.dd-item.sel, .dd-item:not(.off):hover { background: var(--qo-sel); color: #fff; }
+.dd-item.off { opacity: .4; cursor: default; }
+.dd-sep { height: 1px; margin: 4px 8px; background: var(--widget-border); }
 
 /* ---------- main ---------- */
 .main { flex: 1; display: flex; min-height: 0; position: relative; }
@@ -123,6 +151,7 @@ button { font: inherit; color: inherit; }
 .kids.closed { display: none; }
 .fi { font: 700 9px/1 var(--ui); width: 16px; text-align: center; flex: none; letter-spacing: -.2px; }
 .fi-go { color: #519aba; } .fi-md { color: #519aba; } .fi-mod { color: #a074c4; } .fi-pdf { color: #cc3e44; }
+.fi-fn { color: #b180d7; } .fi-st { color: #ee9d28; } .fi-var { color: #75beff; }
 
 /* ---------- workbench ---------- */
 .workbench { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--ed); }
@@ -137,7 +166,6 @@ button { font: inherit; color: inherit; }
 .tab .x { width: 20px; height: 20px; border-radius: 4px; display: grid; place-items: center; opacity: 0; font-size: 15px; line-height: 1; }
 .tab.on .x, .tab:hover .x { opacity: 1; }
 .tab .x:hover { background: rgba(127,127,127,.3); }
-.tab.preview .name { font-style: normal; }
 .crumbs {
   height: 22px; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 16px;
   font-size: 12.5px; color: var(--tab-fg); background: var(--ed); white-space: nowrap; overflow: hidden;
@@ -147,8 +175,11 @@ button { font: inherit; color: inherit; }
 .scroller { position: absolute; inset: 0; overflow: auto; }
 .code {
   display: inline-block; min-width: 100%; padding: 2px 100px 45vh 0;
-  font: 13.5px/20px var(--mono); tab-size: 4; -moz-tab-size: 4; white-space: pre;
+  font: var(--fs)/var(--lh) var(--mono); tab-size: 4; -moz-tab-size: 4; white-space: pre;
 }
+.wrap-on .code { display: block; padding-right: 24px; }
+.wrap-on:not(.no-mm) .code { padding-right: 100px; }
+.wrap-on .tx { white-space: pre-wrap; overflow-wrap: anywhere; }
 .ln { display: flex; min-width: 100%; cursor: text; }
 .gn {
   position: sticky; left: 0; flex: none; width: 66px; padding-right: 24px; text-align: right;
@@ -157,6 +188,8 @@ button { font: inherit; color: inherit; }
 .tx { flex: 1; padding-left: 2px; color: var(--fg); }
 .ln.on .gn { color: var(--gut-on); }
 .ln.on .tx { box-shadow: inset 0 2px 0 var(--line-hl), inset 0 -2px 0 var(--line-hl); }
+.ln.flash .tx { animation: flash 1s ease-out; }
+@keyframes flash { from { background: rgba(0,122,204,.25); } to { background: transparent; } }
 .k { color: var(--k); } .k2 { color: var(--k2); } .s { color: var(--s); } .c { color: var(--c); }
 .t { color: var(--t); } .f { color: var(--f); } .v { color: var(--v); } .n { color: var(--n); } .p { color: var(--p); }
 .code a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
@@ -164,17 +197,30 @@ button { font: inherit; color: inherit; }
 
 .minimap { position: absolute; top: 0; right: 14px; width: 72px; bottom: 0; overflow: hidden; cursor: pointer; }
 .mm-code {
-  font: 13.5px/20px var(--mono); white-space: pre; tab-size: 4; pointer-events: none;
+  font: var(--fs)/var(--lh) var(--mono); white-space: pre; tab-size: 4; pointer-events: none;
   transform: scale(.14); transform-origin: 0 0; width: 720%; padding-top: 2px; opacity: .75;
 }
 .mm-code a { color: inherit; text-decoration: none; }
 .mm-slider { position: absolute; left: 0; right: 0; background: rgba(121,121,121,.13); pointer-events: none; }
 .minimap:hover .mm-slider { background: rgba(121,121,121,.25); }
-.is-preview .minimap { display: none; }
+.is-preview .minimap, .no-mm .minimap { display: none; }
+
+/* find widget */
+.find {
+  position: absolute; top: 0; right: 100px; z-index: 5; display: flex; align-items: center; gap: 2px;
+  padding: 5px 6px; background: var(--widget); border: 1px solid var(--widget-border); border-top: 0;
+  border-radius: 0 0 4px 4px; box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+.find input {
+  width: 210px; height: 24px; padding: 0 6px; margin-right: 4px; background: var(--input); color: var(--fg);
+  border: 1px solid var(--focus); border-radius: 2px; outline: 0; font: 13px var(--ui);
+}
+.find .cnt { min-width: 74px; font-size: 12px; color: var(--side-fg); padding: 0 4px; white-space: nowrap; }
+.find .cnt.none { color: var(--ar); }
 
 .empty { height: 100%; display: grid; place-content: center; text-align: center; color: var(--tab-fg); gap: 10px; }
 .empty .logo { font: 700 72px var(--mono); opacity: .12; margin-bottom: 14px; }
-kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rgba(127,127,127,.17); border: 1px solid rgba(127,127,127,.3); border-bottom-width: 2px; }
+kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rgba(127,127,127,.17); border: 1px solid rgba(127,127,127,.3); border-bottom-width: 2px; white-space: nowrap; }
 
 /* ---------- markdown preview ---------- */
 .md { max-width: 880px; padding: 26px 40px 80px; color: var(--md-fg); font: 14px/1.65 var(--ui); }
@@ -207,11 +253,10 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
 .ptab:hover { color: var(--tab-on-fg); }
 .ptab.on { color: var(--tab-on-fg); border-bottom-color: var(--tab-on-fg); }
 .panel-head .spacer { flex: 1; }
-.icon-btn { border: 0; background: none; cursor: pointer; width: 24px; height: 24px; border-radius: 4px; display: grid; place-items: center; color: var(--tab-fg); }
+.icon-btn { border: 0; background: none; cursor: pointer; width: 24px; height: 24px; border-radius: 4px; display: grid; place-items: center; color: var(--tab-fg); flex: none; }
 .icon-btn:hover { background: rgba(127,127,127,.2); color: var(--tab-on-fg); }
 .icon-btn svg { width: 16px; height: 16px; }
 .pbody { flex: 1; overflow: auto; padding: 2px 20px 12px; font: 13px/1.5 var(--mono); color: var(--tfg); white-space: pre-wrap; word-break: break-word; }
-.pbody[hidden] { display: none; }
 .prompt-line { display: flex; white-space: pre; }
 .prompt-line input { flex: 1; min-width: 40px; background: none; border: 0; outline: 0; padding: 0; color: inherit; font: inherit; caret-color: var(--tfg); }
 .a-g { color: var(--ag); } .a-b { color: var(--ab); } .a-y { color: var(--ay); } .a-c { color: var(--ac); } .a-d { color: var(--ad); } .a-r { color: var(--ar); }
@@ -225,11 +270,11 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
 .sb.remote { background: var(--remote); padding: 0 10px; }
 .sb-right { margin-left: auto; display: flex; height: 100%; }
 
-/* ---------- quick open ---------- */
+/* ---------- quick input ---------- */
 .qo { position: fixed; inset: 0; z-index: 100; display: none; }
 .qo.show { display: block; }
 .qo-box {
-  position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: min(600px, 94vw);
+  position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: min(620px, 94vw);
   background: var(--widget); border: 1px solid var(--widget-border); border-radius: 6px;
   box-shadow: 0 8px 28px rgba(0,0,0,.45); padding: 6px;
 }
@@ -240,16 +285,51 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
 .qo-list { margin-top: 6px; max-height: 50vh; overflow: auto; }
 .qo-item { display: flex; align-items: center; gap: 8px; height: 24px; padding: 0 8px; border-radius: 3px; cursor: pointer; color: var(--side-fg); white-space: nowrap; }
 .qo-item small { opacity: .65; overflow: hidden; text-overflow: ellipsis; }
+.qo-item .qo-k { margin-left: auto; font-size: 11px; opacity: .8; padding-left: 16px; }
 .qo-item.on { background: var(--qo-sel); color: #fff; }
+.qo-item.info { cursor: default; opacity: .8; }
+
+/* ---------- modal ---------- */
+.modal { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.35); display: grid; place-items: center; }
+.dialog {
+  width: min(460px, 92vw); background: var(--widget); color: var(--side-fg); border: 1px solid var(--widget-border);
+  border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,.5); padding: 22px 22px 16px; display: grid; grid-template-columns: 52px 1fr; gap: 16px;
+}
+.dlg-ic { width: 52px; height: 52px; border-radius: 10px; background: #007acc; color: #fff; display: grid; place-items: center; font: 700 18px var(--mono); }
+.dlg-body h3 { margin: 2px 0 8px; font-size: 15px; color: var(--tab-on-fg); }
+.dlg-body pre { margin: 0; font: 12.5px/1.6 var(--ui); white-space: pre-wrap; }
+.dlg-btns { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+.dbtn { border: 1px solid var(--widget-border); background: transparent; color: var(--side-fg); padding: 5px 14px; border-radius: 3px; cursor: pointer; font-size: 13px; }
+.dbtn:hover { background: rgba(127,127,127,.15); }
+.dbtn.primary { background: #0e639c; border-color: #0e639c; color: #fff; }
+.dbtn.primary:hover { background: #1177bb; }
+
+/* ---------- notifications ---------- */
+.toasts { position: fixed; right: 12px; bottom: 32px; z-index: 250; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; pointer-events: none; }
+.toast {
+  width: min(380px, 90vw); display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px;
+  background: var(--widget); color: var(--side-fg); border: 1px solid var(--widget-border); border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35); font-size: 13px; pointer-events: auto; animation: tin .15s ease-out;
+}
+.toast .ic { width: 16px; height: 16px; border-radius: 50%; background: #3794ff; color: #fff; font: 700 11px/16px var(--ui); text-align: center; flex: none; margin-top: 1px; }
+.toast.out { opacity: 0; transition: opacity .25s; }
+@keyframes tin { from { transform: translateY(8px); opacity: 0; } }
 
 /* ---------- responsive ---------- */
+@media (max-width: 1180px) {
+  .cc { left: auto; right: 12px; transform: none; width: 210px; }
+}
 @media (max-width: 760px) {
+  :root { --fs: 12.5px; --lh: 19px; }
   .menus, .hide-m { display: none !important; }
-  .cc { width: 56vw; }
+  .mbtn { display: block; }
+  .cc { left: 50%; right: auto; transform: translateX(-50%); width: 56vw; }
   .sidebar { position: absolute; left: 48px; top: 0; bottom: 0; z-index: 30; box-shadow: 4px 0 18px rgba(0,0,0,.4); }
   .minimap { display: none; }
-  .code { font-size: 12.5px; line-height: 19px; padding-right: 24px; }
+  .code { padding-right: 24px; }
   .gn { width: 44px; padding-right: 12px; }
+  .find { right: 8px; left: 8px; }
+  .find input { flex: 1; width: auto; min-width: 0; }
   .md { padding: 20px 18px 60px; }
   .md h1 { font-size: 1.7em; }
   .panel { height: 36%; }
@@ -272,19 +352,21 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
     <p><a href="mailto:hamed.maaleki@gmail.com">hamed.maaleki@gmail.com</a> ·
     <a href="https://github.com/Haameed">GitHub</a> ·
     <a href="https://www.linkedin.com/in/hamed-maaleki/">LinkedIn</a> ·
-    <a href="hamed_maaleki-PDF.pdf">CV (PDF)</a></p>
+    <a href="Hamed-Maaleki-CV.pdf">CV (PDF)</a></p>
   </div>
 </noscript>
 
 <!-- ================= TITLE BAR ================= -->
 <header class="titlebar">
   <div class="lights"><i></i><i></i><i></i></div>
-  <nav class="menus"><span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span><span>Help</span></nav>
-  <div class="cc" id="cc" title="Search files (Ctrl+P)">
+  <button class="mbtn" id="mbtn" aria-label="Command palette">☰</button>
+  <nav class="menus" id="menus" role="menubar" aria-label="Application menu"></nav>
+  <div class="cc" id="cc" title="Search files">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3.5 3.5"/></svg>
     hamed-maaleki
   </div>
 </header>
+<div class="dd" id="dd" role="menu" hidden></div>
 
 <div class="main">
   <!-- ================= ACTIVITY BAR ================= -->
@@ -293,14 +375,14 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
       <button class="act-btn on" id="actExplorer" title="Explorer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v12A1.5 1.5 0 0 0 7.5 18h9a1.5 1.5 0 0 0 1.5-1.5V7z"/><path d="M14 3v4h4"/><path d="M6 7H4.5A1.5 1.5 0 0 0 3 8.5v11A1.5 1.5 0 0 0 4.5 21H13a1.5 1.5 0 0 0 1.5-1.5V18"/></svg>
       </button>
-      <button class="act-btn" id="actSearch" title="Search files (Ctrl+P)">
+      <button class="act-btn" id="actSearch" title="Search files">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="10" r="6"/><path d="m9.7 14.3-6 6"/></svg>
       </button>
       <button class="act-btn" id="actGit" title="Source Control: git log">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6.5" cy="5.5" r="2.2"/><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="7.5" r="2.2"/><path d="M6.5 7.7v8.6M17.5 9.7c0 4-4 4.3-9.4 7.3"/></svg>
       </button>
       <button class="act-btn" id="actGithub" title="github.com/Haameed">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.2z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.700 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.900-1.3 2.800-1 2.800-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.700-4.600 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2.200z"/></svg>
       </button>
     </div>
     <div>
@@ -329,17 +411,23 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
     <div class="editor" id="editor">
       <div class="scroller" id="scroller"></div>
       <div class="minimap" id="minimap"><div id="mmCode"></div><div class="mm-slider" id="mmSlider"></div></div>
+      <div class="find" id="find" hidden>
+        <input id="findIn" placeholder="Find" autocomplete="off" spellcheck="false" aria-label="Find" />
+        <span class="cnt" id="findCnt">No results</span>
+        <button class="icon-btn" id="findPrev" title="Previous match (Shift+Enter)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 13V3M4 7l4-4 4 4"/></svg></button>
+        <button class="icon-btn" id="findNext" title="Next match (Enter)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 3v10M4 9l4 4 4-4"/></svg></button>
+        <button class="icon-btn" id="findClose" title="Close (Escape)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
+      </div>
     </div>
 
     <div class="panel" id="panel">
       <div class="panel-head">
         <span class="ptab" data-p="problems">Problems</span>
         <span class="ptab" data-p="output">Output</span>
-        <span class="ptab hide-m">Debug Console</span>
         <span class="ptab on" data-p="terminal">Terminal</span>
         <span class="spacer"></span>
         <button class="icon-btn" id="clearTerm" title="Clear terminal"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 4h10M6 4V2.5h4V4M4.5 4l.7 9.5h5.6l.7-9.5"/></svg></button>
-        <button class="icon-btn" id="closePanel" title="Close panel (Ctrl+`)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
+        <button class="icon-btn" id="closePanel" title="Close panel"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
       </div>
       <div class="pbody" id="pTerminal"><div id="termOut"></div><div class="prompt-line"><span id="promptLabel"></span><input id="termIn" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input" /></div></div>
       <div class="pbody" id="pProblems" hidden>No problems have been detected in the workspace.</div>
@@ -356,7 +444,7 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
   <div class="sb" id="sbBranch" title="git log"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="4.5" cy="3.5" r="1.5"/><circle cx="4.5" cy="12.5" r="1.5"/><circle cx="11.5" cy="5" r="1.5"/><path d="M4.5 5v6M11.5 6.5c0 3-3 3-7 4.8"/></svg>main</div>
   <div class="sb" id="sbProblems" title="Problems"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="5.5"/><path d="m6 6 4 4M10 6l-4 4"/></svg>0 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 2.5 14 13H2z"/><path d="M8 6.5v3M8 11v.5"/></svg>0</div>
   <div class="sb-right">
-    <div class="sb" id="sbPos">Ln 1, Col 1</div>
+    <div class="sb" id="sbPos" title="Go to Line">Ln 1, Col 1</div>
     <div class="sb hide-m">Tab Size: 4</div>
     <div class="sb hide-m">UTF-8</div>
     <div class="sb hide-m">LF</div>
@@ -366,13 +454,28 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
   </div>
 </footer>
 
-<!-- ================= QUICK OPEN ================= -->
+<!-- ================= QUICK INPUT ================= -->
 <div class="qo" id="qo">
   <div class="qo-box">
-    <input id="qoIn" placeholder="Search files by name, or try: cv, email, github" autocomplete="off" spellcheck="false" />
+    <input id="qoIn" autocomplete="off" spellcheck="false" aria-label="Quick input" />
     <div class="qo-list" id="qoList"></div>
   </div>
 </div>
+
+<!-- ================= ABOUT DIALOG ================= -->
+<div class="modal" id="modal" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <div class="dlg-ic">HM</div>
+    <div class="dlg-body"><h3 id="dlgTitle">hamed-maaleki</h3><pre id="dlgText"></pre></div>
+    <div class="dlg-btns">
+      <button class="dbtn" id="dlgCopy">Copy</button>
+      <button class="dbtn" id="dlgMail">Email</button>
+      <button class="dbtn primary" id="dlgOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
 
 <!-- ================= README PREVIEW ================= -->
 <template id="readme">
@@ -387,11 +490,12 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
 
   <p>I work on Linux platforms, infrastructure automation and monitoring. I've been in operations since 2010.
   I started in a NOC, then ran virtualization platforms for an ISP, a telecom operator, a ride-hailing company and a bank.
-  Over the last few years I've written most of my tooling in Go and Python.</p>
+  Over the last few years I've written most of my tooling in Go.</p>
 
   <p>This site is laid out like one of my repos, because that's what my screen looks like most days.
-  Open a file on the left, press <kbd>Ctrl</kbd>+<kbd>P</kbd>, or type <code>help</code> in the terminal below.
-  If you'd rather read a normal CV, <a href="hamed_maaleki-PDF.pdf" download>here's the PDF</a>.</p>
+  Open a file on the left, use the menus at the top, press <kbd>F1</kbd> for the command palette,
+  or type <code>help</code> in the terminal below.
+  If you'd rather read a normal CV, <a href="Hamed-Maaleki-CV.pdf" download>here's the PDF</a>.</p>
 
   <h2>At a glance</h2>
   <table>
@@ -412,7 +516,7 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
 │   ├── projects/<a href="#" data-open="internal/projects/projects.go">projects.go</a>         <span class="c"># open-source work</span>
 │   ├── skills/<a href="#" data-open="internal/skills/skills.go">skills.go</a>             <span class="c"># the toolbox</span>
 │   └── contact/<a href="#" data-open="internal/contact/contact.go">contact.go</a>           <span class="c"># how to reach me</span>
-└── <a href="hamed_maaleki-PDF.pdf" download>Hamed-Maaleki-CV.pdf</a></code></pre>
+└── <a href="Hamed-Maaleki-CV.pdf" download>Hamed-Maaleki-CV.pdf</a></code></pre>
 
   <h2>From a colleague</h2>
   <blockquote>
@@ -434,9 +538,9 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
 //
 // I've worked in IT operations since 2010: first in a NOC, then running
 // Linux and virtualization platforms, and for the last few years writing
-// most of my tooling in Go and Python.
+// most of my tooling in Go.
 //
-// Try it in the terminal below:  go run .
+// Try it: Run > Run Without Debugging, or type  go run .  in the terminal.
 package main
 
 import (
@@ -776,7 +880,7 @@ const LookingFor = "senior hands-on: infrastructure automation, observability, L
 //
 // Visa: I'll need the employer's support with the work visa and residence
 // permit. I know that's extra paperwork, so I'd rather say it up front.
-var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
+var Where = []string{"Germany", "anywhere in the EU"}
 </script>
 
 <script>
@@ -786,19 +890,69 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
   var EMAIL = "hamed.maaleki@gmail.com";
   var GH = "https://github.com/Haameed";
   var LI = "https://www.linkedin.com/in/hamed-maaleki/";
-  var CV = "hamed_maaleki-PDF.pdf";
+  var CV = "Hamed-Maaleki-CV.pdf";
+  var SHORTCUTS = "Keyboard Shortcuts";
   var MOBILE = function () { return window.innerWidth <= 760; };
+  var isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
 
-  /* ---------------- theme ---------------- */
+  /* ================= settings ================= */
+  var S = { minimap: true, wrap: false, crumbs: true, zoom: 0 };
+  try { Object.assign(S, JSON.parse(localStorage.getItem("vsc-settings") || "{}")); } catch (e) {}
   var savedTheme = localStorage.getItem("vsc-theme");
   if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
 
-  /* ---------------- files ---------------- */
+  /* ================= helpers ================= */
+  function base(p) { return p.split("/").pop(); }
+  function dirOf(p) { var a = p.split("/"); a.pop(); return a.join("/"); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function icon(p) {
+    if (p.endsWith(".go")) return '<span class="fi fi-go">go</span>';
+    if (p.endsWith(".mod")) return '<span class="fi fi-mod">≡</span>';
+    if (p.endsWith(".md")) return '<span class="fi fi-md">M↓</span>';
+    if (p.endsWith(".pdf")) return '<span class="fi fi-pdf">PDF</span>';
+    if (p === SHORTCUTS) return '<span class="fi">⌨</span>';
+    return '<span class="fi">•</span>';
+  }
+
+  var toastsEl = $("#toasts");
+  function notify(msg) {
+    var t = document.createElement("div");
+    t.className = "toast";
+    t.innerHTML = '<span class="ic">i</span><span>' + msg + "</span>";
+    toastsEl.appendChild(t);
+    setTimeout(function () { t.classList.add("out"); }, 3200);
+    setTimeout(function () { t.remove(); }, 3500);
+  }
+  function copyText(text, msg) {
+    function ok() { if (msg) notify(msg); }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); ok(); } catch (e) { notify("Couldn't copy to the clipboard."); }
+      ta.remove();
+    }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, fallback);
+    else fallback();
+  }
+  function downloadBlob(name, text) {
+    var url = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
+    var a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+  function downloadCV() {
+    var a = document.createElement("a");
+    a.href = CV; a.download = CV; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  /* ================= files ================= */
   var FILES = {};
   document.querySelectorAll('script[type="text/plain"][data-path]').forEach(function (s) {
     FILES[s.dataset.path] = { lang: s.dataset.lang, src: s.textContent.replace(/^\r?\n/, "").replace(/\s+$/, "") };
   });
-  FILES["README.md"] = { lang: "markdown", preview: true };
+  FILES["README.md"] = { lang: "markdown", preview: true, title: "Preview README.md" };
+  FILES[SHORTCUTS] = { lang: "", preview: true, title: SHORTCUTS, render: function () { return shortcutsHTML(); } };
 
   var TREE = [
     { name: "internal", children: [
@@ -814,18 +968,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     { file: "README.md" }
   ];
 
-  function base(p) { return p.split("/").pop(); }
-  function dirOf(p) { var a = p.split("/"); a.pop(); return a.join("/"); }
-  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
-  function icon(p) {
-    if (p.endsWith(".go")) return '<span class="fi fi-go">go</span>';
-    if (p.endsWith(".mod")) return '<span class="fi fi-mod">≡</span>';
-    if (p.endsWith(".md")) return '<span class="fi fi-md">M↓</span>';
-    if (p.endsWith(".pdf")) return '<span class="fi fi-pdf">PDF</span>';
-    return '<span class="fi">•</span>';
-  }
-
-  /* ---------------- highlighter ---------------- */
+  /* ================= highlighter ================= */
   var KW = new Set("chan const func interface map package import struct type var".split(" "));
   var CTL = new Set("break case continue default defer else fallthrough for go goto if range return select switch".split(" "));
   var CONSTS = new Set(["true", "false", "nil", "iota"]);
@@ -840,7 +983,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
   function tok(cls, text, link) {
     return text.split("\n").map(function (part) {
       if (!part) return "";
-      var h = esc(part);
+      var h = part.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       if (link) h = linkify(h);
       return cls ? '<span class="' + cls + '">' + h + "</span>" : h;
     }).join("\n");
@@ -865,7 +1008,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
       else if (next === "(") cls = "f";
       else if (prev === "type") cls = "t";
       else if (cap && (next === "{" || prev === "]" || prev === "*" || (next === ")" && prevKind === "id"))) cls = "t";
-      else if (cap && prev === ")" ) cls = "t";
+      else if (cap && prev === ")") cls = "t";
       else cls = "v";
       out += tok(cls, id);
       prev = id; prevKind = "id";
@@ -873,7 +1016,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     return out;
   }
 
-  /* ---------------- explorer ---------------- */
+  /* ================= explorer ================= */
   var treeEl = $("#tree");
   function buildTree(nodes, depth, path) {
     var h = "";
@@ -905,15 +1048,12 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     treeEl.querySelectorAll(".row.file").forEach(function (r) { r.classList.toggle("on", r.dataset.file === active); });
   }
 
-  /* ---------------- tabs + editor ---------------- */
-  var tabs = [], active = null;
+  /* ================= tabs + editor ================= */
+  var tabs = [], active = null, curLine = 1;
   var tabsEl = $("#tabs"), scroller = $("#scroller"), editor = $("#editor"), crumbs = $("#crumbs");
   var mmCode = $("#mmCode"), mmSlider = $("#mmSlider"), minimap = $("#minimap");
 
-  function downloadCV() {
-    var a = document.createElement("a");
-    a.href = CV; a.download = CV; document.body.appendChild(a); a.click(); a.remove();
-  }
+  function isCode() { return !!(active && FILES[active] && FILES[active].src); }
 
   function open(p) {
     if (p === CV) { downloadCV(); return; }
@@ -921,7 +1061,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     if (tabs.indexOf(p) === -1) tabs.push(p);
     active = p;
     renderTabs(); renderEditor(); markTree();
-    try { history.replaceState(null, "", "#" + p); } catch (e) {}
+    try { history.replaceState(null, "", "#" + encodeURI(p)); } catch (e) {}
     if (MOBILE()) setSidebar(false);
   }
   function closeTab(p) {
@@ -934,9 +1074,8 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
   function renderTabs() {
     tabsEl.innerHTML = tabs.map(function (p) {
       var f = FILES[p];
-      var label = f.preview ? "Preview " + base(p) : base(p);
-      return '<div class="tab' + (p === active ? " on" : "") + (f.preview ? " preview" : "") + '" data-tab="' + p + '" title="' + p + '">' +
-        icon(p) + '<span class="name">' + label + '</span><span class="x" data-close="' + p + '">×</span></div>';
+      return '<div class="tab' + (p === active ? " on" : "") + '" data-tab="' + esc(p) + '" title="' + esc(p) + '">' +
+        icon(p) + '<span class="name">' + esc(f.title || base(p)) + '</span><span class="x" data-close="' + esc(p) + '">×</span></div>';
     }).join("");
     var on = tabsEl.querySelector(".tab.on");
     if (on) on.scrollIntoView({ block: "nearest", inline: "nearest" });
@@ -957,23 +1096,27 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
       editor.classList.add("is-preview");
       crumbs.innerHTML = "";
       scroller.innerHTML = '<div class="empty"><div class="logo">{ }</div>' +
-        "<div>Go to file &nbsp;<kbd>Ctrl</kbd> + <kbd>P</kbd></div>" +
-        "<div>Toggle terminal &nbsp;<kbd>Ctrl</kbd> + <kbd>`</kbd></div></div>";
+        "<div>Show All Commands &nbsp;<kbd>F1</kbd></div>" +
+        "<div>Go to File &nbsp;" + kbdHTML("mod+p") + "</div>" +
+        "<div>Toggle Terminal &nbsp;" + kbdHTML("ctrl+`") + "</div></div>";
       document.title = "hamed-maaleki";
       setLang("");
+      $("#sbPos").textContent = "";
+      if (!findBox.hidden) runFind();
       return;
     }
     var f = FILES[active];
     var parts = ["hamed-maaleki"].concat(active.split("/"));
     crumbs.innerHTML = parts.map(function (s, i) {
-      return (i === parts.length - 1 ? icon(active) + " " : "") + "<span>" + s + "</span>";
+      return (i === parts.length - 1 ? icon(active) + " " : "") + "<span>" + esc(s) + "</span>";
     }).join('<span class="sep">›</span>');
     document.title = base(active) + " · hamed-maaleki";
 
     if (f.preview) {
       editor.classList.add("is-preview");
-      scroller.innerHTML = '<div class="md">' + $("#readme").innerHTML + "</div>";
-      setLang("Markdown");
+      scroller.innerHTML = '<div class="md">' + (f.render ? f.render() : $("#readme").innerHTML) + "</div>";
+      setLang(active === SHORTCUTS ? "Keybindings" : "Markdown");
+      $("#sbPos").textContent = "";
     } else {
       editor.classList.remove("is-preview");
       if (!f.html) f.html = highlight(f.src, f.lang === "mod" ? "mod" : "go");
@@ -988,26 +1131,38 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     }
     scroller.scrollTop = 0; scroller.scrollLeft = 0;
     updateSlider();
+    if (!findBox.hidden) runFind();
   }
 
   function setLang(l) { $("#sbLang").textContent = l || "Plain Text"; }
   function setCursor(ln, col) {
+    curLine = ln;
     $("#sbPos").textContent = "Ln " + ln + ", Col " + col;
     scroller.querySelectorAll(".ln.on").forEach(function (x) { x.classList.remove("on"); });
     var row = scroller.querySelector('.ln[data-n="' + ln + '"]');
     if (row) row.classList.add("on");
   }
+  function lineCount() { return isCode() ? FILES[active].src.split("\n").length : 0; }
+  function gotoLine(n) {
+    if (!isCode()) return;
+    n = Math.max(1, Math.min(lineCount(), n));
+    var row = scroller.querySelector('.ln[data-n="' + n + '"]');
+    if (!row) return;
+    row.scrollIntoView({ block: "center" });
+    setCursor(n, 1);
+    row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+  }
 
-  // measure char width for column calc
-  var charW = (function () {
+  var charW = 8;
+  function measureCharW() {
     var s = document.createElement("span");
-    s.style.cssText = "position:absolute;visibility:hidden;font:13.5px var(--mono);white-space:pre";
+    s.style.cssText = "position:absolute;visibility:hidden;white-space:pre;font:var(--fs) var(--mono)";
     s.textContent = "MMMMMMMMMM";
     document.body.appendChild(s);
     var w = s.getBoundingClientRect().width / 10;
     s.remove();
-    return w || 8;
-  })();
+    charW = w || 8;
+  }
 
   scroller.addEventListener("click", function (e) {
     var a = e.target.closest("a[data-open]");
@@ -1023,7 +1178,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
   /* minimap */
   var MM_SCALE = 0.14;
   function updateSlider() {
-    if (editor.classList.contains("is-preview")) return;
+    if (editor.classList.contains("is-preview") || !S.minimap) return;
     var codeH = scroller.scrollHeight * MM_SCALE;
     var mmH = minimap.clientHeight;
     var offset = codeH > mmH ? (scroller.scrollTop / Math.max(1, scroller.scrollHeight - scroller.clientHeight)) * (codeH - mmH) : 0;
@@ -1032,37 +1187,40 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     mmSlider.style.height = Math.max(12, scroller.clientHeight * MM_SCALE) + "px";
   }
   scroller.addEventListener("scroll", updateSlider, { passive: true });
-  window.addEventListener("resize", updateSlider);
+  window.addEventListener("resize", function () { updateSlider(); closeMenu(); });
   minimap.addEventListener("click", function (e) {
     var r = minimap.getBoundingClientRect();
     var ratio = (e.clientY - r.top) / r.height;
     scroller.scrollTo({ top: ratio * (scroller.scrollHeight - scroller.clientHeight), behavior: "smooth" });
   });
 
-  /* ---------------- sidebar + activity ---------------- */
-  var sidebar = $("#sidebar");
+  /* ================= settings apply ================= */
+  function applySettings() {
+    editor.classList.toggle("no-mm", !S.minimap);
+    editor.classList.toggle("wrap-on", !!S.wrap);
+    crumbs.hidden = !S.crumbs;
+    var st = document.documentElement.style;
+    if (S.zoom) {
+      var fs = (MOBILE() ? 12.5 : 13.5) + S.zoom;
+      st.setProperty("--fs", fs + "px");
+      st.setProperty("--lh", Math.round(fs * 1.48) + "px");
+    } else { st.removeProperty("--fs"); st.removeProperty("--lh"); }
+    measureCharW();
+    try { localStorage.setItem("vsc-settings", JSON.stringify(S)); } catch (e) {}
+    setTimeout(updateSlider, 0);
+  }
+  function setTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    try { localStorage.setItem("vsc-theme", t); } catch (e) {}
+  }
+  function theme() { return document.documentElement.getAttribute("data-theme"); }
+
+  /* ================= sidebar + panel ================= */
+  var sidebar = $("#sidebar"), panel = $("#panel");
   function setSidebar(show) {
     sidebar.classList.toggle("hidden", !show);
     $("#actExplorer").classList.toggle("on", show);
   }
-  $("#actExplorer").addEventListener("click", function () { setSidebar(sidebar.classList.contains("hidden")); });
-  $("#actSearch").addEventListener("click", function () { showQO(); });
-  $("#cc").addEventListener("click", function () { showQO(); });
-  $("#actGit").addEventListener("click", function () { showPanel("terminal"); run("git log --oneline"); });
-  $("#sbBranch").addEventListener("click", function () { showPanel("terminal"); run("git log --oneline"); });
-  $("#actGithub").addEventListener("click", function () { window.open(GH, "_blank", "noopener"); });
-  $("#actLinkedin").addEventListener("click", function () { window.open(LI, "_blank", "noopener"); });
-  $("#sbHire").addEventListener("click", function () { location.href = "mailto:" + EMAIL; });
-  $("#sbProblems").addEventListener("click", function () { showPanel("problems"); });
-  $("#actTheme").addEventListener("click", function () {
-    var html = document.documentElement;
-    var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    html.setAttribute("data-theme", next);
-    localStorage.setItem("vsc-theme", next);
-  });
-
-  /* ---------------- panel ---------------- */
-  var panel = $("#panel");
   function showPanel(which) {
     panel.classList.remove("hidden");
     document.querySelectorAll(".ptab[data-p]").forEach(function (t) { t.classList.toggle("on", t.dataset.p === which); });
@@ -1071,15 +1229,514 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     $("#pOutput").hidden = which !== "output";
     setTimeout(updateSlider, 0);
   }
+  function togglePanel() {
+    if (panel.classList.contains("hidden")) { showPanel("terminal"); termIn.focus(); }
+    else panel.classList.add("hidden");
+    setTimeout(updateSlider, 0);
+  }
   document.querySelectorAll(".ptab[data-p]").forEach(function (t) {
     t.addEventListener("click", function () { showPanel(t.dataset.p); });
   });
   $("#closePanel").addEventListener("click", function () { panel.classList.add("hidden"); setTimeout(updateSlider, 0); });
   $("#clearTerm").addEventListener("click", function () { termOut.innerHTML = ""; });
 
-  /* ---------------- terminal ---------------- */
+  /* ================= find widget ================= */
+  var findBox = $("#find"), findIn = $("#findIn"), findCnt = $("#findCnt");
+  var hasHL = !!(window.CSS && CSS.highlights && window.Highlight);
+  var fRanges = [], fIdx = -1;
+
+  function textNodes(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) { return n.parentNode.closest(".gn") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+    });
+    var a = [], n;
+    while ((n = w.nextNode())) a.push(n);
+    return a;
+  }
+  function locate(map, off, isEnd) {
+    var lo = 0, hi = map.length - 1;
+    while (lo < hi) {
+      var mid = (lo + hi + 1) >> 1, s = map[mid][1];
+      if (isEnd ? s < off : s <= off) lo = mid; else hi = mid - 1;
+    }
+    return [map[lo][0], off - map[lo][1]];
+  }
+  function clearFindMarks() { if (hasHL) { CSS.highlights.delete("find-all"); CSS.highlights.delete("find-cur"); } }
+  function runFind() {
+    clearFindMarks();
+    fRanges = []; fIdx = -1;
+    var q = findIn.value, root = scroller.firstElementChild;
+    if (q && root) {
+      var nodes = textNodes(root), full = "", map = [];
+      nodes.forEach(function (n) { map.push([n, full.length]); full += n.data; });
+      var hay = full.toLowerCase(), needle = q.toLowerCase(), i = 0;
+      while (map.length && (i = hay.indexOf(needle, i)) > -1 && fRanges.length < 2000) {
+        var a = locate(map, i, false), b = locate(map, i + needle.length, true);
+        var r = document.createRange();
+        r.setStart(a[0], a[1]); r.setEnd(b[0], b[1]);
+        fRanges.push(r);
+        i += needle.length;
+      }
+      if (hasHL && fRanges.length) CSS.highlights.set("find-all", new Highlight(...fRanges));
+      if (fRanges.length) {
+        // first match at or after the cursor line
+        fIdx = 0;
+        for (var k = 0; k < fRanges.length; k++) {
+          var ln = fRanges[k].startContainer.parentElement.closest(".ln");
+          if (ln && +ln.dataset.n >= curLine) { fIdx = k; break; }
+        }
+        showMatch(false);
+      }
+    }
+    updateFindCount();
+  }
+  function updateFindCount() {
+    var none = findIn.value && !fRanges.length;
+    findCnt.textContent = !findIn.value ? "No results" : none ? "No results" : (fIdx + 1) + " of " + fRanges.length;
+    findCnt.classList.toggle("none", !!none);
+  }
+  function showMatch(moveCursor) {
+    var r = fRanges[fIdx];
+    if (!r) return;
+    if (hasHL) CSS.highlights.set("find-cur", new Highlight(r));
+    else { var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+    var el = r.startContainer.parentElement;
+    el.scrollIntoView({ block: "center", inline: "nearest" });
+    var ln = el.closest(".ln");
+    if (ln && moveCursor !== false) setCursor(+ln.dataset.n, r.startOffset + 1);
+    updateFindCount();
+  }
+  function findStep(d) {
+    if (findBox.hidden) { openFind(); return; }
+    if (!fRanges.length) return;
+    fIdx = (fIdx + d + fRanges.length) % fRanges.length;
+    showMatch(true);
+  }
+  function openFind() {
+    findBox.hidden = false;
+    var sel = String(getSelection()).trim();
+    if (sel && sel.indexOf("\n") === -1 && sel.length < 80) findIn.value = sel;
+    findIn.focus(); findIn.select();
+    runFind();
+  }
+  function closeFind() { findBox.hidden = true; clearFindMarks(); fRanges = []; }
+  findIn.addEventListener("input", runFind);
+  findIn.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); findStep(e.shiftKey ? -1 : 1); }
+    else if (e.key === "Escape") { e.preventDefault(); closeFind(); }
+  });
+  $("#findNext").addEventListener("click", function () { findStep(1); });
+  $("#findPrev").addEventListener("click", function () { findStep(-1); });
+  $("#findClose").addEventListener("click", closeFind);
+
+  /* ================= symbols ================= */
+  function symbols() {
+    if (!isCode()) return [];
+    var out = [], block = null;
+    FILES[active].src.split("\n").forEach(function (l, i) {
+      var m;
+      if (block) {
+        if (/^\)/.test(l)) { block = null; return; }
+        if ((m = l.match(/^\t(\S+)\s/)) && !/^\/\//.test(m[1])) out.push({ name: m[1], kind: block, line: i + 1 });
+        return;
+      }
+      if ((m = l.match(/^func\s+(?:\(([^)]*)\)\s*)?([A-Za-z_]\w*)/))) out.push({ name: m[2], kind: m[1] ? "method" : "func", line: i + 1 });
+      else if ((m = l.match(/^type\s+([A-Za-z_]\w*)\s+(\w+)/))) out.push({ name: m[1], kind: m[2] === "struct" ? "struct" : "type", line: i + 1 });
+      else if ((m = l.match(/^(var|const)\s+([A-Za-z_]\w*)/))) out.push({ name: m[2], kind: m[1], line: i + 1 });
+      else if ((m = l.match(/^(var|const|require)\s*\($/))) block = m[1] === "require" ? "module" : m[1];
+      else if ((m = l.match(/^module\s+(\S+)/))) out.push({ name: m[1], kind: "module", line: i + 1 });
+      else if ((m = l.match(/^package\s+(\w+)/))) out.push({ name: m[1], kind: "package", line: i + 1 });
+    });
+    return out;
+  }
+  function symIcon(kind) {
+    if (kind === "func" || kind === "method") return '<span class="fi fi-fn">ƒ</span>';
+    if (kind === "struct" || kind === "type") return '<span class="fi fi-st">S</span>';
+    if (kind === "module" || kind === "package") return '<span class="fi fi-mod">{}</span>';
+    return '<span class="fi fi-var">' + (kind === "const" ? "c" : "v") + "</span>";
+  }
+
+  /* ================= keys ================= */
+  function keyLabel(spec) {
+    return spec.split("+").map(function (k) {
+      if (k === "mod") return isMac ? "⌘" : "Ctrl";
+      if (k === "ctrl") return isMac ? "⌃" : "Ctrl";
+      if (k === "shift") return isMac ? "⇧" : "Shift";
+      if (k === "alt") return isMac ? "⌥" : "Alt";
+      return k.length === 1 ? k.toUpperCase() : k;
+    }).join(isMac ? "" : "+");
+  }
+  function kbdHTML(spec) { return "<kbd>" + esc(keyLabel(spec)) + "</kbd>"; }
+  function keysOf(c) { return [].concat(c.key || []); }
+  function matches(e, spec) {
+    var parts = spec.split("+"), key = parts.pop();
+    var need = { ctrl: false, meta: false, shift: false, alt: false };
+    parts.forEach(function (p) {
+      if (p === "mod") { if (isMac) need.meta = true; else need.ctrl = true; }
+      else need[p] = true;
+    });
+    if (e.ctrlKey !== need.ctrl || e.metaKey !== need.meta || e.shiftKey !== need.shift || e.altKey !== need.alt) return false;
+    if (key === "`") return e.code === "Backquote";
+    if (key.length === 1 && /[a-z]/.test(key)) return e.code === "Key" + key.toUpperCase();
+    return (e.key || "").toLowerCase() === key.toLowerCase();
+  }
+
+  /* ================= commands ================= */
+  var C = {};
+  function cmd(id, o) { o.id = id; C[id] = o; }
+  function exec(id) {
+    var c = C[id];
+    if (!c || (c.enabled && !c.enabled())) return;
+    c.run();
+  }
+  function runInTerminal(line) { showPanel("terminal"); run(line); }
+
+  // File
+  cmd("file.quickOpen", { cat: "Go", label: "Go to File…", key: "mod+p", run: function () { showQI(""); } });
+  cmd("file.save", { cat: "File", label: "Save a Copy", key: "mod+s", prevent: true, enabled: isCode,
+    run: function () { downloadBlob(base(active), FILES[active].src + "\n"); notify("Saved a copy of <b>" + esc(base(active)) + "</b> to your downloads."); } });
+  cmd("file.cv", { cat: "File", label: "Download CV (PDF)", run: downloadCV });
+  cmd("file.copyLink", { cat: "File", label: "Copy Link to This File", enabled: function () { return !!active; },
+    run: function () { copyText(location.href.split("#")[0] + "#" + encodeURI(active), "Link to <b>" + esc(base(active)) + "</b> copied."); } });
+  cmd("file.close", { cat: "View", label: "Close Editor", enabled: function () { return !!active; }, run: function () { closeTab(active); } });
+  cmd("file.closeAll", { cat: "View", label: "Close All Editors", enabled: function () { return tabs.length > 0; },
+    run: function () { tabs = []; active = null; renderTabs(); renderEditor(); markTree(); } });
+
+  // Edit
+  cmd("edit.copy", { cat: "Edit", label: "Copy", hint: "mod+c",
+    run: function () { var s = String(getSelection()); if (!s) { notify("Nothing is selected."); return; } copyText(s, "Copied to the clipboard."); } });
+  cmd("edit.copyFile", { cat: "Edit", label: "Copy File Contents", enabled: isCode,
+    run: function () { copyText(FILES[active].src, "Copied <b>" + esc(base(active)) + "</b> to the clipboard."); } });
+  cmd("edit.copyEmail", { cat: "Edit", label: "Copy Email Address", run: function () { copyText(EMAIL, "Copied " + EMAIL); } });
+  cmd("edit.find", { cat: "Edit", label: "Find", key: "mod+f", enabled: function () { return !!active; }, run: openFind });
+  cmd("edit.findNext", { cat: "Edit", label: "Find Next", key: "F3", enabled: function () { return !!active; }, run: function () { findStep(1); } });
+  cmd("edit.findPrev", { cat: "Edit", label: "Find Previous", key: "shift+F3", enabled: function () { return !!active; }, run: function () { findStep(-1); } });
+
+  // Selection
+  cmd("sel.all", { cat: "Selection", label: "Select All", key: "mod+a", enabled: function () { return !!active; },
+    run: function () { var r = document.createRange(); r.selectNodeContents(scroller.firstElementChild); var s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
+  cmd("sel.line", { cat: "Selection", label: "Select Current Line", enabled: isCode,
+    run: function () { var tx = scroller.querySelector('.ln[data-n="' + curLine + '"] .tx'); if (!tx) return; var r = document.createRange(); r.selectNodeContents(tx); var s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
+  cmd("sel.copyLine", { cat: "Selection", label: "Copy Current Line", enabled: isCode,
+    run: function () { copyText(FILES[active].src.split("\n")[curLine - 1] || "", "Copied line " + curLine + "."); } });
+
+  // View
+  cmd("view.palette", { cat: "View", label: "Command Palette…", key: ["mod+shift+p", "F1"], palette: false, run: function () { showQI(">"); } });
+  cmd("view.explorer", { cat: "View", label: "Explorer", key: "mod+b", checked: function () { return !sidebar.classList.contains("hidden"); },
+    run: function () { setSidebar(sidebar.classList.contains("hidden")); } });
+  cmd("view.terminal", { cat: "View", label: "Terminal", key: "ctrl+`", checked: function () { return !panel.classList.contains("hidden"); }, run: togglePanel });
+  cmd("view.minimap", { cat: "View", label: "Minimap", checked: function () { return S.minimap; }, run: function () { S.minimap = !S.minimap; applySettings(); } });
+  cmd("view.crumbs", { cat: "View", label: "Breadcrumbs", checked: function () { return S.crumbs; }, run: function () { S.crumbs = !S.crumbs; applySettings(); } });
+  cmd("view.wrap", { cat: "View", label: "Word Wrap", key: "alt+z", checked: function () { return S.wrap; }, run: function () { S.wrap = !S.wrap; applySettings(); } });
+  cmd("view.zoomIn", { cat: "View", label: "Editor Zoom In", enabled: function () { return S.zoom < 8; }, run: function () { S.zoom++; applySettings(); } });
+  cmd("view.zoomOut", { cat: "View", label: "Editor Zoom Out", enabled: function () { return S.zoom > -4; }, run: function () { S.zoom--; applySettings(); } });
+  cmd("view.zoomReset", { cat: "View", label: "Reset Editor Zoom", enabled: function () { return S.zoom !== 0; }, run: function () { S.zoom = 0; applySettings(); } });
+  cmd("view.fullscreen", { cat: "View", label: "Full Screen", enabled: function () { return !!document.documentElement.requestFullscreen; },
+    checked: function () { return !!document.fullscreenElement; },
+    run: function () { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(function () {}); } });
+  cmd("theme.dark", { cat: "Preferences", label: "Color Theme: Dark+", menu: "Dark+ Theme", checked: function () { return theme() === "dark"; }, run: function () { setTheme("dark"); } });
+  cmd("theme.light", { cat: "Preferences", label: "Color Theme: Light+", menu: "Light+ Theme", checked: function () { return theme() === "light"; }, run: function () { setTheme("light"); } });
+
+  // Go
+  cmd("go.line", { cat: "Go", label: "Go to Line…", key: "ctrl+g", enabled: isCode, run: function () { showQI(":"); } });
+  cmd("go.symbol", { cat: "Go", label: "Go to Symbol in Editor…", key: "mod+shift+o", enabled: isCode, run: function () { showQI("@"); } });
+  cmd("go.next", { cat: "View", label: "Open Next Editor", enabled: function () { return tabs.length > 1; },
+    run: function () { open(tabs[(tabs.indexOf(active) + 1) % tabs.length]); } });
+  cmd("go.prev", { cat: "View", label: "Open Previous Editor", enabled: function () { return tabs.length > 1; },
+    run: function () { open(tabs[(tabs.indexOf(active) - 1 + tabs.length) % tabs.length]); } });
+
+  // Run
+  cmd("run.run", { cat: "Run", label: "Run Without Debugging (go run .)", menu: "Run Without Debugging", run: function () { runInTerminal("go run ."); } });
+  cmd("run.test", { cat: "Run", label: "Run Tests (go test ./...)", menu: "Run Tests", run: function () { runInTerminal("go test ./..."); } });
+  cmd("run.vet", { cat: "Run", label: "Run go vet", run: function () { runInTerminal("go vet ./..."); } });
+  cmd("run.log", { cat: "Run", label: "Show Career History (git log)", run: function () { runInTerminal("git log --oneline"); } });
+
+  // Terminal
+  cmd("term.new", { cat: "Terminal", label: "New Terminal", key: "ctrl+shift+`",
+    run: function () { showPanel("terminal"); termOut.innerHTML = ""; welcome(); termIn.focus(); } });
+  cmd("term.clear", { cat: "Terminal", label: "Clear Terminal", run: function () { showPanel("terminal"); termOut.innerHTML = ""; termIn.focus(); } });
+  cmd("term.kill", { cat: "Terminal", label: "Kill Terminal", enabled: function () { return !panel.classList.contains("hidden"); },
+    run: function () { panel.classList.add("hidden"); termOut.innerHTML = ""; setTimeout(updateSlider, 0); } });
+  cmd("term.task", { cat: "Terminal", label: "Run Task…", run: function () {
+    showList([
+      { label: "go run .", desc: "print the summary", act: function () { runInTerminal("go run ."); } },
+      { label: "go test ./...", desc: "run the tests", act: function () { runInTerminal("go test ./..."); } },
+      { label: "git log", desc: "career history", act: function () { runInTerminal("git log --oneline"); } },
+      { label: "download cv", desc: CV, act: downloadCV },
+      { label: "email hamed", desc: EMAIL, act: function () { location.href = "mailto:" + EMAIL; } }
+    ], "Select the task to run");
+  } });
+
+  // Help
+  cmd("help.welcome", { cat: "Help", label: "Welcome (README.md)", menu: "Welcome", run: function () { open("README.md"); } });
+  cmd("help.keys", { cat: "Help", label: "Keyboard Shortcuts Reference", run: function () { open(SHORTCUTS); } });
+  cmd("help.github", { cat: "Help", label: "View My GitHub", run: function () { window.open(GH, "_blank", "noopener"); } });
+  cmd("help.linkedin", { cat: "Help", label: "View My LinkedIn", run: function () { window.open(LI, "_blank", "noopener"); } });
+  cmd("help.email", { cat: "Help", label: "Contact Hamed by Email", run: function () { location.href = "mailto:" + EMAIL; } });
+  cmd("help.about", { cat: "Help", label: "About", run: showAbout });
+
+  var MENUS = [
+    ["File", ["file.quickOpen", "-", "file.save", "file.cv", "file.copyLink", "-", "file.close", "file.closeAll"]],
+    ["Edit", ["edit.copy", "edit.copyFile", "edit.copyEmail", "-", "edit.find", "edit.findNext", "edit.findPrev"]],
+    ["Selection", ["sel.all", "sel.line", "-", "sel.copyLine"]],
+    ["View", ["view.palette", "-", "view.explorer", "view.terminal", "-", "view.minimap", "view.crumbs", "view.wrap", "-", "view.zoomIn", "view.zoomOut", "view.zoomReset", "view.fullscreen", "-", "theme.dark", "theme.light"]],
+    ["Go", ["file.quickOpen", "go.line", "go.symbol", "-", "go.next", "go.prev"]],
+    ["Run", ["run.run", "run.test", "run.vet", "-", "run.log"]],
+    ["Terminal", ["term.new", "term.clear", "term.kill", "-", "term.task"]],
+    ["Help", ["help.welcome", "help.keys", "view.palette", "-", "help.github", "help.linkedin", "help.email", "-", "help.about"]]
+  ];
+  var CTX = ["go.symbol", "go.line", "-", "edit.copy", "sel.copyLine", "edit.copyFile", "file.copyLink", "-", "edit.find", "view.palette"];
+
+  /* ================= menu bar + dropdown ================= */
+  var menuBar = $("#menus"), dd = $("#dd"), openIdx = -1, ddItems = [], ddSel = -1;
+  menuBar.innerHTML = MENUS.map(function (m, i) {
+    return '<button class="mlabel" data-m="' + i + '" role="menuitem" aria-haspopup="true">' + m[0] + "</button>";
+  }).join("");
+
+  function renderItems(ids) {
+    ddItems = [];
+    return ids.map(function (id) {
+      if (id === "-") return '<div class="dd-sep" role="separator"></div>';
+      var c = C[id], en = !c.enabled || c.enabled(), ck = c.checked && c.checked();
+      var i = ddItems.length, k = c.key ? keysOf(c)[0] : c.hint;
+      ddItems.push({ id: id, en: en });
+      return '<div class="dd-item' + (en ? "" : " off") + '" data-i="' + i + '" role="menuitem"' + (en ? "" : ' aria-disabled="true"') + ">" +
+        '<span class="dd-ck">' + (ck ? "✓" : "") + '</span><span>' + esc(c.menu || c.label) + '</span><span class="dd-k">' + (k ? esc(keyLabel(k)) : "") + "</span></div>";
+    }).join("");
+  }
+  function placeDD(x, y) {
+    dd.style.left = x + "px"; dd.style.top = y + "px";
+    var r = dd.getBoundingClientRect();
+    if (r.right > innerWidth - 4) dd.style.left = Math.max(4, innerWidth - r.width - 4) + "px";
+    if (r.bottom > innerHeight - 4) dd.style.top = Math.max(4, y - r.height) + "px";
+  }
+  function openMenu(i) {
+    openIdx = i; ddSel = -1;
+    menuBar.querySelectorAll(".mlabel").forEach(function (b) {
+      var on = +b.dataset.m === i;
+      b.classList.toggle("on", on); b.setAttribute("aria-expanded", on);
+    });
+    dd.innerHTML = renderItems(MENUS[i][1]);
+    dd.hidden = false;
+    var r = menuBar.querySelector('[data-m="' + i + '"]').getBoundingClientRect();
+    placeDD(r.left, r.bottom + 3);
+  }
+  function showMenuAt(ids, x, y) {
+    openIdx = -2; ddSel = -1;
+    dd.innerHTML = renderItems(ids);
+    dd.hidden = false;
+    placeDD(x, y);
+  }
+  function closeMenu() {
+    if (dd.hidden) return;
+    openIdx = -1; dd.hidden = true;
+    menuBar.querySelectorAll(".mlabel").forEach(function (b) { b.classList.remove("on"); b.setAttribute("aria-expanded", "false"); });
+  }
+  function ddMove(d) {
+    var en = [];
+    ddItems.forEach(function (x, i) { if (x.en) en.push(i); });
+    if (!en.length) return;
+    var p = en.indexOf(ddSel);
+    p = p === -1 ? (d > 0 ? 0 : en.length - 1) : (p + d + en.length) % en.length;
+    ddSel = en[p];
+    dd.querySelectorAll(".dd-item").forEach(function (el) { el.classList.toggle("sel", +el.dataset.i === ddSel); });
+  }
+  menuBar.addEventListener("mousedown", function (e) {
+    var b = e.target.closest(".mlabel");
+    if (!b) return;
+    e.preventDefault();
+    var i = +b.dataset.m;
+    if (openIdx === i) closeMenu(); else openMenu(i);
+  });
+  menuBar.addEventListener("click", function (e) {
+    var b = e.target.closest(".mlabel");
+    if (b && e.detail === 0) { openMenu(+b.dataset.m); ddMove(1); } // keyboard activation
+  });
+  menuBar.addEventListener("mouseover", function (e) {
+    var b = e.target.closest(".mlabel");
+    if (b && openIdx >= 0 && +b.dataset.m !== openIdx) openMenu(+b.dataset.m);
+  });
+  dd.addEventListener("mousedown", function (e) { e.preventDefault(); });
+  dd.addEventListener("mouseover", function (e) {
+    var it = e.target.closest(".dd-item");
+    if (it && ddItems[+it.dataset.i].en) ddSel = +it.dataset.i;
+  });
+  dd.addEventListener("click", function (e) {
+    var it = e.target.closest(".dd-item");
+    if (!it) return;
+    var x = ddItems[+it.dataset.i];
+    if (!x.en) return;
+    closeMenu(); exec(x.id);
+  });
+  document.addEventListener("mousedown", function (e) {
+    if (!dd.hidden && !e.target.closest("#dd") && !e.target.closest("#menus")) closeMenu();
+  });
+  scroller.addEventListener("contextmenu", function (e) {
+    var ln = e.target.closest(".ln");
+    if (!ln) return;
+    e.preventDefault();
+    if (!String(getSelection())) setCursor(+ln.dataset.n, 1);
+    showMenuAt(CTX, e.clientX, e.clientY);
+  });
+
+  /* ================= quick input ================= */
+  var qo = $("#qo"), qoIn = $("#qoIn"), qoList = $("#qoList"), qoItems = [], qoSel = 0, qoCustom = null;
+  var PH = "Search files by name (append : to go to line or @ to go to symbol)";
+  var EXTRA = [
+    { label: "Download CV (PDF)", desc: "cv", icon: icon(CV), act: downloadCV },
+    { label: "Email Hamed", desc: EMAIL, icon: '<span class="fi">@</span>', act: function () { location.href = "mailto:" + EMAIL; } },
+    { label: "Open GitHub profile", desc: "github.com/Haameed", icon: '<span class="fi">gh</span>', act: function () { window.open(GH, "_blank", "noopener"); } },
+    { label: "Open LinkedIn profile", desc: "linkedin.com/in/hamed-maaleki", icon: '<span class="fi">in</span>', act: function () { window.open(LI, "_blank", "noopener"); } },
+    { label: "Show all commands", desc: ">", icon: '<span class="fi">&gt;</span>', keep: true, act: function () { qoIn.value = ">"; qoSel = 0; renderQI(); } }
+  ];
+  function fuzzy(text, q) {
+    text = text.toLowerCase();
+    return q.toLowerCase().split(/\s+/).filter(Boolean).every(function (w) { return text.indexOf(w) > -1; });
+  }
+  function itemsFor(v) {
+    if (qoCustom) return qoCustom.filter(function (i) { return fuzzy(i.label + " " + (i.desc || ""), v); });
+    if (v[0] === ">") {
+      var q = v.slice(1);
+      return Object.keys(C).filter(function (id) { return C[id].palette !== false; }).map(function (id) {
+        var c = C[id], en = !c.enabled || c.enabled(), k = c.key ? keysOf(c)[0] : c.hint;
+        return { label: (c.cat ? c.cat + ": " : "") + c.label, key: k ? keyLabel(k) : "", info: !en, desc: en ? "" : "not available here", act: function () { exec(id); } };
+      }).filter(function (i) { return fuzzy(i.label, q); });
+    }
+    if (v[0] === ":") {
+      if (!isCode()) return [{ label: "Open a code file first to go to a line.", info: true }];
+      var n = parseInt(v.slice(1), 10), total = lineCount();
+      if (!v.slice(1).trim()) return [{ label: "Current line: " + curLine + ". Type a line number between 1 and " + total + ".", info: true }];
+      if (isNaN(n) || n < 1 || n > total) return [{ label: "Type a line number between 1 and " + total + ".", info: true }];
+      return [{ label: "Go to line " + n, icon: '<span class="fi">#</span>', act: function () { gotoLine(n); } }];
+    }
+    if (v[0] === "@") {
+      if (!isCode()) return [{ label: "Open a code file first to see its symbols.", info: true }];
+      var sq = v.slice(1);
+      var list = symbols().filter(function (s) { return fuzzy(s.name, sq); }).map(function (s) {
+        return { label: s.name, desc: s.kind + " · line " + s.line, icon: symIcon(s.kind), act: function () { gotoLine(s.line); } };
+      });
+      return list.length ? list : [{ label: "No matching symbols.", info: true }];
+    }
+    var files = Object.keys(FILES).filter(function (p) { return p !== SHORTCUTS; }).map(function (p) {
+      return { label: base(p), desc: dirOf(p), icon: icon(p), act: function () { open(p); } };
+    });
+    return files.concat(EXTRA).filter(function (i) { return fuzzy(i.label + " " + i.desc, v); });
+  }
+  function renderQI() {
+    qoItems = itemsFor(qoIn.value);
+    var firstActive = -1;
+    qoItems.forEach(function (it, i) { if (!it.info && firstActive === -1) firstActive = i; });
+    if (qoSel >= qoItems.length || (qoItems[qoSel] && qoItems[qoSel].info)) qoSel = Math.max(0, firstActive);
+    qoList.innerHTML = qoItems.length ? qoItems.map(function (i, n) {
+      return '<div class="qo-item' + (i.info ? " info" : "") + (n === qoSel && !i.info ? " on" : "") + '" data-i="' + n + '">' +
+        (i.icon || "") + "<span>" + esc(i.label) + "</span>" + (i.desc ? "<small>" + esc(i.desc) + "</small>" : "") +
+        (i.key ? '<span class="qo-k">' + esc(i.key) + "</span>" : "") + "</div>";
+    }).join("") : '<div class="qo-item info"><small>No matching results</small></div>';
+    var on = qoList.querySelector(".qo-item.on");
+    if (on) on.scrollIntoView({ block: "nearest" });
+  }
+  function showQI(prefix) {
+    closeMenu(); qoCustom = null;
+    qoIn.placeholder = PH;
+    qo.classList.add("show"); qoIn.value = prefix || ""; qoSel = 0; renderQI();
+    setTimeout(function () { qoIn.focus(); qoIn.setSelectionRange(qoIn.value.length, qoIn.value.length); }, 0);
+  }
+  function showList(items, placeholder) {
+    showQI(""); qoCustom = items; qoIn.placeholder = placeholder; renderQI();
+  }
+  function hideQI() { qo.classList.remove("show"); qoCustom = null; }
+  function pickQI(n) {
+    var it = qoItems[n];
+    if (!it || it.info || !it.act) return;
+    if (it.keep) { it.act(); return; }
+    hideQI(); it.act();
+  }
+  function moveQI(d) {
+    if (!qoItems.length) return;
+    var n = qoSel;
+    for (var k = 0; k < qoItems.length; k++) {
+      n = (n + d + qoItems.length) % qoItems.length;
+      if (!qoItems[n].info) { qoSel = n; break; }
+    }
+    renderQI();
+  }
+  qoIn.addEventListener("input", function () { qoSel = 0; renderQI(); });
+  qoIn.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { moveQI(1); e.preventDefault(); }
+    else if (e.key === "ArrowUp") { moveQI(-1); e.preventDefault(); }
+    else if (e.key === "Enter") { e.preventDefault(); pickQI(qoSel); }
+    else if (e.key === "Escape") { e.preventDefault(); hideQI(); }
+  });
+  qoList.addEventListener("click", function (e) { var it = e.target.closest("[data-i]"); if (it) pickQI(+it.dataset.i); });
+  qo.addEventListener("mousedown", function (e) { if (e.target === qo) hideQI(); });
+
+  /* ================= about ================= */
+  var modal = $("#modal");
+  function aboutText() {
+    var years = new Date().getFullYear() - 2010;
+    return [
+      "Version: " + years + " years in production (since 2010-06)",
+      "Commit: e41c9a2 (NetDevOps Team Lead, Blu Bank)",
+      "Languages: Go, Python, Bash",
+      "Platforms: Linux, KVM, OpenNebula, VMware vSphere",
+      "Tooling: Ansible, Terraform, Prometheus, GitLab CI",
+      "Location: Tehran, Iran → Germany / EU",
+      "Contact: " + EMAIL
+    ].join("\n");
+  }
+  function showAbout() {
+    $("#dlgText").textContent = aboutText();
+    modal.hidden = false;
+    $("#dlgOk").focus();
+  }
+  function closeAbout() { modal.hidden = true; }
+  $("#dlgOk").addEventListener("click", closeAbout);
+  $("#dlgCopy").addEventListener("click", function () { copyText("hamed-maaleki\n" + aboutText(), "Copied."); closeAbout(); });
+  $("#dlgMail").addEventListener("click", function () { location.href = "mailto:" + EMAIL; closeAbout(); });
+  modal.addEventListener("mousedown", function (e) { if (e.target === modal) closeAbout(); });
+
+  /* ================= shortcuts page ================= */
+  function shortcutsHTML() {
+    var rows = Object.keys(C).filter(function (id) { return C[id].key || C[id].hint; }).map(function (id) {
+      var c = C[id];
+      return "<tr><td>" + esc((c.cat ? c.cat + ": " : "") + c.label) + "</td><td>" +
+        [].concat(c.key || c.hint).map(kbdHTML).join(" or ") + "</td></tr>";
+    }).join("");
+    return "<h1>Keyboard Shortcuts</h1>" +
+      "<p>All of these work on this page. Everything else is in the menus at the top or in the command palette (" + kbdHTML("F1") + ").</p>" +
+      "<table><tr><th>Command</th><th>Keybinding</th></tr>" + rows + "</table>" +
+      "<h2>Quick open</h2><table><tr><th>Type</th><th>To</th></tr>" +
+      "<tr><td><code>main</code></td><td>find a file</td></tr>" +
+      "<tr><td><code>&gt;</code></td><td>run a command</td></tr>" +
+      "<tr><td><code>:42</code></td><td>go to line 42</td></tr>" +
+      "<tr><td><code>@</code></td><td>jump to a func, type or var in the current file</td></tr></table>" +
+      "<h2>Terminal</h2><table><tr><th>Key</th><th>Does</th></tr>" +
+      "<tr><td><kbd>Tab</kbd></td><td>complete a command or file name</td></tr>" +
+      "<tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>command history</td></tr>" +
+      "<tr><td>" + kbdHTML("ctrl+l") + "</td><td>clear</td></tr></table>" +
+      "<h2>Find</h2><table><tr><th>Key</th><th>Does</th></tr>" +
+      "<tr><td><kbd>Enter</kbd> / <kbd>Shift+Enter</kbd></td><td>next / previous match</td></tr>" +
+      "<tr><td><kbd>Escape</kbd></td><td>close</td></tr></table>";
+  }
+
+  /* ================= activity bar + status bar ================= */
+  $("#actExplorer").addEventListener("click", function () { exec("view.explorer"); });
+  $("#actSearch").addEventListener("click", function () { showQI(""); });
+  $("#cc").addEventListener("click", function () { showQI(""); });
+  $("#mbtn").addEventListener("click", function () { showQI(">"); });
+  $("#actGit").addEventListener("click", function () { exec("run.log"); });
+  $("#sbBranch").addEventListener("click", function () { exec("run.log"); });
+  $("#actGithub").addEventListener("click", function () { exec("help.github"); });
+  $("#actLinkedin").addEventListener("click", function () { exec("help.linkedin"); });
+  $("#sbHire").addEventListener("click", function () { exec("help.email"); });
+  $("#sbProblems").addEventListener("click", function () { showPanel("problems"); });
+  $("#sbPos").addEventListener("click", function () { exec("go.line"); });
+  $("#actTheme").addEventListener("click", function () { setTheme(theme() === "dark" ? "light" : "dark"); });
+  $("#cc").title = "Search files (" + keyLabel("mod+p") + ")";
+
+  /* ================= terminal ================= */
   var termOut = $("#termOut"), termIn = $("#termIn"), termBody = $("#pTerminal");
-  var PROMPT = '<span class="a-g">hamed@maaleki</span>:<span class="a-b">~/hamed-maaleki</span>$ ';
+  var PROMPT = '<span class="a-g">hamed@tehran</span>:<span class="a-b">~/hamed-maaleki</span>$ ';
   $("#promptLabel").innerHTML = PROMPT;
 
   var JOBS = [
@@ -1097,6 +1754,9 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     d.innerHTML = html;
     termOut.appendChild(d);
     termBody.scrollTop = termBody.scrollHeight;
+  }
+  function welcome() {
+    print('<span class="a-d">Welcome. Type </span><span class="a-y">help</span><span class="a-d"> to see what this terminal can do.</span>');
   }
   function findFile(arg) {
     if (!arg) return null;
@@ -1120,12 +1780,10 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
         '<span class="a-y">cv</span>                download my CV (PDF)',
         '<span class="a-y">clear</span>             clear the terminal',
         "",
-        '<span class="a-d">Shortcuts: Ctrl+P to find a file, Ctrl+` to toggle this panel.</span>'
+        '<span class="a-d">The menus at the top work too. F1 opens the command palette.</span>'
       ].join("\n");
     },
-    ls: function () {
-      return '<span class="a-b">internal/</span>  go.mod  ' + CV + '  main.go  README.md';
-    },
+    ls: function () { return '<span class="a-b">internal/</span>  go.mod  ' + CV + "  main.go  README.md"; },
     tree: function () {
       return [".", "├── go.mod", "├── " + CV, '├── <span class="a-b">internal</span>',
         '│   ├── <span class="a-b">about</span>/about.go', '│   ├── <span class="a-b">contact</span>/contact.go',
@@ -1135,9 +1793,9 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     },
     whoami: function () { return "hamed: senior devops engineer, tehran. linux, automation, observability. relocating to the EU."; },
     contact: function () {
-      return "email     <a href=\"mailto:" + EMAIL + "\">" + EMAIL + "</a>\n" +
-        "linkedin  <a href=\"" + LI + "\" target=\"_blank\" rel=\"noopener\">linkedin.com/in/hamed-maaleki</a>\n" +
-        "github    <a href=\"" + GH + "\" target=\"_blank\" rel=\"noopener\">github.com/Haameed</a>";
+      return 'email     <a href="mailto:' + EMAIL + '">' + EMAIL + "</a>\n" +
+        'linkedin  <a href="' + LI + '" target="_blank" rel="noopener">linkedin.com/in/hamed-maaleki</a>\n' +
+        'github    <a href="' + GH + '" target="_blank" rel="noopener">github.com/Haameed</a>';
     },
     cv: function () { downloadCV(); return '<span class="a-g">↓</span> downloading ' + CV; },
     clear: function () { termOut.innerHTML = ""; return null; },
@@ -1147,12 +1805,12 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     open: function (a) {
       var p = findFile(a[0]);
       if (!p) return '<span class="a-r">open: ' + esc(a[0] || "") + ": no such file</span>";
-      open(p); return '<span class="a-d">opened ' + p + "</span>";
+      open(p); return '<span class="a-d">opened ' + esc(p) + "</span>";
     },
     cat: function (a) {
       var p = findFile(a[0]);
       if (!p) return '<span class="a-r">cat: ' + esc(a[0] || "") + ": No such file or directory</span>";
-      if (FILES[p].preview) { open(p); return '<span class="a-d">README.md opened in preview</span>'; }
+      if (FILES[p].preview) { open(p); return '<span class="a-d">' + esc(p) + " opened in preview</span>"; }
       return highlight(FILES[p].src, FILES[p].lang === "mod" ? "mod" : "go");
     },
     go: function (a) {
@@ -1174,8 +1832,9 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
           "?   \t" + mod + "contact\t[no test files]"
         ].join("\n");
       }
+      if (a[0] === "vet") return '<span class="a-d">no issues found</span>';
       if (a[0] === "version") return "go version go1.23.4 linux/amd64";
-      return "usage: go run . | go test ./... | go version";
+      return "usage: go run . | go test ./... | go vet ./... | go version";
     },
     git: function (a) {
       if (a[0] === "log") {
@@ -1208,11 +1867,11 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
   function run(line) {
     print(PROMPT + esc(line));
     var parts = line.trim().split(/\s+/);
-    var cmd = parts.shift();
-    if (!cmd) return;
+    var c = parts.shift();
+    if (!c) return;
     hist.push(line); hi = hist.length;
-    var fn = CMDS[cmd.toLowerCase()];
-    if (!fn) { print('<span class="a-r">bash: ' + esc(cmd) + ': command not found</span>. Try <span class="a-y">help</span>.'); return; }
+    var fn = CMDS[c.toLowerCase()];
+    if (!fn) { print('<span class="a-r">bash: ' + esc(c) + ': command not found</span>. Try <span class="a-y">help</span>.'); return; }
     var r = fn(parts);
     if (r != null) print(r);
   }
@@ -1224,75 +1883,80 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     else if (e.key === "Tab") {
       e.preventDefault();
       var words = termIn.value.split(" "), last = words.pop();
-      var pool = words.length ? Object.keys(FILES).map(base) : Object.keys(CMDS);
+      var pool = words.length
+        ? Object.keys(FILES).filter(function (p) { return p !== SHORTCUTS; }).map(base)
+        : Object.keys(CMDS);
       var hit = pool.filter(function (x) { return x.indexOf(last) === 0; });
       if (hit.length === 1) { words.push(hit[0]); termIn.value = words.join(" ") + " "; }
+      else if (hit.length > 1) print(PROMPT + esc(termIn.value) + "\n" + hit.join("  "));
     }
   });
   termBody.addEventListener("click", function (e) {
     if (e.target.closest("a")) return;
-    if (window.getSelection().toString()) return;
+    if (String(getSelection())) return;
     termIn.focus();
   });
 
-  /* ---------------- quick open ---------------- */
-  var qo = $("#qo"), qoIn = $("#qoIn"), qoList = $("#qoList"), qoItems = [], qoSel = 0;
-  var EXTRA = [
-    { label: "Download CV (PDF)", desc: "cv", icon: icon(CV), act: downloadCV },
-    { label: "Email Hamed", desc: EMAIL, icon: '<span class="fi">@</span>', act: function () { location.href = "mailto:" + EMAIL; } },
-    { label: "Open GitHub profile", desc: "github.com/Haameed", icon: '<span class="fi">gh</span>', act: function () { window.open(GH, "_blank", "noopener"); } },
-    { label: "Open LinkedIn profile", desc: "linkedin.com/in/hamed-maaleki", icon: '<span class="fi">in</span>', act: function () { window.open(LI, "_blank", "noopener"); } },
-    { label: "Toggle terminal", desc: "Ctrl+`", icon: '<span class="fi">&gt;_</span>', act: togglePanel },
-    { label: "Toggle dark / light theme", desc: "Dark+ · Light+", icon: '<span class="fi">◐</span>', act: function () { $("#actTheme").click(); } }
-  ];
-  function allItems() {
-    return Object.keys(FILES).map(function (p) {
-      return { label: base(p), desc: dirOf(p), icon: icon(p), act: function () { open(p); } };
-    }).concat(EXTRA);
-  }
-  function renderQO() {
-    var q = qoIn.value.trim().toLowerCase();
-    qoItems = allItems().filter(function (i) { return !q || (i.label + " " + i.desc).toLowerCase().indexOf(q) > -1; });
-    qoSel = Math.min(qoSel, Math.max(0, qoItems.length - 1));
-    qoList.innerHTML = qoItems.length ? qoItems.map(function (i, n) {
-      return '<div class="qo-item' + (n === qoSel ? " on" : "") + '" data-i="' + n + '">' + i.icon + "<span>" + i.label + "</span><small>" + esc(i.desc) + "</small></div>";
-    }).join("") : '<div class="qo-item"><small>No matching results</small></div>';
-  }
-  function showQO() { qo.classList.add("show"); qoIn.value = ""; qoSel = 0; renderQO(); setTimeout(function () { qoIn.focus(); }, 0); }
-  function hideQO() { qo.classList.remove("show"); }
-  function pickQO(n) { var it = qoItems[n]; hideQO(); if (it) it.act(); }
-  qoIn.addEventListener("input", function () { qoSel = 0; renderQO(); });
-  qoIn.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowDown") { qoSel = Math.min(qoItems.length - 1, qoSel + 1); renderQO(); e.preventDefault(); }
-    else if (e.key === "ArrowUp") { qoSel = Math.max(0, qoSel - 1); renderQO(); e.preventDefault(); }
-    else if (e.key === "Enter") pickQO(qoSel);
-    else if (e.key === "Escape") hideQO();
+  /* ================= global keyboard shortcuts ================= */
+  var BIND = [];
+  Object.keys(C).forEach(function (id) {
+    keysOf(C[id]).forEach(function (k) { BIND.push({ id: id, spec: k }); });
   });
-  qoList.addEventListener("click", function (e) { var it = e.target.closest("[data-i]"); if (it) pickQO(+it.dataset.i); });
-  qo.addEventListener("mousedown", function (e) { if (e.target === qo) hideQO(); });
+  // shortcuts that still work while typing in an input box
+  var INPUT_OK = { "view.palette": 1, "file.quickOpen": 1, "view.terminal": 1, "file.save": 1, "term.new": 1, "edit.find": 1 };
 
-  function togglePanel() {
-    if (panel.classList.contains("hidden")) { showPanel("terminal"); termIn.focus(); }
-    else panel.classList.add("hidden");
-    setTimeout(updateSlider, 0);
-  }
-
-  /* ---------------- shortcuts ---------------- */
   document.addEventListener("keydown", function (e) {
-    var mod = e.ctrlKey || e.metaKey;
-    if (mod && (e.key === "p" || e.key === "P")) { e.preventDefault(); showQO(); }
-    else if (e.ctrlKey && (e.key === "`" || e.code === "Backquote")) { e.preventDefault(); togglePanel(); }
-    else if (mod && (e.key === "b" || e.key === "B")) { e.preventDefault(); setSidebar(sidebar.classList.contains("hidden")); }
-    else if (e.key === "Escape") hideQO();
+    if (e.defaultPrevented) return;
+
+    // About dialog
+    if (!modal.hidden) {
+      if (e.key === "Escape") { e.preventDefault(); closeAbout(); }
+      return;
+    }
+
+    // open dropdown / context menu
+    if (!dd.hidden) {
+      if (e.key === "Escape") closeMenu();
+      else if (e.key === "ArrowDown") ddMove(1);
+      else if (e.key === "ArrowUp") ddMove(-1);
+      else if ((e.key === "ArrowRight" || e.key === "ArrowLeft") && openIdx >= 0) {
+        openMenu((openIdx + (e.key === "ArrowRight" ? 1 : -1) + MENUS.length) % MENUS.length);
+        ddMove(1);
+      } else if (e.key === "Enter" || e.key === " ") {
+        if (ddSel > -1) { var id = ddItems[ddSel].id; closeMenu(); exec(id); }
+      } else if (e.key === "Tab") { closeMenu(); return; }
+      else return;
+      e.preventDefault();
+      return;
+    }
+
+    var inInput = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
+    for (var i = 0; i < BIND.length; i++) {
+      var b = BIND[i];
+      if (!matches(e, b.spec)) continue;
+      if (inInput && !INPUT_OK[b.id]) continue;
+      var c = C[b.id];
+      if (!c.enabled || c.enabled()) { e.preventDefault(); c.run(); }
+      else if (c.prevent) { e.preventDefault(); notify("Open a code file to save a copy of it."); }
+      return;
+    }
+
+    if (e.key === "Escape") {
+      if (qo.classList.contains("show")) hideQI();
+      else if (!findBox.hidden) closeFind();
+    }
   });
 
-  /* ---------------- boot ---------------- */
+  /* ================= boot ================= */
+  applySettings();
   if (MOBILE()) setSidebar(false);
-  var start = decodeURIComponent(location.hash.slice(1));
+
+  var start = "";
+  try { start = decodeURI(location.hash.slice(1)); } catch (e) {}
   tabs = ["README.md", "main.go"];
   open(FILES[start] ? start : "README.md");
 
-  print('<span class="a-d">Welcome. Type </span><span class="a-y">help</span><span class="a-d"> to see what this terminal can do.</span>');
+  welcome();
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var demo = "go run .";
   if (reduce) { run(demo); }
@@ -1300,6 +1964,7 @@ var Where = []string{"Germany", "Netherlands", "anywhere in the EU"}
     setTimeout(function () {
       var i = 0;
       var t = setInterval(function () {
+        // stop the demo if the visitor starts typing
         if (document.activeElement === termIn && termIn.value && termIn.value !== demo.slice(0, i)) { clearInterval(t); return; }
         termIn.value = demo.slice(0, ++i);
         if (i >= demo.length) {
