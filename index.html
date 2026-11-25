@@ -20,6 +20,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="alternate" hreflang="en" href="https://haameed.github.io/" />
+<link rel="alternate" hreflang="fa" href="https://haameed.github.io/?lang=fa" />
 
 <style>
 :root {
@@ -347,6 +350,29 @@ kbd { font: 11px var(--ui); padding: 2px 6px; border-radius: 3px; background: rg
   .sidebar { left: 42px; }
   .lights { display: none; }
 }
+/* ---------- Persian content (FA) ---------- */
+:root { --mono: "JetBrains Mono", Vazirmatn, Consolas, "SF Mono", Menlo, monospace; }
+.fa { direction: rtl; text-align: right; font-family: Vazirmatn, var(--ui); line-height: 1.95; }
+.fa th, .fa td { text-align: right; }
+.fa blockquote { border-left: 0; border-right: 4px solid rgba(127,127,127,.4); }
+.fa pre, .fa code, .fa kbd { direction: ltr; text-align: left; unicode-bidi: isolate; }
+.fa .badge { font-family: Vazirmatn, Verdana, sans-serif; }
+.fa-out { direction: rtl; text-align: right; font-family: Vazirmatn, var(--mono); line-height: 1.9; }
+.dlg-body pre[dir="rtl"] { font-family: Vazirmatn, var(--ui); text-align: right; }
+
+.lang-sw {
+  margin-left: auto; display: flex; height: 22px; position: relative; z-index: 1;
+  border: 1px solid var(--widget-border); border-radius: 6px; overflow: hidden;
+}
+.lang-sw button {
+  border: 0; background: none; color: var(--title-fg); padding: 0 10px; cursor: pointer;
+  font: 12px var(--ui); opacity: .75;
+}
+.lang-sw button + button { border-left: 1px solid var(--widget-border); }
+.lang-sw button:hover { opacity: 1; background: rgba(127,127,127,.2); }
+.lang-sw button.on { background: var(--status); color: #fff; opacity: 1; }
+.lang-sw button[data-lang="fa"] { font-family: Vazirmatn, var(--ui); }
+@media (max-width: 1180px) and (min-width: 761px) { .cc { right: 100px; } }
 </style>
 </head>
 <body>
@@ -889,7 +915,431 @@ const LookingFor = "senior hands-on: infrastructure automation, observability, L
 // permit. I know that's extra paperwork, so I'd rather say it up front.
 var Where = []string{"Germany", "anywhere in the EU"}
 </script>
+<!-- ================= README (فارسی) ================= -->
+<template id="readme-fa">
+<div class="fa" dir="rtl" lang="fa">
+  <h1><img src="https://github.com/Haameed.png?size=128" alt="حامد مالکی" onerror="this.remove()" /><span>حامد مالکی<small>مهندس ارشد DevOps · اتوماسیون زیرساخت و مانیتورینگ</small></span></h1>
+  <div class="badges">
+    <span class="badge"><b>محل زندگی</b><i>تهران</i></span>
+    <span class="badge"><b>مهاجرت</b><i>آلمان / اروپا</i></span>
+    <span class="badge go"><b>کدنویسی</b><i>Go · Python · Bash</i></span>
+    <span class="badge ok"><b>وضعیت</b><i>آماده‌ی همکاری</i></span>
+    <span class="badge warn"><b>ویزا</b><i>نیاز به حمایت کارفرما</i></span>
+  </div>
 
+  <p>روی پلتفرم‌های لینوکسی، اتوماسیون زیرساخت و مانیتورینگ کار می‌کنم. از سال ۱۳۸۹ در محیط‌های عملیاتی بوده‌ام؛
+  کارم را در NOC شروع کردم و بعد پلتفرم‌های مجازی‌سازی یک ISP، یک اپراتور مخابراتی، یک شرکت تاکسی اینترنتی و یک بانک را اداره کردم.
+  چند سال است که بیشتر ابزارهایم را با Go و Python می‌نویسم.</p>
+
+  <p>این سایت را شبیه یکی از ریپوهایم چیده‌ام، چون بیشتر روزها صفحه‌ی مانیتورم همین شکلی است.
+  از فهرست فایل‌ها در سمت چپ یکی را باز کنید، از منوهای بالا استفاده کنید، <kbd>F1</kbd> را بزنید
+  یا در ترمینال پایین <code>help</code> را تایپ کنید. منوها و محیط ویرایشگر انگلیسی مانده‌اند؛ فقط محتوا فارسی است.
+  اگر رزومه‌ی معمولی را ترجیح می‌دهید، <a href="Hamed-Maaleki-CV.pdf" download>نسخه‌ی PDF اینجاست</a> (به انگلیسی).</p>
+
+  <h2>در یک نگاه</h2>
+  <table>
+    <tr><th>الان</th><td>سرپرست تیم NetDevOps در بلو بانک. یک تیم سه‌نفره را هدایت می‌کنم و هنوز بخش زیادی از کد را خودم می‌نویسم.</td></tr>
+    <tr><th>قبل از آن</th><td>مهندس SysOps / DevOps در اسنپ: بیش از ۷۰ سرور فیزیکی و ۷۰۰ ماشین مجازی روی KVM و OpenNebula، به‌علاوه‌ی یک Terraform provider که با تیم ساختیم و در production استفاده می‌شد.</td></tr>
+    <tr><th>متن‌باز</th><td>اکسپورترهای Prometheus برای F5 BIG-IP، F5OS، FortiGate و OpenNebula، و یک پلاگین inventory برای Ansible روی OpenNebula.</td></tr>
+    <tr><th>دنبال چه هستم</th><td>یک نقش ارشد و فنی در اتوماسیون زیرساخت، observability یا پلتفرم‌های لینوکسی، در آلمان یا جای دیگری در اروپا.</td></tr>
+    <tr><th>مدارک</th><td>برای ویزای کار و اجازه‌ی اقامت به حمایت کارفرما نیاز دارم.</td></tr>
+  </table>
+
+  <h2>سوابق کاری</h2>
+  <table>
+    <tr><th>سال</th><th>شرکت</th><th>نقش</th></tr>
+    <tr><td>۱۴۰۴ تا اکنون</td><td>بلو بانک</td><td>سرپرست تیم NetDevOps</td></tr>
+    <tr><td>۱۴۰۴</td><td>بلو بانک</td><td>مهندس ارشد NetDevOps</td></tr>
+    <tr><td>۱۴۰۰ تا ۱۴۰۴</td><td>اسنپ</td><td>مهندس SysOps / DevOps</td></tr>
+    <tr><td>۱۳۹۹ تا ۱۴۰۰</td><td>بلو بانک</td><td>مهندس SysOps</td></tr>
+    <tr><td>۱۳۹۷ تا ۱۳۹۹</td><td>مبین‌نت</td><td>مدیر سیستم لینوکس</td></tr>
+    <tr><td>۱۳۹۴ تا ۱۳۹۷</td><td>آسیاتک</td><td>مدیر سیستم لینوکس</td></tr>
+    <tr><td>۱۳۸۹ تا ۱۳۹۴</td><td>شرکت ملی پخش فراورده های نفتی (طرح IFCP)</td><td>کارشناس NOC</td></tr>
+  </table>
+  <p>جزئیات هر کدام در فایل <a href="#" data-open="internal/experience/experience.go">experience.go</a> هست.</p>
+
+  <h2>ساختار پروژه</h2>
+<pre><code>.
+├── <a href="#" data-open="main.go">main.go</a>                          <span class="c"># از اینجا شروع کنید</span>
+├── <a href="#" data-open="go.mod">go.mod</a>                           <span class="c"># ابزارهایی که با آن‌ها کار می‌کنم</span>
+├── internal/
+│   ├── about/<a href="#" data-open="internal/about/about.go">about.go</a>               <span class="c"># معرفی کامل‌تر</span>
+│   ├── experience/<a href="#" data-open="internal/experience/experience.go">experience.go</a>     <span class="c"># از ۱۳۸۹ تا امروز</span>
+│   ├── projects/<a href="#" data-open="internal/projects/projects.go">projects.go</a>         <span class="c"># کارهای متن‌باز</span>
+│   ├── skills/<a href="#" data-open="internal/skills/skills.go">skills.go</a>             <span class="c"># جعبه‌ابزار</span>
+│   └── contact/<a href="#" data-open="internal/contact/contact.go">contact.go</a>           <span class="c"># راه‌های تماس</span>
+└── <a href="Hamed-Maaleki-CV.pdf" download>Hamed-Maaleki-CV.pdf</a></code></pre>
+
+  <h2>تحصیلات و زبان</h2>
+  <table>
+    <tr><th>تحصیلات</th><td>کارشناسی فناوری اطلاعات، دانشگاه جامع علمی‌کاربردی، ۱۳۹۴</td></tr>
+    <tr><th>فارسی</th><td>زبان مادری</td></tr>
+    <tr><th>انگلیسی</th><td>سطح کاری حرفه‌ای</td></tr>
+  </table>
+
+  <h2>از زبان یک همکار</h2>
+  <blockquote>
+    <p>حامد یکی از بهترین مدیران سیستم لینوکسی است که دیده‌ام. در لینوکس و زیرساخت به‌عنوان کد تجربه‌ی زیادی دارد، چند پروژه را هم‌زمان پیش می‌برد و آن‌ها را زودتر از موعد تحویل می‌دهد.</p>
+    <footer>کیوان نوبخت، در لینکدین (ترجمه از انگلیسی)</footer>
+  </blockquote>
+
+  <h2>تماس</h2>
+  <p>
+    ایمیل: <a href="mailto:hamed.maaleki@gmail.com">hamed.maaleki@gmail.com</a><br>
+    لینکدین: <a href="https://www.linkedin.com/in/hamed-maaleki/" target="_blank" rel="noopener">linkedin.com/in/hamed-maaleki</a><br>
+    گیت‌هاب: <a href="https://github.com/Haameed" target="_blank" rel="noopener">github.com/Haameed</a>
+  </p>
+</div>
+</template>
+
+<!-- ================= SOURCE FILES (فارسی) ================= -->
+<script type="text/plain" data-fa="main.go">
+// حامد مالکی، مهندس ارشد DevOps.
+//
+// از سال ۱۳۸۹ در حوزه‌ی عملیات IT کار می‌کنم: اول در NOC، بعد مدیریت
+// پلتفرم‌های لینوکس و مجازی‌سازی، و در چند سال اخیر نوشتن بیشتر
+// ابزارهایم با Go و Python.
+//
+// امتحانش کنید: منوی Run و بعد Run Without Debugging، یا در ترمینال بنویسید  go run .
+package main
+
+import (
+	"fmt"
+
+	"github.com/Haameed/hamed-maaleki/internal/about"
+	"github.com/Haameed/hamed-maaleki/internal/contact"
+	"github.com/Haameed/hamed-maaleki/internal/experience"
+)
+
+func main() {
+	me := about.Me()
+
+	fmt.Printf("%s · %s\n", me.Name, me.Title)
+	fmt.Printf("%s، آماده‌ی مهاجرت به %s\n\n", me.Location, me.RelocateTo)
+
+	for _, job := range experience.History() {
+		fmt.Printf("%s · %s · %s\n", job.Company, job.Role, job.Period())
+	}
+
+	fmt.Println("\nراه ارتباطی:", contact.Email)
+}
+</script>
+
+<script type="text/plain" data-fa="go.mod">
+module github.com/Haameed/hamed-maaleki
+
+go 1.23
+
+// ابزارهایی که بیشتر از همه با آن‌ها کار می‌کنم. «نسخه» سال و ماه میلادی است
+// که استفاده از هر کدام را در production شروع کردم.
+require (
+	git.savannah.gnu.org/bash              v2010.6.0
+	vmware.com/vsphere                     v2016.2.0  // HA، DRS، SDRS
+	github.com/ansible/ansible             v2016.2.0
+	github.com/elastic/logstash            v2016.2.0
+	github.com/MariaDB/galera              v2018.11.0 // کلاستر سه‌نودی
+	github.com/python/cpython              v2018.11.0
+	github.com/NagiosEnterprises/nagioscore v2018.11.0
+	github.com/OpenNebula/one              v2021.9.0  // بیش از ۷۰۰ ماشین مجازی روی KVM
+	github.com/hashicorp/terraform         v2021.9.0  // شامل یک provider اختصاصی
+	github.com/prometheus/prometheus       v2021.9.0
+	github.com/golang/go                   v2021.9.0
+	github.com/getsops/sops                v2021.9.0
+	gitlab.com/gitlab-org/gitlab           v2021.9.0  // CI/CD
+	github.com/F5Networks/f5-bigip         v2025.8.0
+)
+
+// فقط در محیط‌های کوچک و آزمایشی، و نه به‌تازگی.
+require (
+	k8s.io/kubernetes v0.0.0 // indirect
+	helm.sh/helm      v0.0.0 // indirect
+)
+</script>
+
+<script type="text/plain" data-fa="internal/about/about.go">
+// بسته‌ی about نسخه‌ی کوتاه معرفی من است.
+package about
+
+// Engineer جواب این سؤال است: «کمی از خودتان بگویید».
+type Engineer struct {
+	Name       string
+	Title      string
+	Location   string
+	RelocateTo string
+	InOpsSince int
+	Focus      []string
+	Education  string
+	Languages  map[string]string
+}
+
+// Me مشخصات من را برمی‌گرداند.
+//
+// نسخه‌ی بلندتر: اولین کارم در مرکز عملیات شبکه‌ی شرکت ملی نفت ایران بود و
+// سیستم‌های پشت بیش از ۴٬۰۰۰ جایگاه سوخت را مانیتور می‌کردیم. دو عادت از همان‌جا
+// با من مانده: می‌خواهم قبل از این‌که کسی زنگ بزند بفهمم سرویسی مشکل دارد،
+// و دوست ندارم یک مشکل را دو بار دستی حل کنم.
+//
+// بعد از آن، لینوکس و مجازی‌سازی را در یک ISP، یک اپراتور مخابراتی، یک شرکت
+// تاکسی اینترنتی و یک بانک دیجیتال اداره کردم. در اسنپ این یعنی حدود ۷۰ سرور
+// فیزیکی و بیش از ۷۰۰ ماشین مجازی روی KVM و OpenNebula، که بیشترش با Ansible،
+// Terraform و GitLab CI مدیریت می‌شد.
+//
+// الان سرپرست تیم NetDevOps در بلو بانک هستم و هنوز بخش زیادی از کد را خودم
+// می‌نویسم. نقش بعدی‌ام را ارشد و فنی می‌خواهم، در آلمان یا جای دیگری در اروپا.
+func Me() Engineer {
+	return Engineer{
+		Name:       "حامد مالکی",
+		Title:      "مهندس ارشد DevOps",
+		Location:   "تهران، ایران",
+		RelocateTo: "آلمان / اروپا",
+		InOpsSince: 2010, // ۱۳۸۹
+		Focus: []string{
+			"اتوماسیون زیرساخت",
+			"observability و مانیتورینگ",
+			"پلتفرم‌های لینوکسی",
+		},
+		Education: "کارشناسی فناوری اطلاعات، دانشگاه جامع علمی‌کاربردی (۱۳۹۴)",
+		Languages: map[string]string{
+			"فارسی":   "زبان مادری",
+			"انگلیسی": "سطح کاری حرفه‌ای",
+		},
+	}
+}
+</script>
+
+<script type="text/plain" data-fa="internal/experience/experience.go">
+// بسته‌ی experience سوابق کاری من است، از جدیدترین به قدیمی‌ترین.
+package experience
+
+// Job یک موقعیت شغلی است. Notes کارهایی است که واقعاً آن‌جا انجام دادم.
+type Job struct {
+	Company string
+	Role    string
+	From    string // سال-ماه میلادی
+	To      string // اگر هنوز آن‌جا هستم، خالی است
+	Notes   []string
+	Stack   []string
+}
+
+// Period تاریخ‌ها را خوانا می‌کند.
+func (j Job) Period() string {
+	if j.To == "" {
+		return j.From + " تا اکنون"
+	}
+	return j.From + " تا " + j.To
+}
+
+// History همه‌ی کارهای من از ۱۳۸۹ (۲۰۱۰) تا امروز.
+func History() []Job {
+	return []Job{
+		{
+			Company: "بلو بانک",
+			Role:    "سرپرست تیم NetDevOps",
+			From:    "2026-02",
+			Notes: []string{
+				"سرپرستی یک تیم سه‌نفره؛ هنوز بخش زیادی از کار فنی را خودم انجام می‌دهم.",
+				"هماهنگی، بیشتر با تیم‌های زیرساخت، شبکه و امنیت.",
+			},
+		},
+		{
+			Company: "بلو بانک",
+			Role:    "مهندس ارشد NetDevOps",
+			From:    "2025-08",
+			To:      "2026-02",
+			// اول پاره‌وقت و هم‌زمان با اسنپ، از نوامبر ۲۰۲۵ تمام‌وقت.
+			Notes: []string{
+				"اتوماسیون شبکه و زیرساخت با Ansible، Terraform، Go و Python، بیشتر از طریق REST API.",
+				"دو اکسپورتر Prometheus برای F5 BIG-IP و F5OS نوشتم؛ هر دو متن‌باز هستند.",
+				"کار روی پنل داخلی امنیت شبکه: تغییرات پشتیبانی‌شده از یک‌جا اجرا می‌شوند،",
+				"به‌جای این‌که برای هر دستگاه جداگانه لاگین کنیم.",
+				"یک SMS gateway با Go ساختم که ابزارهای زیرساخت و عملیات پیامک‌هایشان را از آن می‌فرستند.",
+				"ساخت، تست و استقرار همه‌ی این سرویس‌ها با Docker و GitLab CI/CD.",
+				"آزمایش LLMهای on-prem برای عیب‌یابی و کارهای عملیات امنیت.",
+			},
+			Stack: []string{"Go", "Python", "Ansible", "Terraform", "F5", "Prometheus", "GitLab CI"},
+		},
+		{
+			Company: "اسنپ",
+			Role:    "مهندس SysOps / DevOps",
+			From:    "2021-09",
+			To:      "2025-11",
+			Notes: []string{
+				"مدیریت بیش از ۷۰ سرور فیزیکی و ۷۰۰ ماشین مجازی روی KVM و OpenNebula.",
+				"اتوماسیون provisioning، پیکربندی و کارهای تکراری روزمره",
+				"با Ansible، Python، Bash و GitLab CI/CD.",
+				"عضو تیمی بودم که برای کلود داخلی شرکت یک Terraform provider ساخت،",
+				"تا منابع آن در production به‌صورت کد مدیریت شوند.",
+				"نوشتن اکسپورترهای Go و قوانین هشدار برای زیرساخت و سرویس‌های داخلی.",
+				"نگهداری secretها در Git با Mozilla SOPS، در قالب یک روند GitOps.",
+				"رسیدگی به رخدادهای production همراه تیم‌های زیرساخت و توسعه، در لینوکس،",
+				"مجازی‌سازی، مانیتورینگ و اتوماسیون.",
+			},
+			Stack: []string{"KVM", "OpenNebula", "Terraform", "Ansible", "Go", "Prometheus", "SOPS"},
+		},
+		{
+			Company: "بلو بانک",
+			Role:    "مهندس SysOps",
+			From:    "2020-10",
+			To:      "2021-09",
+			Notes: []string{
+				"مدیریت بیش از ۴۰ هاست و ۵۰۰ ماشین مجازی روی VMware vSphere.",
+				"playbookهای Ansible برای مدیریت لینوکس و تغییرات فایروال.",
+				"چک‌های Bash و Python برای چیزهایی که مانیتورینگ موجود پوشش نمی‌داد.",
+				"اتوماسیون inventory زیرساخت و ارسال آن به‌صورت گزارش ایمیلی.",
+			},
+		},
+		{
+			Company: "مبین‌نت",
+			Role:    "مدیر سیستم لینوکس",
+			From:    "2018-11",
+			To:      "2020-07",
+			Notes: []string{
+				"راه‌اندازی و نگهداری یک کلاستر سه‌نودی MariaDB Galera.",
+				"مانیتورینگ SNMP رادیوهای مخابراتی با Bash و Python، و ارسال داده‌ها",
+				"به Nagios از طریق یک روش اختصاصی مبتنی بر socket.",
+				"اسکریپت‌های health-check و عیب‌یابی لینوکس، دیتابیس و سرویس‌ها.",
+			},
+		},
+		{
+			Company: "آسیاتک",
+			Role:    "مدیر سیستم لینوکس",
+			From:    "2016-02",
+			To:      "2018-11",
+			Notes: []string{
+				"مدیریت بیش از ۴۰ هاست و ۳۰۰ ماشین مجازی روی vSphere، شامل HA، DRS و Storage DRS.",
+				"نگهداری FreeRADIUS، MySQL و Syslog مرکزی در production.",
+				"شروع اتوماسیون کارهای روزمره با Ansible.",
+				"پایپ‌لاین‌های Logstash برای پردازش لاگ‌های زیرساخت و ذخیره در دیتابیس‌های داخلی.",
+			},
+		},
+		{
+			// جایی که همه‌چیز شروع شد. طرح IFCP.
+			Company: "شرکت ملی نفت ایران",
+			Role:    "کارشناس NOC",
+			From:    "2010-06",
+			To:      "2016-02",
+			Notes: []string{
+				"مانیتورینگ سیستم‌های بیش از ۴٬۰۰۰ جایگاه سوخت با SolarWinds و ManageEngine.",
+				"اسکریپت‌های Bash برای پاک‌سازی لاگ، بررسی سلامت شبکه و هشدار.",
+				"رسیدگی به رخدادها و escalationها در یک زیرساخت گسترده و پراکنده.",
+			},
+		},
+	}
+}
+</script>
+
+<script type="text/plain" data-fa="internal/projects/projects.go">
+// بسته‌ی projects کارهای متن‌باز من در گیت‌هاب است: اکسپورترهای Prometheus
+// و ابزارهای Ansible، بیشتر برای تجهیزاتی که هر روز با آن‌ها کار می‌کنم.
+package projects
+
+// Project یک ریپازیتوری است.
+type Project struct {
+	Name       string
+	Repo       string
+	Lang       string
+	Summary    string
+	Highlights []string
+}
+
+// All تقریباً به ترتیب وقتی است که رویشان گذاشته‌ام.
+var All = []Project{
+	{
+		Name:    "f5_bigip_exporter",
+		Repo:    "https://github.com/Haameed/f5_bigip_exporter",
+		Lang:    "Go",
+		Summary: "اکسپورتر Prometheus برای F5 BIG-IP از طریق iControl REST.",
+		Highlights: []string{
+			"الگوی multi-target با /probe: یک اکسپورتر، چند دستگاه، بدون نصب agent روی دستگاه",
+			"وضعیت virtual serverها، poolها، nodeها، TMM و HA",
+			"تاریخ انقضای گواهی‌های SSL و نسخه‌های TLS در حال استفاده",
+			"collectorها هم‌زمان اجرا می‌شوند و یک توکن لاگین بین scrapeها مشترک است",
+			"سنسورهای سخت‌افزاری، که روی Virtual Edition بدون خطا رد می‌شوند",
+			"داشبورد Grafana و قوانین هشدار هم همراهش هست",
+		},
+	},
+	{
+		Name:    "f5_f5os_exporter",
+		Repo:    "https://github.com/Haameed/f5_f5os_exporter",
+		Lang:    "Go",
+		Summary: "همین ایده برای F5OS (rSeries و VELOS)، از طریق REST API مبتنی بر OpenConfig.",
+		Highlights: []string{
+			"CPU، دیسک‌ها، منبع تغذیه، اینترفیس‌ها، LACP و لایسنس",
+			"انتشار با GoReleaser",
+		},
+	},
+	{
+		Name:    "opennebula-dynamic-inventory",
+		Repo:    "https://github.com/Haameed/opennebula-dynamic-inventory",
+		Lang:    "Python",
+		Summary: "پلاگین inventory برای Ansible که ماشین‌های در حال اجرا را از OpenNebula می‌خواند.",
+		Highlights: []string{
+			"با یک یا چند کلاستر کار می‌کند",
+			"هاست‌ها را بر اساس نام، label یا attribute گروه‌بندی می‌کند (مثلاً پورت SSH)",
+			"از CLI، AWX و GitLab CI قابل اجراست",
+		},
+	},
+	{
+		Name:    "opennebula_exporter",
+		Repo:    "https://github.com/Haameed/opennebula_exporter",
+		Summary: "متریک‌های Prometheus برای کلودهای OpenNebula.",
+	},
+	{
+		Name:    "fortigate_exporter",
+		Repo:    "https://github.com/Haameed/fortigate_exporter",
+		Summary: "اکسپورتر Prometheus برای فایروال‌های Fortinet FortiGate.",
+	},
+}
+
+// یک alert از ریپوی اکسپورتر BIG-IP که دوستش دارم. کلاینت‌هایی را پیدا می‌کند
+// که هنوز با نسخه‌های قدیمی TLS وصل می‌شوند:
+//
+//	rate(bigip_clientssl_protocol_uses_total{protocol=~"SSLv.*|TLSv1.0|TLSv1.1"}[5m]) > 0
+</script>
+
+<script type="text/plain" data-fa="internal/skills/skills.go">
+// بسته‌ی skills جعبه‌ابزار من است، به همان شکلی که در ذهنم دسته‌بندی شده.
+package skills
+
+// Toolbox ابزارهایی است که در production با آن‌ها کار می‌کنم.
+var Toolbox = map[string][]string{
+	"اتوماسیون": {"Ansible", "Terraform", "توسعه‌ی Terraform provider", "GitOps"},
+	"کدنویسی":   {"Go", "Python", "Bash", "REST API"},
+	"تحویل":     {"GitLab CI/CD", "Docker", "روندهای مبتنی بر Git"},
+	"مانیتورینگ": {
+		"Prometheus", "Grafana", "اکسپورترهای اختصاصی",
+		"Nagios", "Checkmk", "SolarWinds", "SNMP", "Logstash", "Syslog",
+	},
+	"لینوکس":  {"Linux", "Ubuntu", "KVM", "OpenNebula", "VMware vSphere (HA, DRS, SDRS)"},
+	"شبکه":    {"F5 BIG-IP / TMOS", "F5OS", "اتوماسیون شبکه"},
+	"امنیت":   {"HashiCorp Vault", "Mozilla SOPS", "Keycloak", "LDAP", "FreeIPA"},
+	"دیتابیس": {"MariaDB", "MariaDB Galera Cluster", "MySQL"},
+}
+
+// Lab چیزهایی است که فقط در محیط‌های کوچک و آزمایشی، و نه به‌تازگی، با آن‌ها
+// کار کرده‌ام. ترجیح می‌دهم همین‌جا بگویم تا بعداً غافلگیرکننده نباشد.
+var Lab = []string{"Kubernetes", "Helm"}
+</script>
+
+<script type="text/plain" data-fa="internal/contact/contact.go">
+// بسته‌ی contact راه‌های ارتباط با من است. ایمیل سریع‌ترین راه است.
+package contact
+
+const (
+	Email    = "hamed.maaleki@gmail.com"
+	GitHub   = "https://github.com/Haameed"
+	LinkedIn = "https://www.linkedin.com/in/hamed-maaleki/"
+)
+
+// LookingFor نقشی است که دنبالش هستم.
+const LookingFor = "نقش ارشد و فنی: اتوماسیون زیرساخت، observability، پلتفرم‌های لینوکسی"
+
+// Where: اول آلمان، ولی هر جای اروپا برایم مناسب است.
+//
+// ویزا: برای ویزای کار و اجازه‌ی اقامت به حمایت کارفرما نیاز دارم. می‌دانم
+// این یعنی کاغذبازی بیشتر، برای همین ترجیح می‌دهم از اول بگویم.
+var Where = []string{"آلمان", "هر جای اتحادیه‌ی اروپا"}
+</script>
 <script>
 (function () {
   "use strict";
@@ -1953,7 +2403,161 @@ var Where = []string{"Germany", "anywhere in the EU"}
       else if (!findBox.hidden) closeFind();
     }
   });
+  /* ================= language: English / فارسی ================= */
+  // The editor, menus and commands stay in English. Only the content about me
+  // switches: README, the .go files, terminal output and the About dialog.
+  var LOCALE = "en";
+  var SRC = { en: {}, fa: {} };
+  Object.keys(FILES).forEach(function (p) { if (FILES[p].src) SRC.en[p] = FILES[p].src; });
+  document.querySelectorAll('script[type="text/plain"][data-fa]').forEach(function (s) {
+    SRC.fa[s.dataset.fa] = s.textContent.replace(/^\r?\n/, "").replace(/\s+$/, "");
+  });
+  FILES["README.md"].render = function () {
+    return $(LOCALE === "fa" ? "#readme-fa" : "#readme").innerHTML;
+  };
 
+  function faBlock(html) { return '<div class="fa-out" dir="rtl" lang="fa">' + html + "</div>"; }
+
+  var JOBS_FA = [
+    ["بلو بانک", "سرپرست تیم NetDevOps", "۱۴۰۴ تا اکنون"],
+    ["بلو بانک", "مهندس ارشد NetDevOps", "۱۴۰۴"],
+    ["اسنپ", "مهندس SysOps / DevOps", "۱۴۰۰ تا ۱۴۰۴"],
+    ["بلو بانک", "مهندس SysOps", "۱۳۹۹ تا ۱۴۰۰"],
+    ["مبین‌نت", "مدیر سیستم لینوکس", "۱۳۹۷ تا ۱۳۹۹"],
+    ["آسیاتک", "مدیر سیستم لینوکس", "۱۳۹۴ تا ۱۳۹۷"],
+    ["شرکت ملی نفت ایران", "کارشناس NOC", "۱۳۸۹ تا ۱۳۹۴"]
+  ];
+  var LOG_FA = [
+    ["e41c9a2", "سرپرستی تیم NetDevOps در بلو بانک", "۱۴۰۴", true],
+    ["b7d03f5", "پیوستن به بلو بانک به‌عنوان مهندس ارشد NetDevOps", "۱۴۰۴"],
+    ["9a2e611", "رفتن به اسنپ: KVM، OpenNebula، Terraform و Go", "۱۴۰۰"],
+    ["4c8f0d3", "پیوستن به بلو بانک به‌عنوان مهندس SysOps", "۱۳۹۹"],
+    ["1f6b2ae", "رفتن به مبین‌نت: لینوکس در مخابرات، Galera و SNMP", "۱۳۹۷"],
+    ["88d1c47", "رفتن به آسیاتک: vSphere و اولین playbookهای Ansible", "۱۳۹۴"],
+    ["0a3e9b1", "کامیت اول: کارشناس NOC در شرکت ملی نفت ایران", "۱۳۸۹"]
+  ];
+  function faNum(n) { return String(n).replace(/\d/g, function (d) { return "۰۱۲۳۴۵۶۷۸۹"[d]; }); }
+
+  /* switch in the title bar */
+  var langSw = document.createElement("div");
+  langSw.className = "lang-sw";
+  langSw.setAttribute("role", "group");
+  langSw.setAttribute("aria-label", "Language / زبان");
+  langSw.innerHTML = '<button type="button" data-lang="en" title="English">EN</button>' +
+    '<button type="button" data-lang="fa" lang="fa" title="نسخه‌ی فارسی">فا</button>';
+  document.querySelector(".titlebar").appendChild(langSw);
+  langSw.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (b && b.dataset.lang !== LOCALE) setLocale(b.dataset.lang);
+  });
+
+  /* item in the status bar */
+  var sbLocale = document.createElement("div");
+  sbLocale.className = "sb";
+  sbLocale.title = "Switch language: English / فارسی";
+  document.querySelector(".sb-right").insertBefore(sbLocale, $("#sbHire"));
+  sbLocale.addEventListener("click", function () { setLocale(LOCALE === "fa" ? "en" : "fa"); });
+
+  function setLocale(lang, quiet) {
+    LOCALE = lang === "fa" ? "fa" : "en";
+    Object.keys(SRC.en).forEach(function (p) {
+      FILES[p].src = (LOCALE === "fa" && SRC.fa[p]) || SRC.en[p];
+      delete FILES[p].html; // force the highlighter to run again
+    });
+    document.documentElement.setAttribute("data-locale", LOCALE);
+    $("#dlgText").dir = LOCALE === "fa" ? "rtl" : "ltr";
+    langSw.querySelectorAll("button").forEach(function (b) {
+      var on = b.dataset.lang === LOCALE;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    sbLocale.innerHTML = LOCALE === "fa" ? '<span lang="fa">فارسی</span>' : "English";
+    try { localStorage.setItem("site-lang", LOCALE); } catch (e) {}
+    try {
+      var u = new URL(location.href);
+      if (LOCALE === "fa") u.searchParams.set("lang", "fa"); else u.searchParams.delete("lang");
+      history.replaceState(null, "", u.pathname + u.search + u.hash);
+    } catch (e) {}
+    if (active) renderEditor();
+    if (!quiet) {
+      notify(LOCALE === "fa"
+        ? '<span class="fa-out" dir="rtl" lang="fa">محتوا فارسی شد. منوها و محیط ویرایشگر انگلیسی می‌مانند.</span>'
+        : "Content switched to English.");
+    }
+  }
+
+  /* commands: View menu, command palette, quick open */
+  cmd("lang.en", { cat: "Preferences", label: "Content Language: English", menu: "Content: English",
+    checked: function () { return LOCALE === "en"; }, run: function () { setLocale("en"); } });
+  cmd("lang.fa", { cat: "Preferences", label: "Content Language: Persian (فارسی)", menu: "Content: Persian (فارسی)",
+    checked: function () { return LOCALE === "fa"; }, run: function () { setLocale("fa"); } });
+  MENUS.forEach(function (m) { if (m[0] === "View") m[1].push("-", "lang.en", "lang.fa"); });
+  EXTRA.splice(4, 0, {
+    label: "Switch language: English / فارسی", desc: "EN · FA", icon: '<span class="fi">فا</span>',
+    act: function () { setLocale(LOCALE === "fa" ? "en" : "fa"); }
+  });
+
+  /* terminal: Persian output for the commands that talk about me */
+  var CMD_EN = { go: CMDS.go, git: CMDS.git, whoami: CMDS.whoami, contact: CMDS.contact, help: CMDS.help };
+  CMDS.go = function (a) {
+    if (LOCALE !== "fa" || a[0] !== "run") return CMD_EN.go(a);
+    var out = ["حامد مالکی · مهندس ارشد DevOps", "تهران، آماده‌ی مهاجرت به آلمان یا کشورهای دیگر اروپا", ""];
+    JOBS_FA.forEach(function (j) { out.push(j.join(" · ")); });
+    out.push("", 'ایمیل: <a href="mailto:' + EMAIL + '">' + EMAIL + "</a>");
+    return faBlock(out.join("\n"));
+  };
+  CMDS.git = function (a) {
+    if (LOCALE !== "fa" || a[0] !== "log") return CMD_EN.git(a);
+    return faBlock(LOG_FA.map(function (x) {
+      return '<bdi class="a-y">' + x[0] + "</bdi> " +
+        (x[3] ? '<bdi dir="ltr">(<span class="a-c">HEAD -&gt; </span><span class="a-g">main</span>)</bdi> ' : "") +
+        x[1] + ' <span class="a-d">' + x[2] + "</span>";
+    }).join("\n"));
+  };
+  CMDS.whoami = function () {
+    return LOCALE === "fa"
+      ? faBlock("حامد: مهندس ارشد DevOps در تهران. لینوکس، اتوماسیون و مانیتورینگ. در حال مهاجرت به اروپا.")
+      : CMD_EN.whoami();
+  };
+  CMDS.contact = function () {
+    if (LOCALE !== "fa") return CMD_EN.contact();
+    return faBlock(
+      'ایمیل: <a href="mailto:' + EMAIL + '">' + EMAIL + "</a>\n" +
+      'لینکدین: <a href="' + LI + '" target="_blank" rel="noopener">linkedin.com/in/hamed-maaleki</a>\n' +
+      'گیت‌هاب: <a href="' + GH + '" target="_blank" rel="noopener">github.com/Haameed</a>');
+  };
+  CMDS.help = function () {
+    return CMD_EN.help() + '\n<span class="a-y">lang</span> fa | en       switch the content language (فارسی / English)';
+  };
+  CMDS.lang = function (a) {
+    var l = (a[0] || "").toLowerCase();
+    if (l === "fa" || l === "en") { setLocale(l); return '<span class="a-d">content language: ' + l + "</span>"; }
+    return "usage: lang fa | lang en   (current: " + LOCALE + ")";
+  };
+
+  /* About dialog */
+  var aboutTextEn = aboutText;
+  aboutText = function () {
+    if (LOCALE !== "fa") return aboutTextEn();
+    return [
+      "سابقه: " + faNum(new Date().getFullYear() - 2010) + " سال کار در محیط عملیاتی (از ۱۳۸۹)",
+      "نقش فعلی: سرپرست تیم NetDevOps، بلو بانک",
+      "زبان‌های برنامه‌نویسی: Go، Python، Bash",
+      "پلتفرم‌ها: Linux، KVM، OpenNebula، VMware vSphere",
+      "ابزارها: Ansible، Terraform، Prometheus، GitLab CI",
+      "محل: تهران، آماده‌ی مهاجرت به آلمان و اروپا",
+      "ایمیل: " + EMAIL
+    ].join("\n");
+  };
+
+  /* first language: ?lang=fa in the URL, then the last choice, then the browser language */
+  var firstLocale = "en";
+  try {
+    firstLocale = new URLSearchParams(location.search).get("lang") ||
+      localStorage.getItem("site-lang") ||
+      (/^fa\b/i.test(navigator.language || "") ? "fa" : "en");
+  } catch (e) {}
+  setLocale(firstLocale, true);
   /* ================= boot ================= */
   applySettings();
   if (MOBILE()) setSidebar(false);
